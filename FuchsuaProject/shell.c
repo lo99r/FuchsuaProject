@@ -31,6 +31,9 @@ int cdm_ShellMainCode() {
 		}
 	}
 	while (1) {
+		for (int i = 0; i < 9; i++) {
+			strcpy(cdm_ShellInputString[i], " ");
+		}
 		fputc('>', stdout);
 		fputc(' ', stdout);
 		getchar();
@@ -54,9 +57,6 @@ int cdm_ShellMainCode() {
 		}
 		//strcpy(cdm_ShellInputString[0]);
 		//
-		for (int i = 0; i >= 9; i++) {
-			strcpy(cdm_ShellInputString[i], " ");
-		}
 	}
 	return 0;
 }
