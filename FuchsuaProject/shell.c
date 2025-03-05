@@ -22,7 +22,7 @@ int cdm_ShellMainCode() {
 			while (feof(cdm_StartMessage) == 0) {
 				fgets(cdm_FileStringCat, 260, cdm_StartMessage);
 				strcat(cdm_FileStringBuffer, cdm_FileStringCat);
-				strcat(cdm_FileStringBuffer, "\n");
+				//strcat(cdm_FileStringBuffer, "\n");
 			}
 			printf("%s", cdm_FileStringBuffer);
 			//
@@ -47,7 +47,7 @@ int cdm_ShellMainCode() {
 		else if (strcmp(cdm_ShellInputString[0], "ext") == 0) {
 			break;
 		}
-		else if (strcmp(cdm_ShellInputString[0], "\0") == 0) {
+		else if (strcmp(cdm_ShellInputString[0], " ") == 0) {
 		}
 		else {
 			printf("NOOOO\n");
@@ -55,7 +55,7 @@ int cdm_ShellMainCode() {
 		//strcpy(cdm_ShellInputString[0]);
 		//
 		for (int i = 0; i >= 9; i++) {
-			strcpy(cdm_ShellInputString[i], "\0");
+			strcpy(cdm_ShellInputString[i], " ");
 		}
 	}
 	return 0;
