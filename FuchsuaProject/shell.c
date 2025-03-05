@@ -32,7 +32,7 @@ int cdm_ShellMainCode() {
 	}
 	while (1) {
 		for (int i = 0; i < 9; i++) {
-			strcpy(cdm_ShellInputString[i], " ");
+			strcpy(cdm_ShellInputString[i], "NULLL");
 		}
 		fputc('>', stdout);
 		fputc(' ', stdout);
@@ -50,7 +50,7 @@ int cdm_ShellMainCode() {
 		else if (strcmp(cdm_ShellInputString[0], "ext") == 0) {
 			break;
 		}
-		else if (strcmp(cdm_ShellInputString[0], " ") == 0) {
+		else if (strcmp(cdm_ShellInputString[0], "NULLL") == 0) {
 		}
 		else {
 			printf("NOOOO\n");
