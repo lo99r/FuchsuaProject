@@ -40,15 +40,22 @@ int cdm_ShellMainCode() {
 		if (strcmp(cdm_ShellInputString[0], "help") == 0) {
 			printf("HELP nuduruunam mazanit watakina maguurkamfanina\nVER nuduruunam mazanit bugumuunal t-warsion\nEXT nuduruunam mazanit nubumuunal\n");
 		}
-		if (strcmp(cdm_ShellInputString[0], "ver") == 0) {
+		else if (strcmp(cdm_ShellInputString[0], "ver") == 0) {
 			printf("%s.%s\n", CDMVersion, CDMBuild);
 			//
 		}
-		if (strcmp(cdm_ShellInputString[0], "ext") == 0) {
+		else if (strcmp(cdm_ShellInputString[0], "ext") == 0) {
 			break;
+		}
+		else if (strcmp(cdm_ShellInputString[0], "") == 0) {
 		}
 		else {
 			printf("NOOOO\n");
+		}
+		//strcpy(cdm_ShellInputString[0]);
+		//
+		for (int i = 0; i >= 9; i++) {
+			strcpy(cdm_ShellInputString[i], "");
 		}
 	}
 	return 0;
