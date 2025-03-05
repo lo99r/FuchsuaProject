@@ -1,3 +1,3 @@
 #pragma once
-#define CDMVersion "0.0.0"
-#define CDMBuild "left2009"
+#define CDMVersion "0.0.1"
+#define CDMBuild "left2010"

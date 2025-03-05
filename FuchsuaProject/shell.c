@@ -3,6 +3,7 @@
 char cdm_ShellInputString[9][260] = { 0, };	//CDM 1.0.0.first2020
 char cdm_FileStringCat[260] = { 0, };
 char cdm_FileStringBuffer[260] = { 0, };
+char cdm_HyeonjaeDirectoryGyeongro[260] = ".\\*";
 
 extern char* cdm_StringPointer;
 
@@ -46,6 +47,19 @@ int cdm_ShellMainCode() {
 		else if (strcmp(cdm_ShellInputString[0], "ver") == 0) {
 			printf("%s.%s\n", CDMVersion, CDMBuild);
 			//
+		}
+		else if (strcmp(cdm_ShellInputString[0], "dir") == 0) {
+			HMODULE cdm_SearchDirectory = INVALID_HANDLE_VALUE;
+			WIN32_FIND_DATA cdm_FindedDirectoryData;
+			cdm_SearchDirectory = FindFirstFile(cdm_HyeonjaeDirectoryGyeongro, &cdm_FindedDirectoryData);
+			if (cdm_SearchDirectory == INVALID_HANDLE_VALUE) {
+				printf("N0001");
+			}
+			else {
+				do {
+					printf("%s || %d || %d or %d || %d\n", (char*)cdm_FindedDirectoryData.cFileName, cdm_FindedDirectoryData.dwFileAttributes, cdm_FindedDirectoryData.ftLastWriteTime.dwLowDateTime, cdm_FindedDirectoryData.ftLastWriteTime.dwHighDateTime, cdm_FindedDirectoryData.nFileSizeHigh);
+				} while (FindNextFile(cdm_HyeonjaeDirectoryGyeongro, &cdm_FindedDirectoryData) != 0);
+			}
 		}
 		else if (strcmp(cdm_ShellInputString[0], "ext") == 0) {
 			break;
