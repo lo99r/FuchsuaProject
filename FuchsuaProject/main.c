@@ -7,8 +7,9 @@ int main(int argc, char* argv[9]) {
 	if (argc == 1) {
 		scanf("%[^\n]", cdm_OpsionInput[1]);
 		//cdm_StringPointer = strtok(cdm_OpsionInput[1], " ");
-		if (strcmp(cdm_OpsionInput[0], "--mode:notWindows") == 0) {
+		if (strcmp(cdm_OpsionInput[1], "--mode:notWindows") == 0) {
 			cdm_ShellMainCode();
 		}
 	}
+	return 0;
 }

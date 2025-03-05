@@ -1,6 +1,7 @@
 #include"v.h"
 
 char cdm_ShellInputString[9][260] = { 0, };	//CDM 1.0.0.first2020
+char cdm_FileStringCat[260] = { 0, };
 char cdm_FileStringBuffer[260] = { 0, };
 
 extern char* cdm_StringPointer;
@@ -17,16 +18,25 @@ int cdm_ShellMainCode() {
 			fclose(cdm_StartMessage);
 		}
 		else {
-			fscanf(cdm_StartMessage, "%[\0]", cdm_FileStringBuffer);
+			//fscanf(cdm_StartMessage, "%[\0]", cdm_FileStringBuffer);
+			while (feof(cdm_StartMessage) == 0) {
+				fgets(cdm_FileStringCat, 260, cdm_StartMessage);
+				strcat(cdm_FileStringBuffer, cdm_FileStringCat);
+				strcat(cdm_FileStringBuffer, "\n");
+			}
 			printf("%s", cdm_FileStringBuffer);
+			//
 			fclose(cdm_StartMessage);
 		}
+		break;
 	}
 	while (1) {
 		fputc('>', stdout);
 		fputc(' ', stdout);
+		getchar();
 		scanf("%[^\n]", cdm_ShellInputString[0]);
 		cdm_StringPointer = strtok(cdm_ShellInputString[0], " ");
+		strcpy(cdm_ShellInputString[1], cdm_StringPointer);
 		if (strcmp(cdm_ShellInputString[0], "help") == 0) {
 			printf("HELP nuduruunam mazanit watakina maguurkamfanina\nVER nuduruunam mazanit bugumuunal t-warsion\nEXT nuduruunam mazanit nubumuunal\n");
 		}
@@ -36,6 +46,9 @@ int cdm_ShellMainCode() {
 		}
 		if (strcmp(cdm_ShellInputString[0], "ext") == 0) {
 			break;
+		}
+		else {
+			printf("NOOOO\n");
 		}
 	}
 	return 0;
