@@ -37,7 +37,7 @@ int cdm_ShellMainCode() {
 		fputc('>', stdout);
 		fputc(' ', stdout);
 		getchar();
-		scanf("%[^\n]", cdm_ShellInputString[0]);
+		scanf("%259[^\n]", cdm_ShellInputString[0]);
 		cdm_StringPointer = strtok(cdm_ShellInputString[0], " ");
 		strcpy(cdm_ShellInputString[1], cdm_StringPointer);
 		if (strcmp(cdm_ShellInputString[0], "help") == 0) {
