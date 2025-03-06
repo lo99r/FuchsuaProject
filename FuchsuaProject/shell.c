@@ -45,7 +45,7 @@ int cdm_ShellMainCode() {
 		strcpy(cdm_ShellInputString[1], cdm_StringPointer);
 		if (strcmp(cdm_ShellInputString[0], "help") == 0) {
 			printf("HELP nuduruunam mazanit watakina maguurkamfanina\nVER nuduruunam mazanit bugumuunal t-warsion\nEXT nuduruunam mazanit nubumuunal\n\
-labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen");
+labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 		}
 		else if (strcmp(cdm_ShellInputString[0], "ver") == 0) {
 			printf("%s.%s\n", CDMVersion, CDMBuild);
@@ -56,7 +56,7 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen");
 			WIN32_FIND_DATA cdm_FindedDirectoryData;
 			cdm_SearchDirectory = FindFirstFile(cdm_HyeonjaeDirectoryGyeongro, &cdm_FindedDirectoryData);
 			if (cdm_SearchDirectory == INVALID_HANDLE_VALUE) {
-				printf("N0001");
+				printf("N0001\n");
 			}
 			else {
 				do {
@@ -67,7 +67,7 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen");
 		else if (strcmp(cdm_ShellInputString[0], "cad") == 0) {
 			FILE* cdm_t_CAD = fopen("baseDir.cdm", "r");
 			if (cdm_t_CAD == NULL) {
-				printf("N0001");
+				printf("N0001\n");
 			}
 			else {
 				int cdm_t_1 = cdm_FindDirectorySize(cdm_Directory);
@@ -90,6 +90,7 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen");
 			COORD coord = { 0, 0 };
 			SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 			colors(0, 7);
+			//
 		}
 		else if (strcmp(cdm_ShellInputString[0], "ext") == 0) {
 			break;
