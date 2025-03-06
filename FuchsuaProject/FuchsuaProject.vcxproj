@@ -134,6 +134,7 @@
     <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="directory.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="shell.c" />
   </ItemGroup>

@@ -29,5 +29,8 @@
     <ClCompile Include="shell.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="directory.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

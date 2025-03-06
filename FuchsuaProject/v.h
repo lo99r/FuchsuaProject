@@ -18,6 +18,7 @@
 #include<windows.h>//include "windows.h"
 #include<process.h>
 #include<io.h>
+//#include<Skout.h>
 
 #define clss system("cls")
 #define colors(backer, downer) SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (backer * 16) + downer)
@@ -33,7 +34,28 @@
 #define FIE ;
 #define start {
 #define theEnd }
+#define lineQ ¦£
+#define lineE ¦¤
+#define lineZ ¦¦
+#define lineC ¦¥
+#define lineW ¦¡
+#define lineA ¦¢
+#define lineD lineA
+#define lineX lineW
+#define lineAW ¦§
+#define lineWA ¦¨
+#define lineDW ¦©
+#define linwWD ¦ª
+#define jesusCrist ¦«
+//#define ssang "
+#define line2 f(x) fputc('#x')
+//fputc(a, stdout)
+
+// ¦¡¦¢¦£¦¤¦¥¦¦¦§¦¨¦©¦ª¦«
 
 int cdm_ShellMainCode();
+int cdm_DirectoryToChar(char directory[2048][260], char charChar[260]);
+int cdm_CharToDirectory(char charChar[260], char directory[2048][260]);
+int cdm_FindDirectorySize(char directory[2048][260]);
 
 #endif
