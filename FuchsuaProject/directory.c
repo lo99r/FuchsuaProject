@@ -41,3 +41,34 @@ int cdm_FindDirectorySize(char directory[2048][260]) {
 	++lJamat;
 	return lJamat;
 }
+
+int cdm_FindStarInStringLast(char string[260]) {
+	int count = 0;
+	for (int i = 0; string[i] != '*' || i < 260; i++) {
+		count = i;
+	}
+	return count;
+}
+
+//inr
+int cdm_CdZeomDugae(char string[260]) {
+	//:regional_indicator_
+	//l:
+	int eYeogSlashCount = 0;
+	int eFindingEndValue = 0;
+	for (int i = 0; i < 260; i++) {
+		if (string[255 - i] == '\\') {
+			//43580307042800xx
+			++eYeogSlashCount;
+			if (eYeogSlashCount != 2) {
+				continue;
+			}
+			else {
+				eFindingEndValue = i;
+				break;
+			}
+			//
+		}
+	}//s
+	return eFindingEndValue;
+}

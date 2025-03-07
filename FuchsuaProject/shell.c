@@ -68,31 +68,30 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 				do {
 					printf("%s || %d || %d or %d || %d\n", (char*)cdm_FindedDirectoryData.cFileName, cdm_FindedDirectoryData.dwFileAttributes, cdm_FindedDirectoryData.ftLastWriteTime.dwLowDateTime, cdm_FindedDirectoryData.ftLastWriteTime.dwHighDateTime, cdm_FindedDirectoryData.nFileSizeHigh);
 				} while (FindNextFile(cdm_HyeonjaeDirectoryGyeongro, &cdm_FindedDirectoryData) != 0);
+				FindClose(cdm_SearchDirectory);
 			}
-			FindClose(cdm_SearchDirectory);
+			//
 		}
 		else if (strcmp(cdm_ShellInputString[0], "cad") == 0) {
-			FILE* cdm_t_CAD = fopen("baseDir.cdm", "r");
-			if (cdm_t_CAD == NULL) {
-				printf("N0001\n");
+			if (strcmp(cdm_ShellInputString[1], ".."))
+			{
+				int cdm_t_1 = cdm_FindStarInStringLast(cdm_HyeonjaeDirectoryGyeongro);
+				int cdm_t_2 = cdm_CdZeomDugae(cdm_HyeonjaeDirectoryGyeongro);
+				cdm_HyeonjaeDirectoryGyeongro[cdm_t_2 + 1] = '*';
+				for (int ii = cdm_t_2 + 2; ii < cdm_t_1 + 1; ii++) {
+					cdm_HyeonjaeDirectoryGyeongro[ii] = '\0';
+				}
+			}
+			else if (strcmp(cdm_ShellInputString[1], ".") == 0) {
+				//
 			}
 			else {
-				int cdm_t_1 = cdm_FindDirectorySize(cdm_Directory);
-				char** cdm_t_C1 = cdm_CharToDirectory(cdm_Directory, cdm_HyeonjaeDirectoryGyeongro);
-				for (int i = 0; i < 2048; i++) {
-					for (int j = 0; i < 260; j++) {
-						cdm_Directory[i][j] = cdm_t_C1[i][j];
-					}
-					//
-				}
-				strcpy(cdm_Directory[cdm_t_1 + 1], cdm_ShellInputString[1]);
-				char* cdm_t_C2 = cdm_CharToDirectory(cdm_HyeonjaeDirectoryGyeongro, cdm_Directory);
-				for (int i = 0; i < 260; i++) {
-					cdm_HyeonjaeDirectoryGyeongro[i] = cdm_t_C2[i];
-				}//strcat
-				strcat(cdm_HyeonjaeDirectoryGyeongro, "\\*");
-				//
-				printf("ok: %s", cdm_HyeonjaeDirectoryGyeongro);
+				int cdm_t_3 = cdm_FindStarInStringLast(cdm_ShellInputString[1]);
+				cdm_HyeonjaeDirectoryGyeongro[cdm_t_3] = '\0';
+				//cdm
+				strcat(cdm_HyeonjaeDirectoryGyeongro, cdm_ShellInputString[1]);
+				//t
+				strcat(cdm_HyeonjaeDirectoryGyeongro, "\\*");//f
 			}
 		}
 		else if (strcmp(cdm_ShellInputString[0], "cls") == 0) {

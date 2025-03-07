@@ -58,5 +58,8 @@ int cdm_DirectoryToChar(char directory[2048][260], char charChar[260]);
 int cdm_CharToDirectory(char charChar[260], char directory[2048][260]);
 int cdm_FindDirectorySize(char directory[2048][260]);
 int cdm_Setup();
+int cdm_FindStarInStringLast(char string[260]);
+//inr
+int cdm_CdZeomDugae(char string[260]);
 
 #endif
