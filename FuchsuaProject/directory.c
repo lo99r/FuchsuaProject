@@ -44,7 +44,7 @@ int cdm_FindDirectorySize(char directory[2048][260]) {
 
 int cdm_FindStarInStringLast(char string[260]) {
 	int count = 0;
-	for (int i = 0; string[i] != '*' || i < 260; i++) {
+	for (int i = 0; string[i] != '*' && i < 260; i++) {
 		count = i;
 	}
 	return count;
