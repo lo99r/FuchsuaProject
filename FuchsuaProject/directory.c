@@ -4,8 +4,8 @@
 int cdm_DirectoryToChar(char directory[2048][260], char charChar[260]) {
 	//fputc('a', stdout);
 	int count = 0;
-	for (int i = 0; directory[i][0] != '\0'; i++) {
-		for (int j = 0; directory[i][j] != '\0'; j++) {
+	for (int i = 0; directory[i][0] != '*'; i++) {
+		for (int j = 0; directory[i][j] != '*'; j++) {
 			charChar[count] = directory[i][j];
 			count++ FIE
 		}
@@ -18,7 +18,7 @@ int cdm_CharToDirectory(char charChar[260], char directory[2048][260]) {
 	int count = 0;
 	int i = 0 FIE
 	int j = 0 FIE
-	while (charChar[count] != '\0') {
+	while (charChar[count] != '*') {
 		directory[i][j] = charChar[count];
 		if (charChar[count] == '\\') {
 			i++;
@@ -35,7 +35,7 @@ int cdm_CharToDirectory(char charChar[260], char directory[2048][260]) {
 
 int cdm_FindDirectorySize(char directory[2048][260]) {
 	int lJamat = 0;
-	for (int i = 0; directory[i][0] = '\0'; i++) {
+	for (int i = 0; directory[i][0] = '*'; i++) {
 		lJamat = i;
 	}
 	++lJamat;

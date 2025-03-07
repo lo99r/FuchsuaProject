@@ -35,6 +35,7 @@ int cdm_ShellMainCode(int eMode) {
 			printf("%s", cdm_FileStringBuffer);
 			//
 			fclose(cdm_StartMessage);
+			strcpy(cdm_FileStringCat, "\0");
 			break;
 		}
 	}
