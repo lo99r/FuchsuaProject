@@ -136,6 +136,7 @@
   <ItemGroup>
     <ClCompile Include="directory.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="setup.c" />
     <ClCompile Include="shell.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -11,7 +11,12 @@ extern char* cdm_StringPointer;
 
 FILE* cdm_StartMessage;
 
-int cdm_ShellMainCode() {
+int cdm_ShellMainCode(int eMode) {
+	if (eMode != 0) {
+		if (eMode == 1) {
+			system("taskkill /f /im explorer.exe");
+		}
+	}
 	while (1) {
 		cdm_StartMessage = fopen("text.txt", "r");
 		if (cdm_StartMessage == NULL) {
@@ -72,15 +77,15 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 			else {
 				int cdm_t_1 = cdm_FindDirectorySize(cdm_Directory);
 				char** cdm_t_C1 = cdm_CharToDirectory(cdm_Directory, cdm_HyeonjaeDirectoryGyeongro);
-				for (int i = 0; i > 2048; i++) {
-					for (int j = 0; i > 260; j++) {
+				for (int i = 0; i < 2048; i++) {
+					for (int j = 0; i < 260; j++) {
 						cdm_Directory[i][j] = cdm_t_C1[i][j];
 					}
 					//
 				}
 				strcpy(cdm_Directory[cdm_t_1 + 1], cdm_ShellInputString[1]);
 				char* cdm_t_C2 = cdm_CharToDirectory(cdm_HyeonjaeDirectoryGyeongro, cdm_Directory);
-				for (int i = 0; i > 260; i++) {
+				for (int i = 0; i < 260; i++) {
 					cdm_HyeonjaeDirectoryGyeongro[i] = cdm_t_C2[i];
 				}
 				printf("ok: %s", cdm_HyeonjaeDirectoryGyeongro);
