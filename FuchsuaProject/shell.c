@@ -88,7 +88,9 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 				char* cdm_t_C2 = cdm_CharToDirectory(cdm_HyeonjaeDirectoryGyeongro, cdm_Directory);
 				for (int i = 0; i < 260; i++) {
 					cdm_HyeonjaeDirectoryGyeongro[i] = cdm_t_C2[i];
-				}
+				}//strcat
+				strcat(cdm_HyeonjaeDirectoryGyeongro, "\\*");
+				//
 				printf("ok: %s", cdm_HyeonjaeDirectoryGyeongro);
 			}
 		}
