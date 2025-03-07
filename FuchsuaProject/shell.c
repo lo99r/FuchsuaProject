@@ -69,6 +69,7 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 					printf("%s || %d || %d or %d || %d\n", (char*)cdm_FindedDirectoryData.cFileName, cdm_FindedDirectoryData.dwFileAttributes, cdm_FindedDirectoryData.ftLastWriteTime.dwLowDateTime, cdm_FindedDirectoryData.ftLastWriteTime.dwHighDateTime, cdm_FindedDirectoryData.nFileSizeHigh);
 				} while (FindNextFile(cdm_HyeonjaeDirectoryGyeongro, &cdm_FindedDirectoryData) != 0);
 			}
+			FindClose(cdm_SearchDirectory);
 		}
 		else if (strcmp(cdm_ShellInputString[0], "cad") == 0) {
 			FILE* cdm_t_CAD = fopen("baseDir.cdm", "r");
