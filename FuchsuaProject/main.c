@@ -21,9 +21,10 @@ int main(int argc, char* argv[9]) {
 		////strcpy(cdm_HyeonjaeDirectoryGyeongro, fgets());
 		fgets(cdm_HyeonjaeDirectoryGyeongro, 260, cdm_t_StartCdm);
 		////fclose();
+		fclose(cdm_t_StartCdm);
 	}
 	//fclose("");
-	fclose(cdm_t_StartCdm);
+	//
 	if (argc == 1) {
 		re:
 		strcpy(cdm_OpsionInput[1], "NULLL");
