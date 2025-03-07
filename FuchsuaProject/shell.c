@@ -76,7 +76,7 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 			FILE* cdm_t_Nocad = fopen("baseDir.cdm", "r");
 			if (cdm_t_Nocad == NULL) {
 				printf("N0001\n");
-				goto nocad;
+				goto nocadA;
 			}
 			if (strcmp(cdm_ShellInputString[1], ".."))
 			{
@@ -98,7 +98,7 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 				//t
 				strcat(cdm_HyeonjaeDirectoryGyeongro, "\\*");//f
 			}
-			nocad:
+nocadA:
 		}
 		else if (strcmp(cdm_ShellInputString[0], "cls") == 0) {
 			COORD coord = { 0, 0 };
