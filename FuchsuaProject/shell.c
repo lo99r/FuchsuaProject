@@ -76,29 +76,31 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 			FILE* cdm_t_Nocad = fopen("baseDir.cdm", "r");
 			if (cdm_t_Nocad == NULL) {
 				printf("N0001\n");
-				goto nocadA;
+				//goto nocadA;
 			}
-			if (strcmp(cdm_ShellInputString[1], ".."))
+			else
 			{
-				int cdm_t_1 = cdm_FindStarInStringLast(cdm_HyeonjaeDirectoryGyeongro);
-				int cdm_t_2 = cdm_CdZeomDugae(cdm_HyeonjaeDirectoryGyeongro);
-				cdm_HyeonjaeDirectoryGyeongro[cdm_t_2 + 1] = '*';
-				for (int ii = cdm_t_2 + 2; ii < cdm_t_1 + 1; ii++) {
-					cdm_HyeonjaeDirectoryGyeongro[ii] = '\0';
+				if (strcmp(cdm_ShellInputString[1], ".."))
+				{
+					int cdm_t_1 = cdm_FindStarInStringLast(cdm_HyeonjaeDirectoryGyeongro);
+					int cdm_t_2 = cdm_CdZeomDugae(cdm_HyeonjaeDirectoryGyeongro);
+					cdm_HyeonjaeDirectoryGyeongro[cdm_t_2 + 1] = '*';
+					for (int ii = cdm_t_2 + 2; ii < cdm_t_1 + 1; ii++) {
+						cdm_HyeonjaeDirectoryGyeongro[ii] = '\0';
+					}
+				}
+				else if (strcmp(cdm_ShellInputString[1], ".") == 0) {
+					//
+				}
+				else {
+					int cdm_t_3 = cdm_FindStarInStringLast(cdm_ShellInputString[1]);
+					cdm_HyeonjaeDirectoryGyeongro[cdm_t_3] = '\0';
+					//cdm
+					strcat(cdm_HyeonjaeDirectoryGyeongro, cdm_ShellInputString[1]);
+					//t
+					strcat(cdm_HyeonjaeDirectoryGyeongro, "\\*");//f
 				}
 			}
-			else if (strcmp(cdm_ShellInputString[1], ".") == 0) {
-				//
-			}
-			else {
-				int cdm_t_3 = cdm_FindStarInStringLast(cdm_ShellInputString[1]);
-				cdm_HyeonjaeDirectoryGyeongro[cdm_t_3] = '\0';
-				//cdm
-				strcat(cdm_HyeonjaeDirectoryGyeongro, cdm_ShellInputString[1]);
-				//t
-				strcat(cdm_HyeonjaeDirectoryGyeongro, "\\*");//f
-			}
-nocadA:
 		}
 		else if (strcmp(cdm_ShellInputString[0], "cls") == 0) {
 			COORD coord = { 0, 0 };
