@@ -35,7 +35,7 @@ int cdm_CharToDirectory(char charChar[260], char directory[2048][260]) {
 
 int cdm_FindDirectorySize(char directory[2048][260]) {
 	int lJamat = 0;
-	for (int i = 0; directory[i][0] = '*'; i++) {
+	for (int i = 0; directory[i][0] == '*'; i++) {
 		lJamat = i;
 	}
 	++lJamat;
