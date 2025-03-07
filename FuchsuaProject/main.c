@@ -25,6 +25,10 @@ int main(int argc, char* argv[9]) {
 		else if (strcmp(cdm_OpsionInput[1], "setup") == 0) {
 			cdm_Setup();
 		}
+		else if (strcmp(cdm_OpsionInput[1], "test") == 0) {
+			printf("%%cd%%");
+			++main_Start;
+		}
 		else if (strcmp(cdm_OpsionInput[1], "exit") == 0) {
 			goto exitA;
 		}
