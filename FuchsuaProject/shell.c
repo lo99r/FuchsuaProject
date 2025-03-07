@@ -60,7 +60,7 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 		else if (strcmp(cdm_ShellInputString[0], "dir") == 0) {
 			HMODULE cdm_SearchDirectory = INVALID_HANDLE_VALUE;
 			WIN32_FIND_DATA cdm_FindedDirectoryData;
-			cdm_SearchDirectory = FindFirstFile(cdm_HyeonjaeDirectoryGyeongro, &cdm_FindedDirectoryData);
+			cdm_SearchDirectory = FindFirstFile(_T(cdm_HyeonjaeDirectoryGyeongro), &cdm_FindedDirectoryData);
 			if (cdm_SearchDirectory == INVALID_HANDLE_VALUE) {
 				printf("N0001\n");
 			}
