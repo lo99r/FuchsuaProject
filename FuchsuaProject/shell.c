@@ -7,6 +7,8 @@ char cdm_HyeonjaeDirectoryGyeongro[260] = { 0, };// ".\\*"
 char cdm_Directory[2048][260] = { 0, };
 char cdm_QwdStar[260] = { 0, };
 
+wchar_t cdm_Ls[260] = { 0, };
+
 extern char* cdm_StringPointer;
 
 FILE* cdm_StartMessage;
@@ -58,9 +60,10 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 			//
 		}
 		else if (strcmp(cdm_ShellInputString[0], "dir") == 0) {
+			mbstowcs(cdm_Ls, cdm_HyeonjaeDirectoryGyeongro, 260);
 			HMODULE cdm_SearchDirectory = INVALID_HANDLE_VALUE;
 			WIN32_FIND_DATA cdm_FindedDirectoryData;
-			cdm_SearchDirectory = FindFirstFile((LPCWSTR)cdm_HyeonjaeDirectoryGyeongro, &cdm_FindedDirectoryData);
+			cdm_SearchDirectory = FindFirstFile(cdm_Ls, &cdm_FindedDirectoryData);
 			if (cdm_SearchDirectory == INVALID_HANDLE_VALUE) {
 				printf("N0001\n");
 			}
