@@ -68,7 +68,7 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 				printf("N0001\n");
 				DWORD cdm_t_Error = GetLastError();
 				printf("%lu\n", cdm_t_Error);//1;
-				wprintf(L"%ls", cdm_Ls);
+				printf("%s\n", cdm_HyeonjaeDirectoryGyeongro);
 			}
 			else {
 				do {
