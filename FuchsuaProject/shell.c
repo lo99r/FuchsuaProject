@@ -67,7 +67,7 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 			if (cdm_SearchDirectory == INVALID_HANDLE_VALUE) {
 				printf("N0001\n");
 				DWORD cdm_t_Error = GetLastError();
-				printf("%lu\n");//1;
+				printf("%lu\n", cdm_t_Error);//1;
 			}
 			else {
 				do {
