@@ -7,7 +7,7 @@ char cdm_HyeonjaeDirectoryGyeongro[260] = { 0, };// ".\\*"
 char cdm_Directory[2048][260] = { 0, };
 char cdm_QwdStar[260] = { 0, };
 
-wchar_t cdm_Ls[260] = { 0, };
+wchar_t cdm_Ls[260] = L"";
 
 extern char* cdm_StringPointer;
 
