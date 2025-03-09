@@ -53,6 +53,7 @@ int cdm_ShellMainCode(int eMode) {
 		////strcpy(cdm_HyeonjaeDirectoryGyeongro, fgets());
 		//fgets(cdm_HyeonjaeDirectoryGyeongro, 260, cdm_t_StartCdm);
 		////fclose();
+		wprintf(L"¾ø´Ù°í");
 	}
 	else {
 		//a
