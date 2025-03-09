@@ -47,7 +47,31 @@ int cdm_ShellMainCode(int eMode) {
 			system("taskkill /f /im explorer.exe");
 		}
 	}
-	cdm_baseDir_Func();
+	FILE* cdm_t_baseDir_cdm = fopen("baseDir.cdm", "r");
+	if (cdm_t_baseDir_cdm == NULL) {
+		//cdm_t_StartCdm = fopen("text.txt", "w");
+		////strcpy(cdm_HyeonjaeDirectoryGyeongro, fgets());
+		//fgets(cdm_HyeonjaeDirectoryGyeongro, 260, cdm_t_StartCdm);
+		////fclose();
+	}
+	else {
+		//a
+		//cdm_t_StartCdm = fopen("text.txt", "w");
+		////strcpy(cdm_HyeonjaeDirectoryGyeongro, fgets());
+		//fgets(cdm_HyeonjaeDirectoryGyeongro, 260, cdm_t_baseDir_cdm);
+		char cdm_t_FileChar = '\0';
+		for (int i = 0; i < 260; i++) {
+			cdm_t_FileChar = fgetc(cdm_t_baseDir_cdm);
+			if (cdm_t_FileChar = '\n') {
+				break;
+			}
+			else {
+				cdm_HyeonjaeDirectoryGyeongro[i] = cdm_t_FileChar;
+			}
+		}
+		////fclose();
+		fclose(cdm_t_baseDir_cdm);
+	}
 	while (1) {
 		cdm_StartMessage = fopen("text.txt", "r");
 		if (cdm_StartMessage == NULL) {
