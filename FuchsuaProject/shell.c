@@ -63,7 +63,7 @@ int cdm_ShellMainCode(int eMode) {
 		char cdm_t_FileChar = '\0';
 		for (int i = 0; i < 260; i++) {
 			cdm_t_FileChar = fgetc(cdm_t_baseDir_cdm);
-			if (cdm_t_FileChar = '\n') {
+			if (cdm_t_FileChar == '\n') {
 				break;
 			}
 			else {
