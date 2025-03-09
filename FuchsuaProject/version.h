@@ -1,3 +1,3 @@
 #pragma once
 #define CDMVersion "0.0.3"
-#define CDMBuild "2004"
+#define CDMBuild "2005"

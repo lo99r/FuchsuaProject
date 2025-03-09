@@ -105,7 +105,10 @@ int cdm_ShellMainCode(int eMode) {
 		getchar();
 		scanf("%259[^\n]", cdm_ShellInputString[0]);
 		cdm_StringPointer = strtok(cdm_ShellInputString[0], " ");
-		strcpy(cdm_ShellInputString[1], cdm_StringPointer);
+		if (cdm_StringPointer != NULL) {
+			strcpy(cdm_ShellInputString[1], cdm_StringPointer);
+
+		}
 		if (strcmp(cdm_ShellInputString[0], "help") == 0) {
 			printf("HELP nuduruunam mazanit watakina maguurkamfanina\nVER nuduruunam mazanit bugumuunal t-warsion\nEXT nuduruunam mazanit nubumuunal\n\
 labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
