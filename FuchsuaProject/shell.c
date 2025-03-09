@@ -106,10 +106,13 @@ int cdm_ShellMainCode(int eMode) {
 		scanf("%259[^\n]", cdm_ShellInputString[0]);
 		cdm_StringPointer = strtok(cdm_ShellInputString[0], " ");
 		if (cdm_StringPointer != NULL) {
-			strcpy(cdm_ShellInputString[1], cdm_StringPointer);
+			//strcpy(cdm_ShellInputString[1], cdm_StringPointer);
+			for (int i = 0; i < 260; i++) {
+				cdm_ShellInputString[1][i] = cdm_StringPointer[i];
+			}
 
 		}
-		printf("%s %s %s", cdm_ShellInputString[0], cdm_ShellInputString[1], cdm_HyeonjaeDirectoryGyeongro);
+		printf("%s %s %s\n", cdm_ShellInputString[0], cdm_ShellInputString[1], cdm_HyeonjaeDirectoryGyeongro);
 		if (strcmp(cdm_ShellInputString[0], "help") == 0) {
 			printf("HELP nuduruunam mazanit watakina maguurkamfanina\nVER nuduruunam mazanit bugumuunal t-warsion\nEXT nuduruunam mazanit nubumuunal\n\
 labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
