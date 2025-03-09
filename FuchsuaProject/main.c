@@ -6,33 +6,7 @@ int main_Start = 0;
 
 extern char cdm_HyeonjaeDirectoryGyeongro[260];
 
-int cdm_baseDir_Func() {
-	FILE* cdm_t_baseDir_cdm = fopen("baseDir.cdm", "r");
-	if (cdm_t_baseDir_cdm == NULL) {
-		//cdm_t_StartCdm = fopen("text.txt", "w");
-		////strcpy(cdm_HyeonjaeDirectoryGyeongro, fgets());
-		//fgets(cdm_HyeonjaeDirectoryGyeongro, 260, cdm_t_StartCdm);
-		////fclose();
-	}
-	else {
-		//a
-		//cdm_t_StartCdm = fopen("text.txt", "w");
-		////strcpy(cdm_HyeonjaeDirectoryGyeongro, fgets());
-		//fgets(cdm_HyeonjaeDirectoryGyeongro, 260, cdm_t_baseDir_cdm);
-		char cdm_t_FileChar = '\0';
-		for (int i = 0; i < 260; i++) {
-			cdm_t_FileChar = fgetc(cdm_t_baseDir_cdm);
-			if (cdm_t_FileChar = '\n') {
-				break;
-			}
-			else {
-				cdm_HyeonjaeDirectoryGyeongro[i] = cdm_t_FileChar;
-			}
-		}
-		////fclose();
-		fclose(cdm_t_baseDir_cdm);
-	}
-}
+//
 
 int main(int argc, char* argv[9]) {
 	//
