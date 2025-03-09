@@ -67,6 +67,7 @@ int cdm_ShellMainCode(int eMode) {
 			}
 			else {
 				cdm_HyeonjaeDirectoryGyeongro[i] = cdm_t_FileChar;
+				fputc(cdm_t_FileChar, stdout);
 			}
 		}
 		////fclose();
