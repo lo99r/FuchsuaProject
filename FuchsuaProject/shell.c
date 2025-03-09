@@ -129,8 +129,8 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 				/*do {
 					printf("%s || %d || %d or %d || %d\n", (char*)cdm_FindedDirectoryData.cFileName, cdm_FindedDirectoryData.dwFileAttributes, cdm_FindedDirectoryData.ftLastWriteTime.dwLowDateTime, cdm_FindedDirectoryData.ftLastWriteTime.dwHighDateTime, cdm_FindedDirectoryData.nFileSizeHigh);
 				} while (FindNextFile(cdm_HyeonjaeDirectoryGyeongro, &cdm_FindedDirectoryData) != 0);*/
-				while (FindNextFile(cdm_HyeonjaeDirectoryGyeongro, &cdm_FindedDirectoryData) != 0) {
-					printf("%s || %d || %d or %d || %d\n", (char*)cdm_FindedDirectoryData.cFileName, cdm_FindedDirectoryData.dwFileAttributes, cdm_FindedDirectoryData.ftLastWriteTime.dwLowDateTime, cdm_FindedDirectoryData.ftLastWriteTime.dwHighDateTime, cdm_FindedDirectoryData.nFileSizeHigh);
+				while (FindNextFile(cdm_SearchDirectory, &cdm_FindedDirectoryData) != 0) {
+					wprintf(L"%ls || %d || %d or %d || %d\n", cdm_FindedDirectoryData.cFileName, cdm_FindedDirectoryData.dwFileAttributes, cdm_FindedDirectoryData.ftLastWriteTime.dwLowDateTime, cdm_FindedDirectoryData.ftLastWriteTime.dwHighDateTime, cdm_FindedDirectoryData.nFileSizeHigh);
 				}
 				FindClose(cdm_SearchDirectory);
 			}
