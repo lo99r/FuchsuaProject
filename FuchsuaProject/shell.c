@@ -19,6 +19,7 @@ int cdm_ShellMainCode(int eMode) {
 			system("taskkill /f /im explorer.exe");
 		}
 	}
+	cdm_baseDir_Func();
 	while (1) {
 		cdm_StartMessage = fopen("text.txt", "r");
 		if (cdm_StartMessage == NULL) {

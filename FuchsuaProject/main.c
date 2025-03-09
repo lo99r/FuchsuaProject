@@ -56,7 +56,7 @@ int main(int argc, char* argv[9]) {
 	//
 	if (argc == 1) {
 	re:
-		cdm_baseDir_Func();
+		//cdm_baseDir_Func();
 		strcpy(cdm_OpsionInput[1], "NULLL");
 		//getchar();
 		if (main_Start != 0) {
