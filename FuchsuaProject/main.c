@@ -8,8 +8,23 @@ extern char cdm_HyeonjaeDirectoryGyeongro[260];
 
 int main(int argc, char* argv[9]) {
 	//
-	FILE* cdm_t_StartCdm = fopen("text.txt", "r");
-	if (cdm_t_StartCdm == NULL) {
+	//FILE* cdm_t_StartCdm = fopen("text.txt", "r");
+	//if (cdm_t_StartCdm == NULL) {
+	//	//cdm_t_StartCdm = fopen("text.txt", "w");
+	//	////strcpy(cdm_HyeonjaeDirectoryGyeongro, fgets());
+	//	//fgets(cdm_HyeonjaeDirectoryGyeongro, 260, cdm_t_StartCdm);
+	//	////fclose();
+	//}
+	//else {
+	//	//a
+	//	//cdm_t_StartCdm = fopen("text.txt", "w");
+	//	////strcpy(cdm_HyeonjaeDirectoryGyeongro, fgets());
+	//	fgets(cdm_HyeonjaeDirectoryGyeongro, 260, cdm_t_StartCdm);
+	//	////fclose();
+	//	fclose(cdm_t_StartCdm);
+	//}
+	FILE* cdm_t_baseDir_cdm = fopen("baseDir.cdm", "r");
+	if (cdm_t_baseDir_cdm == NULL) {
 		//cdm_t_StartCdm = fopen("text.txt", "w");
 		////strcpy(cdm_HyeonjaeDirectoryGyeongro, fgets());
 		//fgets(cdm_HyeonjaeDirectoryGyeongro, 260, cdm_t_StartCdm);
@@ -19,9 +34,9 @@ int main(int argc, char* argv[9]) {
 		//a
 		//cdm_t_StartCdm = fopen("text.txt", "w");
 		////strcpy(cdm_HyeonjaeDirectoryGyeongro, fgets());
-		fgets(cdm_HyeonjaeDirectoryGyeongro, 260, cdm_t_StartCdm);
+		fgets(cdm_HyeonjaeDirectoryGyeongro, 260, cdm_t_baseDir_cdm);
 		////fclose();
-		fclose(cdm_t_StartCdm);
+		fclose(cdm_t_baseDir_cdm);
 	}
 	//fclose("");
 	//
