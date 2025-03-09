@@ -6,23 +6,7 @@ int main_Start = 0;
 
 extern char cdm_HyeonjaeDirectoryGyeongro[260];
 
-int main(int argc, char* argv[9]) {
-	//
-	//FILE* cdm_t_StartCdm = fopen("text.txt", "r");
-	//if (cdm_t_StartCdm == NULL) {
-	//	//cdm_t_StartCdm = fopen("text.txt", "w");
-	//	////strcpy(cdm_HyeonjaeDirectoryGyeongro, fgets());
-	//	//fgets(cdm_HyeonjaeDirectoryGyeongro, 260, cdm_t_StartCdm);
-	//	////fclose();
-	//}
-	//else {
-	//	//a
-	//	//cdm_t_StartCdm = fopen("text.txt", "w");
-	//	////strcpy(cdm_HyeonjaeDirectoryGyeongro, fgets());
-	//	fgets(cdm_HyeonjaeDirectoryGyeongro, 260, cdm_t_StartCdm);
-	//	////fclose();
-	//	fclose(cdm_t_StartCdm);
-	//}
+int cdm_baseDir_Func() {
 	FILE* cdm_t_baseDir_cdm = fopen("baseDir.cdm", "r");
 	if (cdm_t_baseDir_cdm == NULL) {
 		//cdm_t_StartCdm = fopen("text.txt", "w");
@@ -48,10 +32,31 @@ int main(int argc, char* argv[9]) {
 		////fclose();
 		fclose(cdm_t_baseDir_cdm);
 	}
+}
+
+int main(int argc, char* argv[9]) {
+	//
+	//FILE* cdm_t_StartCdm = fopen("text.txt", "r");
+	//if (cdm_t_StartCdm == NULL) {
+	//	//cdm_t_StartCdm = fopen("text.txt", "w");
+	//	////strcpy(cdm_HyeonjaeDirectoryGyeongro, fgets());
+	//	//fgets(cdm_HyeonjaeDirectoryGyeongro, 260, cdm_t_StartCdm);
+	//	////fclose();
+	//}
+	//else {
+	//	//a
+	//	//cdm_t_StartCdm = fopen("text.txt", "w");
+	//	////strcpy(cdm_HyeonjaeDirectoryGyeongro, fgets());
+	//	fgets(cdm_HyeonjaeDirectoryGyeongro, 260, cdm_t_StartCdm);
+	//	////fclose();
+	//	fclose(cdm_t_StartCdm);
+	//}
+	//cdm_baseDir_Func();
 	//fclose("");
 	//
 	if (argc == 1) {
-		re:
+	re:
+		cdm_baseDir_Func();
 		strcpy(cdm_OpsionInput[1], "NULLL");
 		//getchar();
 		if (main_Start != 0) {
