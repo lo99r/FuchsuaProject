@@ -147,7 +147,7 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 			}
 			else
 			{
-				if (strcmp(cdm_ShellInputString[1], ".."))
+				if (strcmp(cdm_ShellInputString[1], "..") == 0)
 				{
 					int cdm_t_1 = cdm_FindStarInStringLast(cdm_HyeonjaeDirectoryGyeongro);
 					int cdm_t_2 = cdm_CdZeomDugae(cdm_HyeonjaeDirectoryGyeongro);
