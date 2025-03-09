@@ -160,7 +160,7 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 					//
 				}
 				else {
-					int cdm_t_3 = cdm_FindStarInStringLast(cdm_ShellInputString[1]);
+					int cdm_t_3 = cdm_FindStarInStringLast(cdm_HyeonjaeDirectoryGyeongro);
 					cdm_HyeonjaeDirectoryGyeongro[cdm_t_3] = '\0';
 					//cdm
 					strcat(cdm_HyeonjaeDirectoryGyeongro, cdm_ShellInputString[1]);
