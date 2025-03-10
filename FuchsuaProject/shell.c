@@ -105,6 +105,7 @@ int cdm_ShellMainCode(int eMode) {
 		getchar();
 		scanf("%259[^\n]", cdm_ShellInputString[0]);
 		cdm_StringPointer = strtok(cdm_ShellInputString[0], " ");
+		cdm_StringPointer = strtok(NULL, " ");
 		if (cdm_StringPointer != NULL) {
 			//strcpy(cdm_ShellInputString[1], cdm_StringPointer);
 			for (int i = 0; i < 260; i++) {
