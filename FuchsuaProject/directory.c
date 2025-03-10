@@ -46,7 +46,7 @@ int cdm_FindStarInStringLast(char string[260]) {
 	int count = 0;
 	for (int i = 0; i < 260; i++) {
 		count = i;
-		if (string[i] != '*') {
+		if (string[i] == '*') {
 			break;
 		}
 	}
@@ -60,7 +60,7 @@ int cdm_CdZeomDugae(char string[260]) {
 	int eYeogSlashCount = 0;
 	int eFindingEndValue = 0;
 	for (int i = 0; i < 260; i++) {
-		if (string[255 - i] == '\\') {
+		if (string[259 - i] == '\\') {
 			//43580307042800xx
 			++eYeogSlashCount;
 			if (eYeogSlashCount != 2) {
