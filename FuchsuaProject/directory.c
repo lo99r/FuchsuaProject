@@ -73,5 +73,5 @@ int cdm_CdZeomDugae(char string[260]) {
 			//
 		}
 	}//s
-	return eFindingEndValue;
+	return 259 - eFindingEndValue;
 }
