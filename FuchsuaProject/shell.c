@@ -156,7 +156,7 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 			}
 			else
 			{
-				printf("%s %s %s", cdm_ShellInputString[0], cdm_ShellInputString[1], cdm_HyeonjaeDirectoryGyeongro);
+				printf("%s %s %s\n", cdm_ShellInputString[0], cdm_ShellInputString[1], cdm_HyeonjaeDirectoryGyeongro);
 				if (strcmp(cdm_ShellInputString[1], "..") == 0)
 				{
 					int cdm_t_1 = cdm_FindStarInStringLast(cdm_HyeonjaeDirectoryGyeongro);
