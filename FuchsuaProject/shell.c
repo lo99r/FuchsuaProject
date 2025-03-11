@@ -156,11 +156,11 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 			}
 			else
 			{
-				printf("%s %s %s\n", cdm_ShellInputString[0], cdm_ShellInputString[1], cdm_HyeonjaeDirectoryGyeongro);
+				
 				if (strcmp(cdm_ShellInputString[1], "..") == 0)
 				{
 					int cdm_t_1 = cdm_FindStarInStringLast(cdm_HyeonjaeDirectoryGyeongro);
-					int cdm_t_2 = cdm_CdZeomDugae(cdm_HyeonjaeDirectoryGyeongro);
+					int cdm_t_2 = cdm_CdZeomDugae(cdm_HyeonjaeDirectoryGyeongro);printf("%s %s %s\n", cdm_t_1, cdm_t_2, cdm_HyeonjaeDirectoryGyeongro);
 					cdm_HyeonjaeDirectoryGyeongro[cdm_t_2 + 1] = '*';
 					for (int ii = cdm_t_2 + 2; ii < cdm_t_1 + 1; ii++) {
 						cdm_HyeonjaeDirectoryGyeongro[ii] = '\0';
