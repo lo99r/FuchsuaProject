@@ -147,7 +147,6 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 			printf("%s", cdm_HyeonjaeDirectoryGyeongro);//p;
 		}
 		else if (strcmp(cdm_ShellInputString[0], "cad") == 0) {
-			printf("%s %s %s", cdm_ShellInputString[0], cdm_ShellInputString[1], cdm_HyeonjaeDirectoryGyeongro);
 			FILE* cdm_t_Nocad = fopen("baseDir.cdm", "r");
 			if (cdm_t_Nocad == NULL) {
 				printf("N0001\n");
