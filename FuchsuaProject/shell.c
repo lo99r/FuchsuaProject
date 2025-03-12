@@ -113,7 +113,6 @@ int cdm_ShellMainCode(int eMode) {
 			}
 
 		}
-		printf("%s %s %s\n", cdm_ShellInputString[0], cdm_StringPointer, cdm_HyeonjaeDirectoryGyeongro);
 		if (strcmp(cdm_ShellInputString[0], "help") == 0) {
 			printf("HELP nuduruunam mazanit watakina maguurkamfanina\nVER nuduruunam mazanit bugumuunal t-warsion\nEXT nuduruunam mazanit nubumuunal\n\
 labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
@@ -160,7 +159,7 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 				if (strcmp(cdm_ShellInputString[1], "..") == 0)
 				{
 					int cdm_t_1 = cdm_FindStarInStringLast(cdm_HyeonjaeDirectoryGyeongro);
-					int cdm_t_2 = cdm_CdZeomDugae(cdm_HyeonjaeDirectoryGyeongro);printf("%d %d %s\n", cdm_t_1, cdm_t_2, cdm_HyeonjaeDirectoryGyeongro);
+					int cdm_t_2 = cdm_CdZeomDugae(cdm_HyeonjaeDirectoryGyeongro);
 					cdm_HyeonjaeDirectoryGyeongro[cdm_t_2 + 1] = '*';
 					for (int ii = cdm_t_2 + 2; ii < cdm_t_1 + 1; ii++) {
 						cdm_HyeonjaeDirectoryGyeongro[ii] = '\0';
@@ -177,7 +176,6 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 					//t
 					strcat(cdm_HyeonjaeDirectoryGyeongro, "\\*");//f
 				}
-				printf("%s %s %s", cdm_ShellInputString[0], cdm_ShellInputString[1], cdm_HyeonjaeDirectoryGyeongro);
 			}
 		}
 		else if (strcmp(cdm_ShellInputString[0], "cls") == 0) {
