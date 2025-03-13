@@ -20,12 +20,13 @@
 #include<process.h>
 #include<io.h>
 #include<time.h>
+#include<locale.h>
 //#include<Skout.h>
 
 //
 #pragma comment (lib, "winmm.lib")    //ю╫╬г
-#include <mmsystem.h>;                //ю╫╬г
-#include <Digitalv.h>;                //ю╫╬г
+#include <mmsystem.h>                //ю╫╬г
+#include <Digitalv.h>                //ю╫╬г
 
 #endif
 
@@ -114,3 +115,135 @@ void setcursortype(CURSOR_TYPE c) {
 }
 #endif//001
 #endif
+
+//#define q_io 0
+
+#ifndef NO_BINARY
+#define NO_BINARY
+#ifdef q_io
+#if q_io == 0
+#define print(n) wprintf(L"%s", n)
+#define input(n) fgetws(n, 256, stdin);size_t len = wcslen(str);if(len > 0 && str[len - 1] == L'\n'){str[len - 1] = L'\0'}
+#elif q_io == 1
+#define print(n) q_output(n)
+#define input(n) q_input(n)
+#include<q_io.h>
+#else
+#error q_io╢б 0╟З 1ют╢о╢ы.
+#endif
+#else
+#define q_io 0
+#endif
+
+UINT16 memory[4096] = { 0, };
+
+UINT16 cdmb_Main();
+UINT16 cdmb_Memory();
+UINT16 cdmb_Parsing();
+UINT16 cdmb_Command(UINT16* dPoint);
+UINT16 cdmb_Ifing(UINT16* gPoint);
+
+UINT16 cdmb_Main() {
+	if(q_io == 0)
+	{
+		setlocale(LC_ALL, "");
+	}
+	UINT16 cdmmb_t_1 = cdmb_Memory();
+	if (cdmmb_t_1 == 0x41) {
+		return 0x41;
+	}
+	else {
+		cdmb_Parsing();
+	}
+}
+
+UINT16 cdmb_Memory() {
+	FILE* cdm_t_WFILE1 = _wfopen(L"StartMemory", L"rb, ccs=UTF-16LE");
+	if (!cdm_t_WFILE1) {
+		return 0x41;
+	}
+	fread(&memory[15], sizeof(UINT16), 256, cdm_t_WFILE1);
+}
+UINT16 cdmb_CommandFuncReturnen = 0x0;
+UINT16 cdmb_Parsing() {
+	int cdm_t_MEMORYPOINTER = 0;
+	//cdmb_t_Memory[]
+	//cdmb_t_Memory[]
+	//	cdmb_t_Memory[]
+	//	cdmb_t_Memory[]
+	//	cdmb_t_Memory[]
+	//	//cdmb_t_Memory[]
+	//cdmb_t_Memory[]
+	//	cdmb_t_Memory[]
+	//	cdmb_t_Memory[]
+	//	//cdmb_t_Memory[]
+	//	cdmb_t_Memory[]
+	//	cdmb_t_Memory[]
+	//	cdmb_t_Memory[]
+	//	//
+	//if(cdmb_t_Memory[cdm_t_MEMORYPOINTER] == )
+	cdm_t_MEMORYPOINTER = memory[cdm_t_MEMORYPOINTER];
+	while(1)
+	{
+		cdmb_CommandFuncReturnen = cdmb_Command(&cdm_t_MEMORYPOINTER);//y
+		//
+		if (cdmb_CommandFuncReturnen != 0) {
+			break;
+		}
+	}
+	//
+}
+UINT16 cdmb_DeulyeoSseugi = 0x0000;
+UINT16 cdmb_Command(UINT16* dPointer) {
+	UINT16 cdmb_t_IfingRETURN = 0x0000;
+	//UINT16 cdmb_t_DeulyeoSseugi = 0x0000;
+	if (memory[*dPointer] == 0x0001) {
+		memory[*dPointer + 1] = memory[*dPointer + 2];
+		*dPointer += 3;
+	}
+	else if (memory[*dPointer] == 0x0002) {
+		if (q_io == 1) {
+			*dPointer += 2;
+		}
+		else {
+			memory[*dPointer] = _getwch();
+		}
+	}
+	else if (memory[*dPointer] == 0x0003) {
+		/*if (memory[*dPointer + 2] == 0x1111) {
+
+		}*/
+		cdmb_t_IfingRETURN = cdmb_Ifing(*dPointer + 1);
+		if (cdmb_t_IfingRETURN) {
+			cdmb_DeulyeoSseugi += 1;
+		}
+		else {
+			cdmb_DeulyeoSseugi += 1;
+			UINT16 cdmb_t_SavingDS = cdmb_DeulyeoSseugi;
+			/*for (UINT16 i = 0x0000; cdmb_t_SavingDS - 1 == cdmb_DeulyeoSseugi; i++) {
+				if (memory[*dPointer + i] == 0x0003) {
+					cdmb_DeulyeoSseugi += 1;
+				}
+				else if (memory[*dPointer + i] == 0x0004) {
+					cdmb_DeulyeoSseugi -= 1;
+				}
+			}*/
+			while (1) {
+				if (cdmb_t_SavingDS - 1 == cdmb_DeulyeoSseugi) {
+					//v
+					break;
+				}
+				if (memory[*dPointer] == 0x0003) {
+					cdmb_DeulyeoSseugi += 1;
+				}
+				else if (memory[*dPointer] == 0x0004) {
+					cdmb_DeulyeoSseugi -= 1;
+				}
+				//ifKC
+				*dPointer += 1;
+			}
+		}
+	}
+}
+
+#endif //NO_BANARY
