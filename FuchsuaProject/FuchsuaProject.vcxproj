@@ -130,10 +130,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="binary.h" />
     <ClInclude Include="v.h" />
     <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="binary.c" />
     <ClCompile Include="directory.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="setup.c" />
