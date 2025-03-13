@@ -24,8 +24,8 @@
 
 //
 #pragma comment (lib, "winmm.lib")    //擠學
-#include <mmsystem.h>;                //擠學
-#include <Digitalv.h>;                //擠學
+#include <mmsystem.h>             //擠學
+#include <Digitalv.h>            //擠學
 
 #endif
 
@@ -81,7 +81,8 @@ void gotoxy(int x, int y) {
 	COORD Cur;
 	Cur.X = x;
 	Cur.Y = y;
-	SetConsoleCursorPosision(GetStdHandle(STD_OUTPUT_HANDLE), Cur);
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Cur);
+	//
 	//
 }
 int wherex() {
@@ -109,7 +110,8 @@ void setcursortype(CURSOR_TYPE c) {
 		CurInfo.dwSize = 20;
 		CurInfo.bVisible = TRUE;
 		break;
-		SetCondoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &CurInfo);
+		SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &CurInfo);
+		//S
 	}
 }
 #endif//001
