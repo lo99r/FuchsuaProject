@@ -246,4 +246,8 @@ UINT16 cdmb_Command(UINT16* dPointer) {
 	}
 }//¤±¤±
 
+UINT16 cdmb_Ifing(UINT16* gPoint) {
+
+}
+
 #endif //NO_BANARY
