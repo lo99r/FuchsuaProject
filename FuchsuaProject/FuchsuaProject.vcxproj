@@ -104,7 +104,7 @@
       <FixedBaseAddress>true</FixedBaseAddress>
     </Link>
     <PostBuildEvent>
-      <Command>tar -cvf "$(SolutionDir)CDM.zip" -C "$(OutDir)" .
+      <Command>tar -cvf "$(SolutionDir)CDM.zip" -C "$(OutDir)..\t\" .
 del /Q "$(OutDir)*"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
