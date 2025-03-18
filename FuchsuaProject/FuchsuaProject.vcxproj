@@ -104,8 +104,8 @@
       <FixedBaseAddress>true</FixedBaseAddress>
     </Link>
     <PostBuildEvent>
-      <Command>tar -cvf "$(SolutionDir)CDM.zip" -C "$(OutDir)..\t\" .
-del /Q "$(OutDir)*"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
