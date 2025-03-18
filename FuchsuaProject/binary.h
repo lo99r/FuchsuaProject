@@ -22,6 +22,7 @@
 #include<time.h>
 #include<locale.h>
 //#include<Skout.h>
+//#include"v.h"
 
 //
 #pragma comment (lib, "winmm.lib")    //À½¾Ç
@@ -82,7 +83,7 @@ void gotoxy(int x, int y) {
 	COORD Cur;
 	Cur.X = x;
 	Cur.Y = y;
-	SetConsoleCursorPosision(GetStdHandle(STD_OUTPUT_HANDLE), Cur);
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Cur);
 	//
 }
 int wherex() {
@@ -110,7 +111,7 @@ void setcursortype(CURSOR_TYPE c) {
 		CurInfo.dwSize = 20;
 		CurInfo.bVisible = TRUE;
 		break;
-		SetCondoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &CurInfo);
+		SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &CurInfo);
 	}
 }
 #endif//001
