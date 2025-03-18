@@ -166,7 +166,7 @@ UINT16 cdmb_Memory() {
 }
 UINT16 cdmb_CommandFuncReturnen = 0x0;
 UINT16 cdmb_Parsing() {
-	int cdm_t_MEMORYPOINTER = 0;
+	UINT16 cdm_t_MEMORYPOINTER = 0;
 	//cdmb_t_Memory[]
 	//cdmb_t_Memory[]
 	//	cdmb_t_Memory[]
@@ -213,7 +213,8 @@ UINT16 cdmb_Command(UINT16* dPointer) {
 		/*if (memory[*dPointer + 2] == 0x1111) {
 
 		}*/
-		cdmb_t_IfingRETURN = cdmb_Ifing(*dPointer + 1);
+		UINT16 ddPointer = *dPointer + 1;
+		cdmb_t_IfingRETURN = cdmb_Ifing(&ddPointer);
 		if (cdmb_t_IfingRETURN) {
 			cdmb_DeulyeoSseugi += 1;
 		}
