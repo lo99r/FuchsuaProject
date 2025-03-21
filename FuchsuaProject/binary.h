@@ -142,7 +142,6 @@ UINT16 cdmb_Main();
 UINT16 cdmb_Memory();
 UINT16 cdmb_Parsing();
 UINT16 cdmb_Command(UINT16* dPoint);
-UINT16 cdmb_Ifing(UINT16* gPoint);
 
 UINT16 cdmb_Main() {
 	if(q_io == 0)
@@ -194,61 +193,7 @@ UINT16 cdmb_Parsing() {
 	}
 	//
 }
-UINT16 cdmb_DeulyeoSseugi = 0x0000;
-UINT16 cdmb_Command(UINT16* dPointer) {
-	UINT16 cdmb_t_IfingRETURN = 0x0000;
-	//UINT16 cdmb_t_DeulyeoSseugi = 0x0000;
-	if (memory[*dPointer] == 0x0001) {
-		memory[*dPointer + 1] = memory[*dPointer + 2];
-		*dPointer += 3;
-	}
-	else if (memory[*dPointer] == 0x0002) {
-		if (q_io == 1) {
-			*dPointer += 2;
-		}
-		else {
-			memory[*dPointer] = _getwch();
-		}
-	}
-	else if (memory[*dPointer] == 0x0003) {
-		/*if (memory[*dPointer + 2] == 0x1111) {
-
-		}*/
-		UINT16 ddPointer = *dPointer + 1;
-		cdmb_t_IfingRETURN = cdmb_Ifing(&ddPointer);
-		if (cdmb_t_IfingRETURN) {
-			cdmb_DeulyeoSseugi += 1;
-		}
-		else {
-			cdmb_DeulyeoSseugi += 1;
-			UINT16 cdmb_t_SavingDS = cdmb_DeulyeoSseugi;
-			/*for (UINT16 i = 0x0000; cdmb_t_SavingDS - 1 == cdmb_DeulyeoSseugi; i++) {
-				if (memory[*dPointer + i] == 0x0003) {
-					cdmb_DeulyeoSseugi += 1;
-				}
-				else if (memory[*dPointer + i] == 0x0004) {
-					cdmb_DeulyeoSseugi -= 1;
-				}
-			}*/
-			while (1) {
-				if (cdmb_t_SavingDS - 1 == cdmb_DeulyeoSseugi) {
-					//v
-					break;
-				}
-				if (memory[*dPointer] == 0x0003) {
-					cdmb_DeulyeoSseugi += 1;
-				}
-				else if (memory[*dPointer] == 0x0004) {
-					cdmb_DeulyeoSseugi -= 1;
-				}
-				//ifKC
-				*dPointer += 1;
-			}
-		}
-	}
-}//¤±¤±
-
-UINT16 cdmb_Ifing(UINT16* gPoint) {
+UINT16 cdmb_Command(UINT16* dPoint) {
 
 }
 
