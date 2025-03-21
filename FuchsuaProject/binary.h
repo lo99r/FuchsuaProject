@@ -163,7 +163,7 @@ UINT16 cdmb_Memory() {
 	if (!cdm_t_WFILE1) {
 		return 0x41;
 	}
-	fread(&memory[15], sizeof(UINT16), 256, cdm_t_WFILE1);
+	fread(&memory[16], sizeof(UINT16), 256, cdm_t_WFILE1);
 }
 UINT16 cdmb_CommandFuncReturnen = 0x0;
 UINT16 cdmb_Parsing() {
