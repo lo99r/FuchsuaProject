@@ -148,6 +148,8 @@ UINT16 cdmb_Command(UINT16* dPoint);
 UINT16 cdmb_Push(UINT16 hPoint, UINT16* hCount, UINT16 _16bit);
 UINT16 cdmb_Error(UINT16 rErrorCodes);
 UINT16 cdmb_Pop(UINT16 pPoint, UINT16* pCount);
+UINT16 cdmb_Safe(UINT16 ePoint, UINT16 eCount, UINT16 ePushTheMemory);
+UINT16 cdmb_Load(UINT16 dPoint, UINT16* dCount, UINT16 dLoadTheMemory);
 
 UINT16 cdmb_Main() {
 	if(q_io == 0)
@@ -220,6 +222,21 @@ UINT16 cdmb_Command(UINT16* dPoint) {
 			break;
 		}
 	}
+	else if (memory[*dPoint] == 0x0002) { //safe
+		switch (memory[*dPoint + 1]) {
+		case 0x0001:
+			cdmb_Safe(2433, stack1_Count, memory[*dPoint + 2]);
+			break;
+		case 0x0002:
+			cdmb_Safe(2689, stack2_Count, memory[*dPoint + 2]);
+			break;
+		case 0x0003:
+			cdmb_Safe(2945, stack3_Count, memory[*dPoint + 2]);
+			break;
+		default:
+			cdmb_Error(0x0102);
+		}
+	}
 }
 
 UINT16 cdmb_Push(UINT16 hPoint, UINT16* hCount, UINT16 _16bit) {
@@ -236,6 +253,15 @@ UINT16 cdmb_Error(UINT16 rErrorCodes) {
 UINT16 cdmb_Pop(UINT16 pPoint, UINT16* pCount) {
 	//memory[]
 	*pCount += 1;
+	return 0;
+}
+
+UINT16 cdmb_Safe(UINT16 ePoint, UINT16 eCount, UINT16 ePushTheMemory) { //
+	memory[ePushTheMemory] = memory[ePoint + eCount];
+	return 0;
+}
+UINT16 cdmb_Load(UINT16 dPoint, UINT16* dCount, UINT16 dLoadTheMemory) {
+	cdmb_Push(dPoint, dCount, memory[dLoadTheMemory]);
 	return 0;
 }
 
