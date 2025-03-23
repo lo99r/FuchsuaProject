@@ -224,7 +224,7 @@ UINT16 cdmb_Command(UINT16* dPoint) {
 
 UINT16 cdmb_Push(UINT16 hPoint, UINT16* hCount, UINT16 _16bit) {
 	memory[hPoint + *hCount] = _16bit;
-	*hCount++;
+	*hCount += 1;
 	return 0;
 }
 
@@ -235,7 +235,7 @@ UINT16 cdmb_Error(UINT16 rErrorCodes) {
 
 UINT16 cdmb_Pop(UINT16 pPoint, UINT16* pCount) {
 	//memory[]
-	*pCount--;
+	*pCount += 1;
 	return 0;
 }
 
