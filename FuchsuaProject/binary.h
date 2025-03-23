@@ -235,6 +235,23 @@ UINT16 cdmb_Command(UINT16* dPoint) {
 			break;
 		default:
 			cdmb_Error(0x0102);
+			break;
+		}
+	}
+	else if (memory[*dPoint] == 0x0003) { //load
+		switch (memory[*dPoint + 1]) {
+		case 0x0001:
+			cdmb_Load(2433, &stack1_Count, memory[*dPoint + 2]);
+			break;
+		case 0x0002:
+			cdmb_Load(2689, &stack2_Count, memory[*dPoint + 2]);
+			break;
+		case 0x0003:
+			cdmb_Load(2945, &stack3_Count, memory[*dPoint + 2]);
+			break;
+		default:
+			cdmb_Error(0x0103);
+			break;
 		}
 	}
 }
