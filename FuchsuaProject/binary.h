@@ -137,11 +137,17 @@ void setcursortype(CURSOR_TYPE c) {
 #endif
 
 UINT16 memory[4096] = { 0, };
+UINT16 stack1_Count = 0;
+UINT16 stack2_Count = 0;
+UINT16 stack3_Count = 0;
 
 UINT16 cdmb_Main();
 UINT16 cdmb_Memory();
 UINT16 cdmb_Parsing();
 UINT16 cdmb_Command(UINT16* dPoint);
+UINT16 cdmb_Push(UINT16 hPoint, UINT16* hCount, UINT16 _16bit);
+UINT16 cdmb_Error(UINT16 rErrorCodes);
+UINT16 cdmb_Pop(UINT16 pPoint, UINT16* pCount);
 
 UINT16 cdmb_Main() {
 	if(q_io == 0)
@@ -178,9 +184,59 @@ UINT16 cdmb_Parsing() {
 	}
 	//
 }
-//todo: 
+//todo: 바이트 코드를 구현하기
 UINT16 cdmb_Command(UINT16* dPoint) {
+	if (memory[*dPoint] == 0x0000) { //push
+		//s
+		switch (memory[*dPoint + 1]) {
+		case 0x0001:
+			cdmb_Push(2433, &stack1_Count, memory[*dPoint + 2]);
+			break;
+		case 0x0002:
+			cdmb_Push(2689, &stack2_Count, memory[*dPoint + 2]);
+			break;
+		case 0x0003:
+			cdmb_Push(2945, &stack3_Count, memory[*dPoint + 2]);// )
+			break;
+		default:
+			cdmb_Error(0x0100);
+			break;
+		}
+		*dPoint += 3;
+	}
+	else if (memory[*dPoint] == 0x0001) { //pop
+		switch (memory[*dPoint + 1]) {
+		case 0x0001:
+			cdmb_Pop(2433, &stack1_Count);
+			break;
+		case 0x0002:
+			cdmb_Pop(2689, &stack2_Count);
+			break;
+		case 0x0003:
+			cdmb_Pop(2945, &stack3_Count);
+			break;
+		default:
+			cdmb_Error(0x0101);
+			break;
+		}
+	}
+}
 
+UINT16 cdmb_Push(UINT16 hPoint, UINT16* hCount, UINT16 _16bit) {
+	memory[hPoint + *hCount] = _16bit;
+	*hCount++;
+	return 0;
+}
+
+UINT16 cdmb_Error(UINT16 rErrorCodes) {
+	memory[1] = rErrorCodes;
+	return 0;
+}
+
+UINT16 cdmb_Pop(UINT16 pPoint, UINT16* pCount) {
+	//memory[]
+	*pCount--;
+	return 0;
 }
 
 #endif //NO_BANARY
