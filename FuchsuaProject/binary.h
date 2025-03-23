@@ -167,21 +167,6 @@ UINT16 cdmb_Memory() {
 UINT16 cdmb_CommandFuncReturnen = 0x0;
 UINT16 cdmb_Parsing() {
 	UINT16 cdm_t_MEMORYPOINTER = 0;
-	//cdmb_t_Memory[]
-	//cdmb_t_Memory[]
-	//	cdmb_t_Memory[]
-	//	cdmb_t_Memory[]
-	//	cdmb_t_Memory[]
-	//	//cdmb_t_Memory[]
-	//cdmb_t_Memory[]
-	//	cdmb_t_Memory[]
-	//	cdmb_t_Memory[]
-	//	//cdmb_t_Memory[]
-	//	cdmb_t_Memory[]
-	//	cdmb_t_Memory[]
-	//	cdmb_t_Memory[]
-	//	//
-	//if(cdmb_t_Memory[cdm_t_MEMORYPOINTER] == )
 	cdm_t_MEMORYPOINTER = memory[cdm_t_MEMORYPOINTER];
 	while(1)
 	{
@@ -193,6 +178,7 @@ UINT16 cdmb_Parsing() {
 	}
 	//
 }
+//todo: 
 UINT16 cdmb_Command(UINT16* dPoint) {
 
 }
