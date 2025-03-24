@@ -7,8 +7,8 @@
 */
 
 #include"v.h"
-#include"binary.h"
 #define q_io 0
+#include"binary.h"
 
 char cdm_OpsionInput[9][260] = { 0, };
 char* cdm_StringPointer;
@@ -62,6 +62,9 @@ int main(int argc, char* argv[9]) {
 		else if (strcmp(cdm_OpsionInput[1], "test") == 0) {
 			printf("%%cd%%");
 			++main_Start;
+		}
+		else if (strcmp(cdm_OpsionInput[1], "script") == 0) {
+			cdmb_Main();
 		}
 		else if (strcmp(cdm_OpsionInput[1], "exit") == 0) {
 			goto exitA;
