@@ -251,7 +251,7 @@ UINT16 cdmb_Pop(UINT16 pPoint, UINT16* pCount);
 UINT16 cdmb_Safe(UINT16 ePoint, UINT16 eCount, UINT16 ePushTheMemory);
 UINT16 cdmb_Load(UINT16 dPoint, UINT16* dCount, UINT16 dLoadTheMemory);
 
-UINT16 cdmb_Main() {
+inline UINT16 cdmb_Main() {
 	if(q_io == 0) //q_io란
 		/*
 		##########################################################################
@@ -271,7 +271,7 @@ UINT16 cdmb_Main() {
 	}
 }
 
-UINT16 cdmb_Memory() {
+inline UINT16 cdmb_Memory() {
 	FILE* cdm_t_WFILE1 = _wfopen(L"StartMemory", L"rb, ccs=UTF-16LE"); // 리틀엔디언 기반으로 UTF-16 파일을 불러오기
 	if (!cdm_t_WFILE1) {
 		return 0x41; // 불러오지 못하면 종료
@@ -279,7 +279,7 @@ UINT16 cdmb_Memory() {
 	fread(&memory[16], sizeof(UINT16), 256, cdm_t_WFILE1); // #E[16]부터 천천히 메모리를 불러오4기
 }
 UINT16 cdmb_CommandFuncReturnen = 0x0; //코드 종료값 변수 선언 및 정의
-UINT16 cdmb_Parsing() { // 코드 반복실행 함수
+inline UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 	UINT16 cdm_t_MEMORYPOINTER = 0; // 메모리 포인터 위치 TODO: 정의 값을 0->0x0010
 	cdm_t_MEMORYPOINTER = memory[cdm_t_MEMORYPOINTER]; // 메모리 이동
 	while(1)//반복
@@ -293,7 +293,7 @@ UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 	//
 }
 //todo: 바이트 코드를 구현하기
-UINT16 cdmb_Command(UINT16* dPoint) {
+inline UINT16 cdmb_Command(UINT16* dPoint) {
 	if (memory[*dPoint] == 0x0000) { //push
 		/*
 		PUSH 예약어
@@ -393,28 +393,28 @@ UINT16 cdmb_Command(UINT16* dPoint) {
 	}
 }
 
-UINT16 cdmb_Push(UINT16 hPoint, UINT16* hCount, UINT16 _16bit) {
+inline UINT16 cdmb_Push(UINT16 hPoint, UINT16* hCount, UINT16 _16bit) {
 	memory[hPoint + *hCount] = _16bit;
 	*hCount += 1;
 	return 0;
 }
 
-UINT16 cdmb_Error(UINT16 rErrorCodes) {
+inline UINT16 cdmb_Error(UINT16 rErrorCodes) {
 	memory[1] = rErrorCodes;
 	return 0;
 }
 
-UINT16 cdmb_Pop(UINT16 pPoint, UINT16* pCount) {
+inline UINT16 cdmb_Pop(UINT16 pPoint, UINT16* pCount) {
 	//memory[]
 	*pCount += 1;
 	return 0;
 }
 
-UINT16 cdmb_Safe(UINT16 ePoint, UINT16 eCount, UINT16 ePushTheMemory) { //
+inline UINT16 cdmb_Safe(UINT16 ePoint, UINT16 eCount, UINT16 ePushTheMemory) { //
 	memory[ePushTheMemory] = memory[ePoint + eCount];
 	return 0;
 }
-UINT16 cdmb_Load(UINT16 dPoint, UINT16* dCount, UINT16 dLoadTheMemory) {
+inline UINT16 cdmb_Load(UINT16 dPoint, UINT16* dCount, UINT16 dLoadTheMemory) {
 	cdmb_Push(dPoint, dCount, memory[dLoadTheMemory]);
 	return 0;
 }
