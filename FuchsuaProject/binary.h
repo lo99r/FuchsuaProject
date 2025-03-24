@@ -42,8 +42,8 @@
 	#########
 */
 #pragma once
-#ifndef binary_h
-#define binary_h
+#ifndef binary_hh
+#define binary_hh
 
 #include"version.h"
 
@@ -61,6 +61,8 @@
 #include<string.h>//include "string.h"
 #include<windows.h>//include "windows.h"
 #include<process.h>
+#ifndef binary_h
+#define binary_h
 #include<io.h>
 #include<time.h>
 #include<locale.h>
@@ -418,3 +420,4 @@ UINT16 cdmb_Load(UINT16 dPoint, UINT16* dCount, UINT16 dLoadTheMemory) {
 }
 
 #endif //NO_BANARY
+#endif
