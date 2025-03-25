@@ -238,18 +238,18 @@ UINT16 stack3_Count = 0;
  요아니뽀뽀 이름 박제
 */
 
-UINT16 cdmb_Main(); //cdmb를 '실행'이라는거를 가능하게 해주는 cdmb 그 자체 
-UINT16 cdmb_Memory(); // cdmb에서 리틀엔디언 기반으로 처음 실행할 코드를 불러와주는 곳
+inline UINT16 cdmb_Main(); //cdmb를 '실행'이라는거를 가능하게 해주는 cdmb 그 자체 
+inline UINT16 cdmb_Memory(); // cdmb에서 리틀엔디언 기반으로 처음 실행할 코드를 불러와주는 곳
 //
-UINT16 cdmb_Parsing(); // 커맨드의 메모리 포인터 값을 도와줌
-UINT16 cdmb_Command(UINT16* dPoint); // 커맨드의 메인 실행 함수
+inline UINT16 cdmb_Parsing(); // 커맨드의 메모리 포인터 값을 도와줌
+inline UINT16 cdmb_Command(UINT16* dPoint); // 커맨드의 메인 실행 함수
 
 //여기서 부터는 선언이 아닌 정의에서 주석을 달겠습니다.
-UINT16 cdmb_Push(UINT16 hPoint, UINT16* hCount, UINT16 _16bit);
-UINT16 cdmb_Error(UINT16 rErrorCodes);
-UINT16 cdmb_Pop(UINT16 pPoint, UINT16* pCount);
-UINT16 cdmb_Safe(UINT16 ePoint, UINT16 eCount, UINT16 ePushTheMemory);
-UINT16 cdmb_Load(UINT16 dPoint, UINT16* dCount, UINT16 dLoadTheMemory);
+inline UINT16 cdmb_Push(UINT16 hPoint, UINT16* hCount, UINT16 _16bit);
+inline UINT16 cdmb_Error(UINT16 rErrorCodes);
+inline UINT16 cdmb_Pop(UINT16 pPoint, UINT16* pCount);
+inline UINT16 cdmb_Safe(UINT16 ePoint, UINT16 eCount, UINT16 ePushTheMemory);
+inline UINT16 cdmb_Load(UINT16 dPoint, UINT16* dCount, UINT16 dLoadTheMemory);
 
 inline UINT16 cdmb_Main() {
 	if(q_io == 0) //q_io란
