@@ -115,33 +115,33 @@
 #ifndef seoneon
 typedef enum {NOCURSOR, SOLIDCURSOR, NOMALCURSOR} CURSOR_TYPE;
 #define clrscr() system("cls");
-void gotoxy(int x, int y);
-int wherex();
-int wherey();
-void setcursortype(CURSOR_TYPE c);
+inline void gotoxy(int x, int y);
+inline int wherex();
+inline int wherey();
+inline void setcursortype(CURSOR_TYPE c);
 #define delay(n) Sleep(n)
 #define _delay(n) Sleep(n * 1000)
 #define randomize srand((unsigned)time(NULL))
 #define random(n) (rand() % (n))
 #ifndef jeong_eui
-void gotoxy(int x, int y) {
+inline void gotoxy(int x, int y) {
 	COORD Cur;
 	Cur.X = x;
 	Cur.Y = y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Cur);
 	//
 }
-int wherex() {
+inline int wherex() {
 	CONSOLE_SCREEN_BUFFER_INFO cdm_ConsoleBufferInfo;
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cdm_ConsoleBufferInfo);
 	return cdm_ConsoleBufferInfo.dwCursorPosition.X;
 }
-int wherey() {
+inline int wherey() {
 	CONSOLE_SCREEN_BUFFER_INFO cdm_ConsoleBufferInfo;
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cdm_ConsoleBufferInfo);
 	return cdm_ConsoleBufferInfo.dwCursorPosition.Y;
 }
-void setcursortype(CURSOR_TYPE c) {
+inline void setcursortype(CURSOR_TYPE c) {
 	CONSOLE_CURSOR_INFO CurInfo;
 	switch (c) {
 	case NOCURSOR:
