@@ -183,6 +183,16 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 			colors(0, 7);
 			//
 		}
+		else if (strcmp(cdm_ShellInputString[0], "mkdir") == 0) {
+			wchar_t cdm_t_Directory_Gyeongro[260] = { 0, };
+			wchar_t cdm_t_Directory_Target[260] = { 0, };
+			mbstowcs(cdm_t_Directory_Gyeongro, cdm_HyeonjaeDirectoryGyeongro, 260);
+			mbstowcs(cdm_t_Directory_Target, cdm_ShellInputString[1], 260);
+			wchar_t cdm_t_Directory_1[260] = { 0, };
+			wcscpy(cdm_t_Directory_1, cdm_t_Directory_Gyeongro);
+			wcscat(cdm_t_Directory_1, cdm_t_Directory_Target);
+			CreateDirectory(cdm_t_Directory_1, NULL);
+		}
 		else if (strcmp(cdm_ShellInputString[0], "ext") == 0) {
 			break;
 		}
