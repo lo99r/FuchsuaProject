@@ -4,7 +4,7 @@ https://discord.gg/zVmzkd47HA
 
 ### 빌드
 ```
-msbuild FuchsuaProjev.csproj
+msbuild FuchsuaProjev.sln
 ```
 
 ### 실행
