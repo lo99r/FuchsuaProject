@@ -184,8 +184,8 @@ inline void setcursortype(CURSOR_TYPE c) {
 //이 위는 알아서 분석하시고
 //이 아래는 많이 수정하는 곳입니다.
 
-UINT16 memory[4096] = { 0, }; //본 프로그램의 메모리입니다.
-UINT16 stack1_Count = 0; //본 프로그램의 기본 스택의 카운트입니다.
+extern UINT16 memory[4096] = { 0, }; //본 프로그램의 메모리입니다.
+extern UINT16 stack1_Count = 0; //본 프로그램의 기본 스택의 카운트입니다.
 /*
 stackx_Count은(는) 본 프로그램의 유일한 memory에 속하지 않는 변수들입니다. 이 변수는 스택에 값이 몇개가 쌓여있는지 나타냅니다.
 
@@ -204,8 +204,8 @@ stackx_Count은(는) 본 프로그램의 유일한 memory에 속하지 않는 변수들입니다. 이 변
 
   stack에 2, 1 순서로 넣었습니다. 스,택은 마지막에 넣은 값만 접근할 수 있습니다.
 */
-UINT16 stack2_Count = 0;
-UINT16 stack3_Count = 0;
+extern UINT16 stack2_Count = 0;
+extern UINT16 stack3_Count = 0;
 
 /*
  ###################
@@ -278,7 +278,7 @@ inline UINT16 cdmb_Memory() {
 	}
 	fread(&memory[16], sizeof(UINT16), 256, cdm_t_WFILE1); // #E[16]부터 천천히 메모리를 불러오4기
 }
-UINT16 cdmb_CommandFuncReturnen = 0x0; //코드 종료값 변수 선언 및 정의
+extern UINT16 cdmb_CommandFuncReturnen = 0x0; //코드 종료값 변수 선언 및 정의
 inline UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 	UINT16 cdm_t_MEMORYPOINTER = 0; // 메모리 포인터 위치 TODO: 정의 값을 0->0x0010
 	cdm_t_MEMORYPOINTER = memory[cdm_t_MEMORYPOINTER]; // 메모리 이동
