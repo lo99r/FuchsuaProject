@@ -16,10 +16,11 @@ int cdm_Setup() {
 	}
 	else {
 		char installD_Buffer[2048] = { 0, };
-		int i = 0;
-		while (installD_Buffer[i] = NULL) {
-			int it = 0;
-
+		installD_Buffer[0] = fgetc(FindFileSet);
+		int i = 1;
+		while (installD_Buffer[i] == NULL) {
+			/// int it = 0;
+			installD_Buffer[i] == fgetc(FindFileSet);
 		}
 	}
 	return 0;
