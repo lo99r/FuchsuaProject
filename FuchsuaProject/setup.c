@@ -1,5 +1,7 @@
 #include"v.h"
 
+int find_enter(char _strings[2048], int _count);
+
 int cdm_Setup() {
 	FILE* pSetupBatch = fopen("CDMSETUP.BAT", "r");
 	if (pSetupBatch == NULL) {
@@ -13,6 +15,7 @@ int cdm_Setup() {
 	FILE* FindFileSet = fopen(".\\STORE\\Library.list", "r");
 	if (FindFileSet == NULL) {
 		wprintf(L"setupdirectory/STORE/Library.list가 존재하지 않습니다.\n");
+		return 1;
 	}
 	else {
 		char installD_Buffer[2048] = { 0, };
@@ -20,10 +23,22 @@ int cdm_Setup() {
 		int i = 1;
 		while (installD_Buffer[i] == NULL) {
 			/// int it = 0;
-			installD_Buffer[i] == fgetc(FindFileSet);
+			installD_Buffer[i] = fgetc(FindFileSet);
 		}
 	}
 	return 0;
+}
+
+int find_enter(char _strings[2048], int _count) {
+	int _____ = 1;
+	while (1) {
+		if (_strings[_____] == '\n') {
+			_____ += 1;
+		}
+		if (_____ == _count) {
+			return _____;
+		}
+	}
 }
 
 //print('dsfjaklsdjfkl' + 'asdfdsaf')
