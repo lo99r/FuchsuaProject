@@ -8,6 +8,20 @@ int cdm_Setup() {
 		fclose(pSetupBatch);
 	}
 	system("start CDMSETUP.BAT");
+	system("echo 본 프로그램의 설치경로를 입력하세요.\nsetx /p installD=> ");
+	system("echo %installD% > .\\STORE\\installD");
+	FILE* FindFileSet = fopen(".\\STORE\\Library.list", "r");
+	if (FindFileSet == NULL) {
+		wprintf(L"setupdirectory/STORE/Library.list가 존재하지 않습니다.\n");
+	}
+	else {
+		char installD_Buffer[2048] = { 0, };
+		int i = 0;
+		while (installD_Buffer[i] = NULL) {
+			int it = 0;
+
+		}
+	}
 	return 0;
 }
 
