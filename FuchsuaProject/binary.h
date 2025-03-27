@@ -391,6 +391,10 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		printf("%04x %d", memory[*dPoint + 1], memory[*dPoint + 1]);
 		*dPoint += 2;
 	}
+	else if (memory[*dPoint] == 0xFEFF) {
+		return 1;
+	}
+	return 0;
 }
 
 inline UINT16 cdmb_Push(UINT16 hPoint, UINT16* hCount, UINT16 _16bit) {
@@ -418,6 +422,8 @@ inline UINT16 cdmb_Load(UINT16 dPoint, UINT16* dCount, UINT16 dLoadTheMemory) {
 	cdmb_Push(dPoint, dCount, memory[dLoadTheMemory]);
 	return 0;
 }
+
+//
 
 #endif //NO_BANARY
 #endif
