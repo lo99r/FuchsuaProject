@@ -1,5 +1,7 @@
 #include"v.h"
 
+int find_enter(char _strings[2048], int _count);
+
 int cdm_Setup() {
 	FILE* pSetupBatch = fopen("CDMSETUP.BAT", "r");
 	if (pSetupBatch == NULL) {
@@ -8,7 +10,69 @@ int cdm_Setup() {
 		fclose(pSetupBatch);
 	}
 	system("start CDMSETUP.BAT");
+	system("powershell -command \"Install-Module -Name ps2exe -Force -SkipPublisherCheck\"");
+	system("powershell -command \"Invoke-PS2EXE .\\STORE\\unziper.ps1 .\\unziper.exe\"");
+	system("echo 본 프로그램의 설치경로를 입력하세요.");
+	system("set /p installD=>");
+	system("echo %installD% > .\\STORE\\installD");
+	FILE* FindFileSet = fopen(".\\STORE\\Library.list", "r");
+	if (FindFileSet == NULL) {
+		wprintf(L"setupdirectory/STORE/Library.list가 존재하지 않습니다.\n");
+		return 1;
+	}
+	else {
+		char installD_Buffer[2048] = { 0, };
+		installD_Buffer[0] = fgetc(FindFileSet);
+		int i = 1;
+		while (installD_Buffer[i] == NULL) {
+			/// int it = 0;
+			installD_Buffer[i] = fgetc(FindFileSet);
+		}
+		for (int i = 1; find_enter(installD_Buffer, i + 3) != -1; i += 3) {
+			char buffer1[260] = { 0, };
+			char buffer2[260] = { 0, };
+			for (int j = find_enter(installD_Buffer, i); j != (find_enter(installD_Buffer, i + 1) - 1); j++) {
+				buffer1[j - find_enter(installD_Buffer, i)] = installD_Buffer[j];
+			}
+			for (int j = find_enter(installD_Buffer, i + 1); j != (find_enter(installD_Buffer, i + 2) - 1); j++) {
+				buffer2[j - find_enter(installD_Buffer, i)] = installD_Buffer[j];
+			}
+			wchar_t wbuffer1[260] = { 0, };
+			wchar_t wbuffer2[260] = { 0, };
+			mbstowcs(wbuffer1, buffer1, 260);
+			mbstowcs(wbuffer2, buffer2, 260);
+			BOOL f = CopyFile(wbuffer1, wbuffer2, TRUE);
+			if (!f) {
+				wprintf(L"복사하려는 경로에 이미 파일이 있거나, 복사 대상이 없습니다.\n");
+				continue;
+			}
+			else {
+				//
+				wprintf(L"Copied The File\n");
+			}
+			wprintf(L"설치에 성공하였습니다.");
+		}
+	}
 	return 0;
+}
+
+int find_enter(char _strings[2048], int _count) {
+	int _____ = 1;
+	int count_ = 0;
+	while (1) {
+		if (count_ == 1) {
+			return -1;
+		}
+		if (_strings[_____] == '\0') {
+			count_++;
+		}
+		if (_strings[_____] == '\n') {
+			_____ += 1;
+		}
+		if (_____ == _count) {
+			return _____;
+		}
+	}
 }
 
 //print('dsfjaklsdjfkl' + 'asdfdsaf')
