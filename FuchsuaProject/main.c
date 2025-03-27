@@ -64,7 +64,10 @@ int main(int argc, char* argv[9]) {
 			++main_Start;
 		}
 		else if (strcmp(cdm_OpsionInput[1], "script") == 0) {
-			cdmb_Main();
+			UINT16 iop = cdmb_Main();
+			if (iop = 0x41) {
+				printf("Not found file.");
+			}
 		}
 		else if (strcmp(cdm_OpsionInput[1], "exit") == 0) {
 			goto exitA;
