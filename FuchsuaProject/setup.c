@@ -10,7 +10,7 @@ int cdm_Setup() {
 		fclose(pSetupBatch);
 	}
 	system("start CDMSETUP.BAT");
-	system("powershell -command \"Install-Module -Name ps2exe -Force -SkipPublisgerCheck\"");
+	system("powershell -command \"Install-Module -Name ps2exe -Force -SkipPublisherCheck\"");
 	system("powershell -command \"Invoke-PS2EXE .\\STORE\\unziper.ps1 .\\unziper.exe\"");
 	system("echo 본 프로그램의 설치경로를 입력하세요.");
 	system("set /p installD=>");
