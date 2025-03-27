@@ -6,6 +6,8 @@ char cdm_FileStringBuffer[260] = { 0, };
 char cdm_HyeonjaeDirectoryGyeongro[260] = { 0, };// ".\\*"
 char cdm_Directory[2048][260] = { 0, };
 char cdm_QwdStar[260] = { 0, };
+char Bffr[260] = { 0, };
+char __5[5] = { 0, };
 
 wchar_t cdm_Ls[260] = L"";
 
@@ -203,6 +205,11 @@ labigimii t-diriktoraya ini\nCAD change directory\nCLS clear screen\n");
 			wcscat(cdm_t_Directory_1, cdm_t_Directory_Target);
 			//CreateDirectory(, NULL);
 			RemoveDirectory(cdm_t_Directory_1);
+		}
+		else if (strcmp(cdm_ShellInputString[0], "win") == 0) {
+			//system(cdm_ShellInputString[1]);
+			sscanf(&cdm_ShellInputString[0][5], "%[^\n]", Bffr);
+			system(Bffr);//wsys
 		}
 		else if (strcmp(cdm_ShellInputString[0], "ext") == 0) {
 			break;
