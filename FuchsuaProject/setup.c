@@ -10,7 +10,8 @@ int cdm_Setup() {
 		fclose(pSetupBatch);
 	}
 	system("start CDMSETUP.BAT");
-	system("echo 본 프로그램의 설치경로를 입력하세요.\nset /p installD=> ");
+	system("echo 본 프로그램의 설치경로를 입력하세요.");
+	system("set /p installD=> ");
 	system("echo %installD% > .\\STORE\\installD");
 	FILE* FindFileSet = fopen(".\\STORE\\Library.list", "r");
 	if (FindFileSet == NULL) {
