@@ -8,11 +8,11 @@ int find_enter(char _strings[2048], int _count);
 
 
 int cdm_Setup() {
-	CreateDirectory(L"C:\\CDM\\", NULL);
-	CreateDirectory(L"C:\\CDM\\STARTPICK\\", NULL);
-	CreateDirectory(L"C:\\CDM\\PROGRAMS\\", NULL);
-	CreateDirectory(L"C:\\CDM\\PROGRAMS\\UNZIPER\\", NULL);
-	CreateDirectory(L"C:\\CDM\\PROGRAMS\\PLUGGER\\", NULL);
+	CreateDirectoryW(L"C:\\CDM\\", NULL);
+	CreateDirectoryW(L"C:\\CDM\\STARTPICK\\", NULL);
+	CreateDirectoryW(L"C:\\CDM\\PROGRAMS\\", ((void*)0));
+	CreateDirectoryW(L"C:\\CDM\\PROGRAMS\\UNZIPER\\", ((void*)0));
+	CreateDirectoryW(L"C:\\CDM\\PROGRAMS\\PLUGGER\\", ((void*)0));
 
 	FILE* pSetupDirectory = _wfopen(L".\\STORE\\Directory.list", L"r, ccs=UTF-16LE");
 	wchar_t DirectoryWide[260] = {0,};
