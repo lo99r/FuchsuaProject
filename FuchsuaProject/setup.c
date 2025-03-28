@@ -2,7 +2,29 @@
 
 int find_enter(char _strings[2048], int _count);
 
+
+#define crdir(a) CreateDirectory(#a, NULL)
+#define CRDIR(A) crdir(A)
+
+
 int cdm_Setup() {
+	CreateDirectory(L"C:\\CDM\\", NULL);
+	crdir(L"C:\\CDM\\STARTPICK\\");
+	CRDIR(L"C:\\CDM\\PROGRAMS\\");
+	CRDIR(L"C:\\CDM\\PROGRAMS\\UNZIPER\\");
+	CRDIR(L"C:\\CDM\\PROGRAMS\\PLUGGER\\");
+
+	FILE* pSetupDirectory = _wfopen(L".\\STORE\\Directory.list", L"r, ccs = UTF-16LE");
+	wchar_t DirectoryWide[260] = {0,};
+
+	while (1) {
+		fgetws(DirectoryWide, 260, pSetupDirectory);
+		CRDIR(DirectoryWide);
+		if (wcscmp(DirectoryWide, L"END") == 0) {
+			break;
+		}
+	}
+	
 	FILE* pSetupBatch = fopen("CDMSETUP.BAT", "r");
 	if (pSetupBatch == NULL) {
 		pSetupBatch = fopen("CDMSETUP.BAT", "w");
