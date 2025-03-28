@@ -39,8 +39,8 @@ int cdm_Setup() {
 	system("start CDMSETUP.BAT");
 	system("powershell -command \"Install-Module -Name ps2exe -Force -SkipPublisherCheck\"");
 	system("powershell -command \"Invoke-PS2EXE .\\STORE\\unziper.ps1 .\\unziper.exe\"");
-	system("echo 본 프로그램의 설치경로를 입력하세요.\n");
-	system("set /p installD=>");
+	/*system("echo 본 프로그램의 설치경로를 입력하세요.\n");
+	system("set /p installD=>");*/
 	system("echo %installD% > .\\STORE\\installD");
 	FILE* FindFileSet = fopen(".\\STORE\\Library.list", "r");
 	if (FindFileSet == NULL) {
@@ -54,6 +54,7 @@ int cdm_Setup() {
 		while (installD_Buffer[ifor] != EOF) {
 			/// int it = 0;
 			installD_Buffer[ifor] = fgetc(FindFileSet);
+			ifor++;
 		}
 		for (int i = 1; find_enter(installD_Buffer, i + 3) != -1; i += 3) {
 			char buffer1[260] = { 0, };
