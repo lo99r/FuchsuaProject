@@ -9,21 +9,23 @@ int find_enter(char _strings[2048], int _count);
 
 int cdm_Setup() {
 	CreateDirectory(L"C:\\CDM\\", NULL);
-	crdir(L"C:\\CDM\\STARTPICK\\");
-	CRDIR(L"C:\\CDM\\PROGRAMS\\");
-	CRDIR(L"C:\\CDM\\PROGRAMS\\UNZIPER\\");
-	CRDIR(L"C:\\CDM\\PROGRAMS\\PLUGGER\\");
+	CreateDirectory(L"C:\\CDM\\STARTPICK\\", NULL);
+	CreateDirectory(L"C:\\CDM\\PROGRAMS\\", NULL);
+	CreateDirectory(L"C:\\CDM\\PROGRAMS\\UNZIPER\\", NULL);
+	CreateDirectory(L"C:\\CDM\\PROGRAMS\\PLUGGER\\", NULL);
 
-	FILE* pSetupDirectory = _wfopen(L".\\STORE\\Directory.list", L"r, ccs = UTF-16LE");
+	FILE* pSetupDirectory = _wfopen(L".\\STORE\\Directory.list", L"r, ccs=UTF-16LE");
 	wchar_t DirectoryWide[260] = {0,};
 
 	while (1) {
 		fgetws(DirectoryWide, 260, pSetupDirectory);
-		CRDIR(DirectoryWide);
+		CreateDirectory(DirectoryWide, NULL);
 		if (wcscmp(DirectoryWide, L"END") == 0) {
 			break;
 		}
 	}
+
+	fclose(pSetupDirectory);
 	
 	FILE* pSetupBatch = fopen("CDMSETUP.BAT", "r");
 	if (pSetupBatch == NULL) {
@@ -74,6 +76,7 @@ int cdm_Setup() {
 			}
 			wprintf(L"설치에 성공하였습니다.");
 		}
+		fclose(FindFileSet);
 		system("start C:\\CDM\\STARTPICK\\CDM.EXE");
 	}
 	return 0;
