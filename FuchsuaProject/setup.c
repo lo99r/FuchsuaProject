@@ -51,7 +51,7 @@ int cdm_Setup() {
 		char installD_Buffer[2048] = { 0, };
 		installD_Buffer[0] = fgetc(FindFileSet);
 		int ifor = 1;
-		while (installD_Buffer[ifor] != NULL) {
+		while (installD_Buffer[ifor] != EOF) {
 			/// int it = 0;
 			installD_Buffer[ifor] = fgetc(FindFileSet);
 		}
