@@ -18,8 +18,10 @@ int cdm_Setup() {
 	wchar_t DirectoryWide[260] = {0,};
 
 	while (1) {
-		fgetws(DirectoryWide, 260, pSetupDirectory);
-		CreateDirectory(DirectoryWide, NULL);
+		if(fgetws(DirectoryWide, sizeof(DirectoryWide), pSetupDirectory) != NULL)
+		{
+			CreateDirectory(DirectoryWide, NULL);
+		}
 		if (wcscmp(DirectoryWide, L"END") == 0) {
 			break;
 		}
