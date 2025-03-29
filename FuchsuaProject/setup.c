@@ -54,7 +54,7 @@ int cdm_Setup() {
 		while (installD_Buffer[ifor] != EOF) {
 			/// int it = 0;
 			installD_Buffer[ifor] = fgetc(FindFileSet);
-			putch((int)installD_Buffer[ifor]);
+			_putch((int)installD_Buffer[ifor]);
 			if (installD_Buffer[ifor] == -1) {
 				break;
 			}
