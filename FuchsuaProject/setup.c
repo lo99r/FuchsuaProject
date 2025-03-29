@@ -55,7 +55,7 @@ int cdm_Setup() {
 			/// int it = 0;
 			installD_Buffer[ifor] = fgetc(FindFileSet);
 			ifor++;
-			if (installD_Buffer[ifor] == 'D' & installD_Buffer[ifor - 1] == 'N' & installD_Buffer[ifor - 2] == 'E') {
+			if (installD_Buffer[ifor]) {
 				break;
 			}
 		}
