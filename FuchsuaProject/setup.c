@@ -54,10 +54,10 @@ int cdm_Setup() {
 		while (installD_Buffer[ifor] != EOF) {
 			/// int it = 0;
 			installD_Buffer[ifor] = fgetc(FindFileSet);
-			ifor++;
 			if (installD_Buffer[ifor] == -1) {
 				break;
 			}
+			ifor++;
 		}
 		for (int i = 1; find_enter(installD_Buffer, i + 3) != -1; i += 3) {
 			char buffer1[260] = { 0, };
