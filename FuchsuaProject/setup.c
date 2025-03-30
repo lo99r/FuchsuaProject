@@ -67,7 +67,7 @@ int cdm_Setup() {
 		char c[64][2048] = { 0, };
 		strcpy(b, installD_Buffer);
 		a = strtok(b, "\n");
-		strcpy(c[numb], &a);
+		strcpy(c[numb], a);
 		numb++;
 		while (1) {
 			if (numb == 64) {
@@ -76,7 +76,7 @@ int cdm_Setup() {
 			//strcpy(b, installD_Buffer);
 			a = strtok(NULL, "\n");
 			if (a = NULL) {
-				strcpy(c[numb], &a);
+				strcpy(c[numb], a);
 			}
 			numb++;
 		}
@@ -88,6 +88,7 @@ int cdm_Setup() {
 		BOOL h = FALSE;
 		//
 		while (1) {
+			if(cound + 1 == 63)
 			strcpy(d, c[cound]);
 			strcpy(f, c[cound + 1]);
 			mbstowcs(e, d, 2048);
