@@ -90,7 +90,7 @@ int cdm_Setup() {
 				//
 				wprintf(L"Copied The File\n");
 			}
-			i += 3;
+			io += 3;
 		}
 		wprintf(L"설치에 성공하였습니다.");
 		fclose(FindFileSet);
