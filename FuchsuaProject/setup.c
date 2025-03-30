@@ -61,36 +61,19 @@ int cdm_Setup() {
 			}
 			ifor++;
 		}
-		int io = 1;
-		while(1) {
-			if (io == 2048) {
-				break;
-			}
-			if (installD_Buffer[find_enter(installD_Buffer, io + 3)] == '\0') {
-				break;
-			}
-			char buffer1[260] = { 0, };
-			char buffer2[260] = { 0, };
-			for (int j = find_enter(installD_Buffer, io); j != (find_enter(installD_Buffer, io + 1) - 1); j++) {
-				buffer1[j - find_enter(installD_Buffer, io)] = installD_Buffer[j];
-			}
-			for (int j = find_enter(installD_Buffer, io + 1); j != (find_enter(installD_Buffer, io + 2) - 1); j++) {
-				buffer2[j - find_enter(installD_Buffer, io)] = installD_Buffer[j];
-			}
-			wchar_t wbuffer1[260] = { 0, };
-			wchar_t wbuffer2[260] = { 0, };
-			mbstowcs(wbuffer1, buffer1, 260);
-			mbstowcs(wbuffer2, buffer2, 260);
-			BOOL f = CopyFile(wbuffer1, wbuffer2, TRUE);
-			if (!f) {
-				wprintf(L"복사하려는 경로에 이미 파일이 있거나, 복사 대상이 없습니다.\n");
-				continue;
-			}
-			else {
-				//
-				wprintf(L"Copied The File\n");
-			}
-			io += 3;
+		int numb = 0;
+		char* a;
+		char b[2048] = { 0, };
+		char c[64][2048] = { 0, };
+		strcpy(b, installD_Buffer);
+		a = strtok(b, "\n");
+		strcpy(c[numb], a);
+		numb++;
+		while (1) {
+			//strcpy(b, installD_Buffer);
+			a = strtok(NULL, "\n");
+			strcpy(c[numb], a);
+			numb++;
 		}
 		wprintf(L"설치에 성공하였습니다.");
 		fclose(FindFileSet);
