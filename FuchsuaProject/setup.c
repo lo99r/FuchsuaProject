@@ -99,7 +99,7 @@ int cdm_Setup() {
 	return 0;
 }
 
-int find_enter(char _strings[2048], int _count) {
+int find_enter(char* _strings, int _count) {
 	int _____ = 1;
 	int count_ = 0;
 	while (1) {
