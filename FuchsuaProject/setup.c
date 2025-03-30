@@ -67,12 +67,17 @@ int cdm_Setup() {
 		char c[64][2048] = { 0, };
 		strcpy(b, installD_Buffer);
 		a = strtok(b, "\n");
-		strcpy(c[numb], a);
+		strcpy(c[numb], &a);
 		numb++;
 		while (1) {
+			if (numb == 64) {
+				break; //dddddddddddddddddddddddd
+			}
 			//strcpy(b, installD_Buffer);
 			a = strtok(NULL, "\n");
-			strcpy(c[numb], a);
+			if (a = NULL) {
+				strcpy(c[numb], &a);
+			}
 			numb++;
 		}
 		int cound = 0;
@@ -87,7 +92,7 @@ int cdm_Setup() {
 			strcpy(f, c[cound + 1]);
 			mbstowcs(e, d, 2048);
 			mbstowcs(g, f, 2048);
-			h = CopyFile(e, g, NULL);
+			h = CopyFile(e, g, FALSE);
 			//cound
 			cound += 2;
 		}
