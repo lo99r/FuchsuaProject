@@ -1,6 +1,6 @@
 #include"v.h"
 
-int find_enter(char _strings[2048], int _count);
+
 
 
 #define crdir(a) CreateDirectory(#a, NULL)
