@@ -61,17 +61,21 @@ int cdm_Setup() {
 			}
 			ifor++;
 		}
-		for (int i = 1; i < 2048;) {
-			if (installD_Buffer[find_enter(installD_Buffer, i + 3)] == '\0') {
+		int io = 1;
+		while(1) {
+			if (io == 2048) {
+				break;
+			}
+			if (installD_Buffer[find_enter(installD_Buffer, io + 3)] == '\0') {
 				break;
 			}
 			char buffer1[260] = { 0, };
 			char buffer2[260] = { 0, };
-			for (int j = find_enter(installD_Buffer, i); j != (find_enter(installD_Buffer, i + 1) - 1); j++) {
-				buffer1[j - find_enter(installD_Buffer, i)] = installD_Buffer[j];
+			for (int j = find_enter(installD_Buffer, io); j != (find_enter(installD_Buffer, io + 1) - 1); j++) {
+				buffer1[j - find_enter(installD_Buffer, io)] = installD_Buffer[j];
 			}
-			for (int j = find_enter(installD_Buffer, i + 1); j != (find_enter(installD_Buffer, i + 2) - 1); j++) {
-				buffer2[j - find_enter(installD_Buffer, i)] = installD_Buffer[j];
+			for (int j = find_enter(installD_Buffer, io + 1); j != (find_enter(installD_Buffer, io + 2) - 1); j++) {
+				buffer2[j - find_enter(installD_Buffer, io)] = installD_Buffer[j];
 			}
 			wchar_t wbuffer1[260] = { 0, };
 			wchar_t wbuffer2[260] = { 0, };
