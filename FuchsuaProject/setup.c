@@ -61,7 +61,7 @@ int cdm_Setup() {
 			}
 			ifor++;
 		}
-		for (int i = 1; find_enter(installD_Buffer, i + 3) != -1; i += 3) {
+		for (int i = 1; installD_Buffer[find_enter(installD_Buffer, i + 3)] == '\0'; i += 3) {
 			char buffer1[260] = { 0, };
 			char buffer2[260] = { 0, };
 			for (int j = find_enter(installD_Buffer, i); j != (find_enter(installD_Buffer, i + 1) - 1); j++) {
@@ -95,11 +95,8 @@ int find_enter(char _strings[2048], int _count) {
 	int _____ = 1;
 	int count_ = 0;
 	while (1) {
-		if (count_ == 1) {
-			return -1;
-		}
 		if (_strings[_____] == '\0') {
-			count_++;
+			return _____;
 		}
 		if (_strings[_____] == '\n') {
 			_____ += 1;
