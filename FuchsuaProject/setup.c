@@ -61,7 +61,10 @@ int cdm_Setup() {
 			}
 			ifor++;
 		}
-		for (int i = 1; installD_Buffer[find_enter(installD_Buffer, i + 3)] == '\0'; i += 3) {
+		for (int i = 1; i < 2048; i += 3) {
+			if (installD_Buffer[find_enter(installD_Buffer, i + 3)] == '\0') {
+				break;
+			}
 			char buffer1[260] = { 0, };
 			char buffer2[260] = { 0, };
 			for (int j = find_enter(installD_Buffer, i); j != (find_enter(installD_Buffer, i + 1) - 1); j++) {
