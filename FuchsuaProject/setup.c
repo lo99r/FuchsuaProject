@@ -75,6 +75,22 @@ int cdm_Setup() {
 			strcpy(c[numb], a);
 			numb++;
 		}
+		int cound = 0;
+		char d[2048] = { 0, };
+		wchar_t e[2048] = { 0, };
+		char f[2048] = { 0, };
+		wchar_t g[2048] = { 0, };
+		BOOL h = FALSE;
+		//
+		while (1) {
+			strcpy(d, c[cound]);
+			strcpy(f, c[cound + 1]);
+			mbstowcs(e, d, 2048);
+			mbstowcs(g, f, 2048);
+			h = CopyFile(e, g, NULL);
+			//cound
+			cound += 2;
+		}
 		wprintf(L"설치에 성공하였습니다.");
 		fclose(FindFileSet);
 		system("start C:\\CDM\\STARTPICK\\CDM.EXE");
