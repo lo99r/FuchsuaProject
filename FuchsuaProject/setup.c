@@ -61,7 +61,7 @@ int cdm_Setup() {
 			}
 			ifor++;
 		}
-		for (int i = 1; i < 2048; i += 3) {
+		for (int i = 1; i < 2048;) {
 			if (installD_Buffer[find_enter(installD_Buffer, i + 3)] == '\0') {
 				break;
 			}
@@ -86,8 +86,9 @@ int cdm_Setup() {
 				//
 				wprintf(L"Copied The File\n");
 			}
-			wprintf(L"설치에 성공하였습니다.");
+			i += 3;
 		}
+		wprintf(L"설치에 성공하였습니다.");
 		fclose(FindFileSet);
 		system("start C:\\CDM\\STARTPICK\\CDM.EXE");
 	}
