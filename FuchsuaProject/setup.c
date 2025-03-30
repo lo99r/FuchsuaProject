@@ -98,6 +98,7 @@ int cdm_Setup() {
 			mbstowcs(e, d, 2048);
 			mbstowcs(g, f, 2048);
 			h = CopyFile(e, g, FALSE);
+			printf("%d", h); // j
 			//cound
 			cound += 2;
 		}
