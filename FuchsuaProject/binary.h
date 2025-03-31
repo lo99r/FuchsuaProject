@@ -185,7 +185,13 @@ inline void setcursortype(CURSOR_TYPE c) {
 //이 아래는 많이 수정하는 곳입니다.
 
 static UINT16 memory[4096] = { 0, }; //본 프로그램의 메모리입니다.
-static UINT16 stack1_Count = 0; //본 프로그램의 기본 스택의 카운트입니다.
+static UINT16 DK = 0x0000; //data keeck
+static UINT16 AK = 0x0000; //adress keeck
+static UINT16 SK = 0x0000; //status keeck
+static UINT16 IK = 0x0000; //instruction keeck
+static UINT16 PC = 0x0000; //program counter
+
+//본 프로그램의 기본 스택의 카운트입니다.
 /*
 E[2-4]은(는) 본 프로그램의 memory에서 가장 중요한 공간입니다.. 이 변수는 스택에 값이 몇개가 쌓여있는지 나타냅니다.
 
@@ -204,11 +210,7 @@ E[2-4]은(는) 본 프로그램의 memory에서 가장 중요한 공간입니다.. 이 변수는 스택에 
 
   stack에 2, 1 순서로 넣었습니다. 스,택은 마지막에 넣은 값만 접근할 수 있습니다.
 */
-static UINT16 stack2_Count = 0;
-static UINT16 stack3_Count = 0;
-//3
-//
-//
+
 /*
  ###################
  # memory의 예약도 #
