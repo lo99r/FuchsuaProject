@@ -187,7 +187,7 @@ inline void setcursortype(CURSOR_TYPE c) {
 static UINT16 memory[4096] = { 0, }; //본 프로그램의 메모리입니다.
 static UINT16 stack1_Count = 0; //본 프로그램의 기본 스택의 카운트입니다.
 /*
-stackx_Count은(는) 본 프로그램의 유일한 memory에 속하지 않는 변수들입니다. 이 변수는 스택에 값이 몇개가 쌓여있는지 나타냅니다.
+E[2-4]은(는) 본 프로그램의 memory에서 가장 중요한 공간입니다.. 이 변수는 스택에 값이 몇개가 쌓여있는지 나타냅니다.
 
  #######################
  # STACK이(가) 뭘까요? #
@@ -206,7 +206,9 @@ stackx_Count은(는) 본 프로그램의 유일한 memory에 속하지 않는 변수들입니다. 이 변
 */
 static UINT16 stack2_Count = 0;
 static UINT16 stack3_Count = 0;
-
+//3
+//
+//
 /*
  ###################
  # memory의 예약도 #
@@ -217,6 +219,8 @@ static UINT16 stack3_Count = 0;
  #    해당위치로 점프하고 그 위치에서 스크립트를 실행합니다.                       #
  ###################################################################################
  # 1: 이 곳은 스크립트 실행도중 오류가 나면 오류코드를 반환합니다.                 #
+ ###################################################################################
+ # 2-4: 스택의 카운트입니다.                                                       #
  ###################################################################################
  # 16-271: 이 곳은 프로그람을 실행한후 제일 먼저 실행하는 곳입니다.                #
  ###################################################################################
@@ -307,13 +311,13 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		//s
 		switch (memory[*dPoint + 1]) { // 해당 (명령어)의 (옵션1)의 값을 받기
 		case 0x0001: // 1을(를) 받았을 경우,
-			cdmb_Push(2433, &stack1_Count, memory[*dPoint + 2]); // 1번 스택에 PPUSH
+			cdmb_Push(2433, &memory[2], memory[*dPoint + 2]); // 1번 스택에 PPUSH
 			break;
 		case 0x0002: // 2을(를) 받았을 경우,
-			cdmb_Push(2689, &stack2_Count, memory[*dPoint + 2]); // 2번 스택에 PUSH
+			cdmb_Push(2689, &memory[3], memory[*dPoint + 2]); // 2번 스택에 PUSH
 			break;
 		case 0x0003: // 3을(를) 받았을 경어ㅜ
-			cdmb_Push(2945, &stack3_Count, memory[*dPoint + 2]);// )
+			cdmb_Push(2945, &memory[4], memory[*dPoint + 2]);// )
 			break;
 		default:
 			cdmb_Error(0x0100);
@@ -331,13 +335,13 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		*/
 		switch (memory[*dPoint + 1]) {
 		case 0x0001:
-			cdmb_Pop(2433, &stack1_Count); // 1번 스택 터트리기
+			cdmb_Pop(2433, &memory[2]); // 1번 스택 터트리기
 			break;
 		case 0x0002:
-			cdmb_Pop(2689, &stack2_Count); // 2번 스택 터트리기
+			cdmb_Pop(2689, &memory[3]); // 2번 스택 터트리기
 			break;
 		case 0x0003:
-			cdmb_Pop(2945, &stack3_Count); // 3번 스택 터트리기
+			cdmb_Pop(2945, &memory[4]); // 3번 스택 터트리기
 			break;
 		default:
 			cdmb_Error(0x0101);
@@ -355,13 +359,13 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		*/
 		switch (memory[*dPoint + 1]) {
 		case 0x0001:
-			cdmb_Safe(2433, stack1_Count, memory[*dPoint + 2]);
+			cdmb_Safe(2433, memory[2], memory[*dPoint + 2]);
 			break;
 		case 0x0002:
-			cdmb_Safe(2689, stack2_Count, memory[*dPoint + 2]);
+			cdmb_Safe(2689, memory[3], memory[*dPoint + 2]);
 			break;
 		case 0x0003:
-			cdmb_Safe(2945, stack3_Count, memory[*dPoint + 2]);
+			cdmb_Safe(2945, memory[4], memory[*dPoint + 2]);
 			break;
 		default:
 			cdmb_Error(0x0102);
@@ -373,13 +377,13 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 	else if (memory[*dPoint] == 0x0003) { //load
 		switch (memory[*dPoint + 1]) {
 		case 0x0001:
-			cdmb_Load(2433, &stack1_Count, memory[*dPoint + 2]);
+			cdmb_Load(2433, &memory[2], memory[*dPoint + 2]);
 			break;
 		case 0x0002:
-			cdmb_Load(2689, &stack2_Count, memory[*dPoint + 2]);
+			cdmb_Load(2689, &memory[3], memory[*dPoint + 2]);
 			break;
 		case 0x0003:
-			cdmb_Load(2945, &stack3_Count, memory[*dPoint + 2]);
+			cdmb_Load(2945, &memory[4], memory[*dPoint + 2]);
 			break;
 		default:
 			cdmb_Error(0x0103);
