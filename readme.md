@@ -3,7 +3,9 @@
 https://discord.gg/zVmzkd47HA
 
 ### 빌드
-Visual Stiudio 2020에서 해당 프로젝트의 리포지토리를 불러온 후, 빌드를 하시면 됩니다.
+```
+msbuild FuchsuaProjev.sln
+```
 
 ### 실행
 ```Cli Console 례시
