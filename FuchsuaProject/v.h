@@ -62,5 +62,6 @@ int cdm_FindStarInStringLast(char string[260]);
 //inr
 int cdm_CdZeomDugae(char string[260]);
 int cdm_baseDir_Func();
+int find_enter(char _strings[2048], int _count);
 
 #endif
