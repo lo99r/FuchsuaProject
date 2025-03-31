@@ -61,6 +61,7 @@ int cdm_Setup() {
 			}
 			ifor++;
 		}
+		installD_Buffer[ifor] = '\0';
 		int numb = 0;
 		char* a;
 		char b[2048] = { 0, };
