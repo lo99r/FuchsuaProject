@@ -67,17 +67,21 @@ int cdm_Setup() {
 		char c[64][2048] = { 0, };
 		strcpy(b, installD_Buffer);
 		a = strtok(b, "\n");
-		strcpy(c[numb], b);
+		strcpy(c[numb], a);
 		numb++;
+		a = strtok(NULL, "\n");
 		strcpy(c[numb], a);
 		numb++;
 		while (1) {
+			if (a == NULL) {
+				break;
+			}
 			if (numb == 64) {
 				break; //dddddddddddddddddddddddd
 			}
 			//strcpy(b, installD_Buffer);
 			a = strtok(NULL, "\n");
-			if (a = NULL) {
+			if (a != 0) {
 				strcpy(c[numb], a);
 			}
 			numb++;
