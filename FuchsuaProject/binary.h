@@ -324,7 +324,7 @@ inline UINT16 cdmb_Main() {
 }
 
 inline UINT16 cdmb_Memory() {
-	FILE* cdm_t_WFILE1 = _wfopen(L"StartMemory", L"rb, ccs=UTF-16LE"); // 리틀엔디언 기반으로 UTF-16 파일을 불러오기
+	FILE* cdm_t_WFILE1 = _wfopen(L"c:\cdm\startpick\StartMemory", L"rb, ccs=UTF-16LE"); // 리틀엔디언 기반으로 UTF-16 파일을 불러오기
 	if (!cdm_t_WFILE1) {
 		return 0x41; // 불러오지 못하면 종료
 	}
