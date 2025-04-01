@@ -191,25 +191,49 @@ static UINT16 SK = 0x0000; //status keeck
 static UINT16 IK = 0x0000; //instruction keeck
 static UINT16 PC = 0x0000; //program counter
 
-inline UINT16 memory_mgr(UINT16 number, UINT16 option) {
+inline UINT16 memory_mgr(UINT16 number) {
 	if (number < 0x1000) {
 		return number;
 	}
 	else if (number >= 0x1000) {
-		return option == 0 ? memory[number - 0x1000] : &memory[number - 0x1000];
+		return memory[number - 0x1000];
 	}
 	else {
 		switch (number) {
 		case 0x2000:
-			return option == 0 ? DK : &DK;
+			return DK;
 		case 0x2001:
-			return option == 0 ? AK : &AK;
+			return AK;
 		case 0x2002:
-			return option == 0 ? SK : &SK;
+			return SK;
 		case 0x2003:
-			return option == 0 ? IK : &IK;
+			return IK;
 		case 0x2004:
-			return option == 0 ? PC : &PC;
+			return PC;
+		}
+		//
+	}
+}
+
+inline UINT16* memory_mgrP(UINT16 number) {
+	//if (number < 0x1000) {
+	//	return number;
+	//}
+	if (number >= 0x1000) {
+		return &memory[number - 0x1000];
+	}
+	else {
+		switch (number) {
+		case 0x2000:
+			return &DK;
+		case 0x2001:
+			return &AK;
+		case 0x2002:
+			return &SK;
+		case 0x2003:
+			return &IK;
+		case 0x2004:
+			return &PC;
 		}
 		//
 	}
