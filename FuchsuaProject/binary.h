@@ -446,6 +446,9 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 	else if (memory[*dPoint] == 0xFEFF) {
 		return 1;
 	}
+	else {
+		printf("e");
+	}
 	return 0;
 }
 
