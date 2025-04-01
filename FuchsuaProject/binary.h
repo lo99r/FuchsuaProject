@@ -191,6 +191,30 @@ static UINT16 SK = 0x0000; //status keeck
 static UINT16 IK = 0x0000; //instruction keeck
 static UINT16 PC = 0x0000; //program counter
 
+inline UINT16 memory_mgr(UINT16 number, UINT16 option) {
+	if (number < 0x1000) {
+		return number;
+	}
+	else if (number >= 0x1000) {
+		return option == 0 ? memory[number - 0x1000] : &memory[number - 0x1000];
+	}
+	else {
+		switch (number) {
+		case 0x2000:
+			return option == 0 ? DK : &DK;
+		case 0x2001:
+			return option == 0 ? AK : &AK;
+		case 0x2002:
+			return option == 0 ? SK : &SK;
+		case 0x2003:
+			return option == 0 ? IK : &IK;
+		case 0x2004:
+			return option == 0 ? PC : &PC;
+		}
+		//
+	}
+}
+
 //본 프로그램의 기본 스택의 카운트입니다.
 /*
 E[2-4]은(는) 본 프로그램의 memory에서 가장 중요한 공간입니다.. 이 변수는 스택에 값이 몇개가 쌓여있는지 나타냅니다.
