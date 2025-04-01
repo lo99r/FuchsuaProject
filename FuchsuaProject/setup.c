@@ -109,7 +109,7 @@ int cdm_Setup() {
 		}
 		wprintf(L"설치에 성공하였습니다.");
 		fclose(FindFileSet);
-		system("start C:\\CDM\\STARTPICK\\CDM.EXE");
+		system("cd /d c:\\cdm\\startpick\\ && start C:\\CDM\\STARTPICK\\CDM.EXE");
 	}
 	return 0;
 }
