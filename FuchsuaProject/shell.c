@@ -88,7 +88,7 @@ int cdm_ShellMainCode(int eMode) {
 			//fscanf(cdm_StartMessage, "%[\0]", cdm_FileStringBuffer);
 			while (feof(cdm_StartMessage) == 0) {
 				fgets(cdm_FileStringCat, 260, cdm_StartMessage);
-				strcat(cdm_FileStringBuffer, cdm_FileStringCat);
+				strcpy(cdm_FileStringBuffer, cdm_FileStringCat);
 				//strcat(cdm_FileStringBuffer, "\n");
 			}
 			printf("%s", cdm_FileStringBuffer);
