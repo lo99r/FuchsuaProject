@@ -357,6 +357,7 @@ inline UINT16 cdmb_Memory() {
 static UINT16 cdmb_CommandFuncReturnen = 0x0; //코드 종료값 변수 선언 및 정의
 inline UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 	UINT16 cdm_t_MEMORYPOINTER = 0; // 메모리 포인터 위치 TODO: 정의 값을 0->0x0010
+	memory[0] = 0x0010;
 	cdm_t_MEMORYPOINTER = memory[cdm_t_MEMORYPOINTER]; // 메모리 이동
 	while(1)//반복
 	{
