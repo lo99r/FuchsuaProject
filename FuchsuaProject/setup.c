@@ -30,13 +30,7 @@ int cdm_Setup() {
 
 	fclose(pSetupDirectory);
 	
-	FILE* pSetupBatch = fopen("CDMSETUP.BAT", "r");
-	if (pSetupBatch == NULL) {
-		pSetupBatch = fopen("CDMSETUP.BAT", "w");
-		fprintf(pSetupBatch, "@title CDM_SETUP_PROGRAM_1_0\n@color 17\n@echo %%cd%%\\* > baseDir.cdm\n@exit");
-		fclose(pSetupBatch);
-	}
-	system("start CDMSETUP.BAT");
+	yoany();
 	system("powershell -command \"Install-Module -Name ps2exe -Force -SkipPublisherCheck\"");
 	system("powershell -command \"Invoke-PS2EXE .\\STORE\\unziper.ps1 .\\unziper.exe\"");
 	/*system("echo 본 프로그램의 설치경로를 입력하세요.\n");
