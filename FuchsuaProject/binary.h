@@ -475,6 +475,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		printf("e: %04x, %04x(%d)", memory[*dPoint], *dPoint, *dPoint);
 		return 1;
 	}
+	printf("%04x, %04x(%d)", memory[*dPoint], *dPoint, *dPoint);
 	return 0;
 }
 
