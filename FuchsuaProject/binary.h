@@ -470,7 +470,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		*dPoint += 3;
 	}
 	else if (memory[*dPoint] == 0x0004) { //echo
-		printf("%04x %d", *(memory + *(memory + *dPoint + 1)), *(memory + *(memory + *dPoint + 1)));
+		printf("%04x %d", *(memory + *(memory + *dPoint + 1)), *(memory + *dPoint + 1));
 		*dPoint += 2;
 	}
 	else if (memory[*dPoint] == 0x0005) { //output
