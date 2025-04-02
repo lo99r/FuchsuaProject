@@ -336,8 +336,9 @@ inline UINT16 cdmb_Main() {
 		##########################################################################D
 		*/
 	{
-		setlocale(LC_ALL, "");
+		
 	}
+	setlocale(LC_ALL, "");
 	UINT16 cdmmb_t_1 = cdmb_Memory(); //코드를 메모리에 불러오기
 	if (cdmmb_t_1 == 0x41) { //불러올 수 없으면 종료
 		return 0x41;
