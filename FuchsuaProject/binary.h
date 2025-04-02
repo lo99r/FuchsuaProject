@@ -367,6 +367,10 @@ inline UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 			break;
 		}
 	}
+	printf("\n\n");
+	for (int counting = 0; counting < 4096; counting++) {
+		printf("%04x ", memory[counting]);
+	}
 	//
 }
 //todo: 바이트 코드를 구현하기
@@ -476,10 +480,6 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		return 1;
 	}
 	printf("%04x, %04x(%d)", memory[*dPoint], *dPoint, *dPoint);
-	printf("\n\n");
-	for (int counting = 0; counting < 4096; counting++) {
-		printf("%04x ", memory[counting]);
-	}
 	return 0;
 }
 
