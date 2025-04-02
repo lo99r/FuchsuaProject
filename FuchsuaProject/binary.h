@@ -476,6 +476,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		return 1;
 	}
 	printf("%04x, %04x(%d)", memory[*dPoint], *dPoint, *dPoint);
+	printf("\n\n");
 	for (int counting = 0; counting < 4096; counting++) {
 		printf("%04x ", memory[counting]);
 	}
