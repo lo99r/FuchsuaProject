@@ -352,7 +352,7 @@ inline UINT16 cdmb_Memory() {
 	if (!cdm_t_WFILE1) {
 		return 0x41; // 불러오지 못하면 종료
 	}
-	fread(&memory[16], sizeof(UINT16), 256, cdm_t_WFILE1); // #E[16]부터 천천히 메모리를 불러오4기
+	fread(memory + 16, sizeof(UINT16), 256, cdm_t_WFILE1); // #E[16]부터 천천히 메모리를 불러오4기
 }
 static UINT16 cdmb_CommandFuncReturnen = 0x0; //코드 종료값 변수 선언 및 정의
 inline UINT16 cdmb_Parsing() { // 코드 반복실행 함수
