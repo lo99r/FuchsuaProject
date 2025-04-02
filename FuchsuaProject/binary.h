@@ -472,7 +472,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		return 1;
 	}
 	else {
-		printf("e");
+		printf("e: %04x", memory[*dPoint]);
 	}
 	return 0;
 }
