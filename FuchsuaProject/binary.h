@@ -472,6 +472,9 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		printf("%04x %d", memory[*dPoint + 1], memory[*dPoint + 1]);
 		*dPoint += 2;
 	}
+	else if (memory[*dPoint] == 0x0005) {
+		printf("%c", memory[*dPoint + 1]);
+	}
 	else if (memory[*dPoint] == 0xFEFF) {
 		return 1;
 	}
@@ -479,7 +482,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		printf("e: %04x, %04x(%d)", memory[*dPoint], *dPoint, *dPoint);
 		return 1;
 	}
-	printf("%04x, %04x(%d)", memory[*dPoint], *dPoint, *dPoint);
+	//printf("%04x, %04x(%d)", memory[*dPoint], *dPoint, *dPoint);
 	return 0;
 }
 
