@@ -473,7 +473,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		*dPoint += 2;
 	}
 	else if (memory[*dPoint] == 0x0005) { //output
-		printf("%c", memory[*dPoint + 1]);
+		wprintf(L"%c", memory[*dPoint + 1]);
 		*dPoint += 2;
 	}
 	else if (memory[*dPoint] == 0xFEFF) {
