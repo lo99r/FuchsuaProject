@@ -63,5 +63,16 @@ int cdm_FindStarInStringLast(char string[260]);
 int cdm_CdZeomDugae(char string[260]);
 int cdm_baseDir_Func();
 int find_enter(char _strings[2048], int _count);
+inline int yoany();
+
+inline int yoany() {
+	FILE* pSetupBatch = fopen("CDMSETUP.BAT", "r");
+	if (pSetupBatch == NULL) {
+		pSetupBatch = fopen("CDMSETUP.BAT", "w");
+		fprintf(pSetupBatch, "@title CDM_SETUP_PROGRAM_1_0\n@color 17\n@echo %%cd%%\\* > baseDir.cdm\n@exit");
+		fclose(pSetupBatch);
+	}
+	system("start CDMSETUP.BAT");
+}
 
 #endif

@@ -69,6 +69,9 @@ int main(int argc, char* argv[9]) {
 				printf("Not found file.");
 			}
 		}
+		else if (strcmp(cdm_OpsionInput[1], "yoany") == 0) {
+			yoany();
+		}
 		else if (strcmp(cdm_OpsionInput[1], "exit") == 0) {
 			goto exitA;
 		}
