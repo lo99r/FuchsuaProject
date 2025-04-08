@@ -314,6 +314,10 @@ E[2-4]은(는) 본 프로그램의 memory에서 가장 중요한 공간입니다.. 이 변수는 스택에 
 요아니 뽀뽀,
 요아니 뽀뽀, 요아니 뽀뽀, 요아니 뽀뽀, 요아니 뽀뽀, 요아니 뽀뽀*/
 
+//typedef (inline UINT16) ebikawa;
+typedef volatile UINT16 v16;
+typedef volatile UINT16* v19;
+
 inline UINT16 cdmb_Main(); //cdmb를 '실행'이라는거를 가능하게 해주는 cdmb 그 자체 
 inline UINT16 cdmb_Memory(); // cdmb에서 리틀엔디언 기반으로 처음 실행할 코드를 불러와주는 곳
 //
@@ -326,6 +330,10 @@ inline UINT16 cdmb_Error(UINT16 rErrorCodes);
 inline UINT16 cdmb_Pop(UINT16 pPoint, UINT16* pCount);
 inline UINT16 cdmb_Safe(UINT16 ePoint, UINT16 eCount, UINT16 ePushTheMemory);
 inline UINT16 cdmb_Load(UINT16 dPoint, UINT16* dCount, UINT16 dLoadTheMemory);
+inline UINT16 cdmb_Add(UINT16 dStack1, v19 dCount1, UINT16 dStack2, v19 dCount2, UINT16 dPushStack, v19 dPushCount);
+inline UINT16 cdmb_Sub(UINT16 dStack1, v19 dCount1, UINT16 dStack2, v19 dCount2, UINT16 dPushStack, v19 dPushCount);
+inline UINT16 cdmb_Mul(UINT16 dStack1, v19 dCount1, UINT16 dStack2, v19 dCount2, UINT16 dPushStack, v19 dPushCount);
+inline UINT16 cdmb_Div(UINT16 dStack1, v19 dCount1, UINT16 dStack2, v19 dCount2, UINT16 dPushStack, v19 dPushCount);
 
 inline UINT16 cdmb_Main() {
 	if(q_io == 0) //q_io란
@@ -478,6 +486,62 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		_putwch(*(memory + *(memory + *dPoint + 1)));
 		*dPoint += 2;
 	}
+	else if ((memory + (*dPoint)) == 0x1000) { // add
+		//cdmb_Add();
+		switch (*(memory + *dPoint + 1)) {
+		case 1:
+			cdmb_Add(2433, &memory[2], *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433), *(memory + *dPoint + 3) == 1 ? 2433 : *(memory + *dPoint + 3) == 2 ? 2689 : *(memory + *dPoint + 3) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433));
+			break;
+		case 2:
+			cdmb_Add(2689, &memory[3], *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433), *(memory + *dPoint + 3) == 1 ? 2433 : *(memory + *dPoint + 3) == 2 ? 2689 : *(memory + *dPoint + 3) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433));
+			break;
+		case 3:
+			cdmb_Add(2945, &memory[4], *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433), *(memory + *dPoint + 3) == 1 ? 2433 : *(memory + *dPoint + 3) == 2 ? 2689 : *(memory + *dPoint + 3) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433));
+			break;
+		}
+	}
+	else if ((memory + (*dPoint)) == 0x1001) { // sub
+		//cdmb_Add();
+		switch (*(memory + *dPoint + 1)) {
+		case 1:
+			cdmb_Sub(2433, &memory[2], *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433), *(memory + *dPoint + 3) == 1 ? 2433 : *(memory + *dPoint + 3) == 2 ? 2689 : *(memory + *dPoint + 3) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433));
+			break;
+		case 2:
+			cdmb_Sub(2689, &memory[3], *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433), *(memory + *dPoint + 3) == 1 ? 2433 : *(memory + *dPoint + 3) == 2 ? 2689 : *(memory + *dPoint + 3) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433));
+			break;
+		case 3:
+			cdmb_Sub(2945, &memory[4], *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433), *(memory + *dPoint + 3) == 1 ? 2433 : *(memory + *dPoint + 3) == 2 ? 2689 : *(memory + *dPoint + 3) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433));
+			break;
+		}
+	}
+	else if ((memory + (*dPoint)) == 0x1002) { // mul
+		//cdmb_Add();
+		switch (*(memory + *dPoint + 1)) {
+		case 1:
+			cdmb_Mul(2433, &memory[2], *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433), *(memory + *dPoint + 3) == 1 ? 2433 : *(memory + *dPoint + 3) == 2 ? 2689 : *(memory + *dPoint + 3) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433));
+			break;
+		case 2:
+			cdmb_Mul(2689, &memory[3], *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433), *(memory + *dPoint + 3) == 1 ? 2433 : *(memory + *dPoint + 3) == 2 ? 2689 : *(memory + *dPoint + 3) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433));
+			break;
+		case 3:
+			cdmb_Mul(2945, &memory[4], *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433), *(memory + *dPoint + 3) == 1 ? 2433 : *(memory + *dPoint + 3) == 2 ? 2689 : *(memory + *dPoint + 3) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433));
+			break;
+		}
+	}
+	else if ((memory + (*dPoint)) == 0x1003) { // div
+		//cdmb_Add();
+		switch (*(memory + *dPoint + 1)) {
+		case 1:
+			cdmb_Div(2433, &memory[2], *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433), *(memory + *dPoint + 3) == 1 ? 2433 : *(memory + *dPoint + 3) == 2 ? 2689 : *(memory + *dPoint + 3) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433));
+			break;
+		case 2:
+			cdmb_Div(2689, &memory[3], *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433), *(memory + *dPoint + 3) == 1 ? 2433 : *(memory + *dPoint + 3) == 2 ? 2689 : *(memory + *dPoint + 3) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433));
+			break;
+		case 3:
+			cdmb_Div(2945, &memory[4], *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433), *(memory + *dPoint + 3) == 1 ? 2433 : *(memory + *dPoint + 3) == 2 ? 2689 : *(memory + *dPoint + 3) ? 2945 : 2433, (memory + *(memory + *dPoint + 2) == 1 ? 2433 : *(memory + *dPoint + 2) == 2 ? 2689 : *(memory + *dPoint + 2) ? 2945 : 2433));
+			break;
+		}
+	}
 	else if (memory[*dPoint] == 0xFEFF) {
 		return 1;
 	}
@@ -512,6 +576,26 @@ inline UINT16 cdmb_Safe(UINT16 ePoint, UINT16 eCount, UINT16 ePushTheMemory) { /
 }
 inline UINT16 cdmb_Load(UINT16 dPoint, UINT16* dCount, UINT16 dLoadTheMemory) {
 	cdmb_Push(dPoint, dCount, memory[dLoadTheMemory]);
+	return 0;
+}
+
+inline UINT16 cdmb_Add(UINT16 dStack1, v19 dCount1, UINT16 dStack2, v19 dCount2, UINT16 dPushStack, v19 dPushCount) {
+	cdmb_Push(dPushStack, dPushCount, *(memory + dStack1 + *dCount1) + *(memory + dStack2 + *dCount2));
+	return 0;
+}
+
+inline UINT16 cdmb_Sub(UINT16 dStack1, v19 dCount1, UINT16 dStack2, v19 dCount2, UINT16 dPushStack, v19 dPushCount) {
+	cdmb_Push(dPushStack, dPushCount, *(memory + dStack1 + *dCount1) - *(memory + dStack2 + *dCount2));
+	return 0;
+}
+
+inline UINT16 cdmb_Mul(UINT16 dStack1, v19 dCount1, UINT16 dStack2, v19 dCount2, UINT16 dPushStack, v19 dPushCount) {
+	cdmb_Push(dPushStack, dPushCount, *(memory + dStack1 + *dCount1) * *(memory + dStack2 + *dCount2));
+	return 0;
+}
+
+inline UINT16 cdmb_Div(UINT16 dStack1, v19 dCount1, UINT16 dStack2, v19 dCount2, UINT16 dPushStack, v19 dPushCount) {
+	cdmb_Push(dPushStack, dPushCount, *(memory + dStack1 + *dCount1) / *(memory + dStack2 + *dCount2) != 0 ? *(memory + dStack2 + *dCount2) : 1);
 	return 0;
 }
 
