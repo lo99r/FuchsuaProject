@@ -91,7 +91,9 @@ int cdm_ShellMainCode(int eMode) {
 				strcat(cdm_FileStringBuffer, cdm_FileStringCat);
 				//strcat(cdm_FileStringBuffer, "\n");
 			}
+			//strcpy();
 			printf("%s", cdm_FileStringBuffer);
+			strcpy(cdm_FileStringBuffer, "\0");
 			//
 			fclose(cdm_StartMessage);
 			strcpy(cdm_FileStringCat, "\0");
