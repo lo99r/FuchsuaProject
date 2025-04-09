@@ -1,6 +1,6 @@
 # 프로젝트 소개
 본 프로젝트는 윈도우등 다양한 환경에서 돌아가는 cli 기반 인터페이스입니다.
-https://discord.gg/zVmzkd47HA
+https://discord.gg/xdDhw7c4SN
 
 ### 빌드
 ```
