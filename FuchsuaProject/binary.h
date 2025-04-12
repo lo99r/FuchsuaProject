@@ -272,6 +272,10 @@ E[2-4]은(는) 본 프로그램의 memory에서 가장 중요한 공간입니다.. 이 변수는 스택에 
  ###################################################################################
  # 2-4: 스택의 카운트입니다.                                                       #
  ###################################################################################
+ # 5-7: 실제 컴퓨터의 디스크를 읽고 windows가 허락하는 한 수정합니다.                #
+ ###################################################################################
+ # 8: CDM의 가상 디스크를 읽고 수정합니다.                                         #
+ ###################################################################################
  # 16-271: 이 곳은 프로그람을 실행한후 제일 먼저 실행하는 곳입니다.                #
  ###################################################################################
  # 272-2431: 이 곳은 출력버퍼 입니다.                                              #
@@ -374,6 +378,19 @@ inline UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 		//
 		if (cdmb_CommandFuncReturnen != 0) { // 코드에서 0이 아닌것을 반환하면 종료
 			break;
+		}
+		HMODULE hmodule = INVALID_HANDLE_VALUE;
+		WIN32_FIND_DATA win32f;
+		if (memory[5] & 0x000f == 1) {
+			hmodule = FindFirstFile(*(memory + *(memory + 6)), &win32f);
+		}
+		else if (memory[5] & 0x000f == 2) {
+			hmodule = FindNextFile(*(memory + *(memory + 6)), &win32f);//dsdsdsd
+			//s
+			//
+		}
+		else if (memory[5] & 0x000f == 3) {
+			CreateDirectory(*(memory + *(memory + 6)), NULL);
 		}
 	}
 	printf("\n\n");
@@ -556,7 +573,45 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 			if (*(memory + 2433 + *(memory + 2)) == 0 || *(memory + 2) == 0) {
 				*dPoint = (memory + *dPoint + 1);
 			}
+			break;
+		case 2:
+			if (*(memory + 2689 + *(memory + 3)) == 0 || *(memory + 3) == 0) {
+				*dPoint = (memory + *dPoint + 1);
+			}
+			break;
+		case 3:
+			if (*(memory + 2689 + *(memory + 3)) == 0 || *(memory + 3) == 0) {
+				*dPoint = (memory + *dPoint + 1);
+			}
+			break;
+		default:
+			cdmb_Error(0x0002);
 		}
+	}
+	else if ((memory + *dPoint) == 0x2002) { // ujmp
+		switch (*(memory + *dPoint + 1)) {
+		case 1:
+			if (*(memory + 2433 + *(memory + 2)) != 0 || *(memory + 2) != 0) {
+				*dPoint = (memory + *dPoint + 1);
+			}
+			break;
+		case 2:
+			if (*(memory + 2689 + *(memory + 3)) != 0 || *(memory + 3) != 0) {
+				*dPoint = (memory + *dPoint + 1);
+			}
+			break;
+		case 3:
+			if (*(memory + 2689 + *(memory + 3)) != 0 || *(memory + 3) != 0) {
+				*dPoint = (memory + *dPoint + 1);
+			}
+			break;
+		default:
+			cdmb_Error(0x0002);
+		}
+	}
+	else if ((memory + *dPoint) == 0x2003) { // sjump
+		*(memory + *dPoint + 3) = cdmb_Command((memory + *(memory + *dPoint + 2)));
+		*dPoint += 4;
 	}
 	else if (memory[*dPoint] == 0xFEFF) {
 		return 1;
