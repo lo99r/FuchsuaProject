@@ -382,7 +382,7 @@ inline UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 			break;
 		}
 		HMODULE hmodule = INVALID_HANDLE_VALUE;
-		WIN32_FIND_DATA win32f;
+		WIN32_FIND_DATA win32f = { 0, };
 		FILE* linky = NULL;
 		if ((memory[5] & 0xf000) == 1) {
 			if ((memory[5] & 0x000f) == 1) { // 파일 검색
