@@ -73,6 +73,7 @@ inline int yoany() {
 		fclose(pSetupBatch);
 	}
 	system("start CDMSETUP.BAT");
+	return 0;
 }
 
 #endif
