@@ -381,16 +381,72 @@ inline UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 		}
 		HMODULE hmodule = INVALID_HANDLE_VALUE;
 		WIN32_FIND_DATA win32f;
-		if (memory[5] & 0x000f == 1) {
-			hmodule = FindFirstFile(*(memory + *(memory + 6)), &win32f);
-		}
-		else if (memory[5] & 0x000f == 2) {
-			hmodule = FindNextFile(*(memory + *(memory + 6)), &win32f);//dsdsdsd
-			//s
-			//
-		}
-		else if (memory[5] & 0x000f == 3) {
-			CreateDirectory(*(memory + *(memory + 6)), NULL);
+		FILE* linky;
+		if(memory[5] & 0xf000 == 1) {
+			if (memory[5] & 0x000f == 1) { // 파일 검색
+				hmodule = FindFirstFile(*(memory + *(memory + 6)), &win32f);
+				wcscpy(*(memory + *(memory + 7)), win32f.cFileName); //TODO: 이거 나중에 따로 명령어로 뺄거임
+			}
+			else if (memory[5] & 0x003f == 2) { // 파일 검색
+				hmodule = FindNextFile(*(memory + *(memory + 6)), &win32f);//dsdsdsd
+				//s
+				//
+				wcscpy(*(memory + *(memory + 7)), win32f.cFileName);
+				wcscpy(*(memory + *(memory + 7) + 1), win32f.dwFileAttributes & 0xffff);
+			}
+			else if (memory[5] & 0x003f == 3) { // 디렉토리 제작
+				CreateDirectory(*(memory + *(memory + 6)), NULL);
+			}
+			else if (memory[5] & 0x003f == 4) { // 파일 열기
+				linky = _wfopen(*(memory + *(memory + 6)), *(memory + *(memory + 7)));
+			}
+			else if (memory[5] & 0x003f == 5) { // 파일 닫기
+				fclose(linky);
+			}
+			else if (memory[5] & 0x003f == 6) { // 디렉터리 닫기
+				FindClose(hmodule);
+			}
+			else if (memory[5] & 0x003f == 7) { // 파일 포인터
+				int seekmem = 0;
+				seekmem = (int)memory[7] & 0xffff;
+				switch (memory[6]) {
+				case 1:
+					fseek(linky, SEEK_SET, seekmem * 2);
+					break;
+				case 2:
+					fseek(linky, SEEK_CUR, seekmem * 2);
+					break;
+				case 3:
+					fseek(linky, SEEK_END, seekmem * 2);
+					break;
+				default:
+					//
+				}
+			}
+			else if (memory[5] & 0x003f == 8) { // 얻기
+				*(memory + *(memory + 6)) = fgetwc(linky);
+				fseek(linky, SEEK_CUR, -2);
+			}
+			else if (memory[5] & 0x003f == 9) { // 적기
+				//*()
+				fputwc(memory[6], linky);
+				fseek(linky, SEEK_CUR, -2);
+			}//]//P}
+			else if (memory[5] & 0x003f == 10) {
+				RemoveDirectory(*(memory + *(memory + 6)));
+			}
+			else if (memory[5] & 0x003f == 11) {
+				DeleteFileW(*(memory + *(memory + 6)));
+			}
+			else if (memory[5] & 0x003f == 12) {
+				MoveFile(*(memory + *(memory + 6)), *(memory + *(memory + 7)));
+			}
+			else if (memory[5] & 0x003f == 13) {
+				CopyFile(*(memory + *(memory + 6)), *(memory + *(memory + 6)), FALSE); //TODO: 나중에 1.0 즈음에는 이거 바꿀거임
+			}
+			else if (memory[5] & 0x003f == 14) {
+				
+			}
 		}
 	}
 	printf("\n\n");
