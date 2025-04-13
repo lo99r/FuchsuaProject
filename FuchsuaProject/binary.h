@@ -445,8 +445,14 @@ inline UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 				CopyFile(*(memory + *(memory + 6)), *(memory + *(memory + 6)), FALSE); //TODO: 나중에 1.0 즈음에는 이거 바꿀거임
 			}
 			else if (memory[5] & 0x003f == 14) {
-				
+				if (win32f.dwFileAttributes & FILE_ATTRIBUTE_ARCHIVE) {
+					*(memory + *(memory + 6)) = !(win32f.dwFileAttributes & FILE_ATTRIBUTE_ARCHIVE);
+				}
+				else {
+					*(memory + *(memory + 6)) = !(win32f.dwFileAttributes & FILE_ATTRIBUTE_ARCHIVE);
+				}
 			}
+			memory[5] = memory[5] & 0x003f;
 		}
 	}
 	printf("\n\n");
