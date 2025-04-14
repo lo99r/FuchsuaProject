@@ -192,11 +192,12 @@ static UINT16 SK = 0x0000; //status keeck
 static UINT16 IK = 0x0000; //instruction keeck
 static UINT16 PC = 0x0000; //program counter
 
-inline UINT16 memory_mgr(UINT16 number) {
-	if (number < 0x1000) {
+inline UINT16 memory_mgr(UINT16 _number) {
+	UINT16 number = _number;
+	if (number & 0xf000 == 0x0000) {
 		return number;
 	}
-	else if (number >= 0x1000) {
+	else if (number & 0xf000 == 0x0000) {
 		return memory[number - 0x1000];
 	}
 	else {
@@ -214,6 +215,7 @@ inline UINT16 memory_mgr(UINT16 number) {
 		}
 		//
 	}
+	return 0x0000;
 }
 
 inline UINT16* memory_mgrP(UINT16 number) {
@@ -459,7 +461,7 @@ inline UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 			}
 			memory[5] = memory[5] & 0x003f;
 			if ((memory[8] & 0x0f00) == 0x0100) {
-				FILE* disko;
+				FILE* disko = NULL;
 				if ((memory[8] & 0x003f) == 1) {
 					//opendisk((memory + 9), disko);
 					disko = _wfopen((memory + 9), L"wb, ccs=UTF-16LE");
