@@ -66,6 +66,7 @@
 #include<io.h>
 #include<time.h>
 #include<locale.h>
+#include"qmach/qdisk.h"
 //#include<Skout.h>
 //#include"v.h"
 
@@ -274,7 +275,7 @@ E[2-4]은(는) 본 프로그램의 memory에서 가장 중요한 공간입니다.. 이 변수는 스택에 
  ###################################################################################
  # 5-7: 실제 컴퓨터의 디스크를 읽고 windows가 허락하는 한 수정합니다.                #
  ###################################################################################
- # 8: CDM의 가상 디스크를 읽고 수정합니다.                                         #
+ # 8-10: CDM의 가상 디스크를 읽고 수정합니다.                                         #
  ###################################################################################
  # 16-271: 이 곳은 프로그람을 실행한후 제일 먼저 실행하는 곳입니다.                #
  ###################################################################################
@@ -384,7 +385,7 @@ inline UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 		HMODULE hmodule = INVALID_HANDLE_VALUE;
 		WIN32_FIND_DATA win32f = { 0, };
 		FILE* linky = NULL;
-		if ((memory[5] & 0xf000) == 1) {
+		if ((memory[5] & 0x0f00) == 0x0100) {
 			if ((memory[5] & 0x000f) == 1) { // 파일 검색
 				hmodule = FindFirstFile((memory + *(memory + 6)), &win32f);
 				wcscpy((memory + *(memory + 7)), win32f.cFileName); //TODO: 이거 나중에 따로 명령어로 뺄거임
@@ -457,6 +458,35 @@ inline UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 				}
 			}
 			memory[5] = memory[5] & 0x003f;
+			if ((memory[8] & 0x0f00) == 0x0100) {
+				FILE* disko;
+				if ((memory[8] & 0x003f) == 1) {
+					//opendisk((memory + 9), disko);
+					disko = _wfopen((memory + 9), L"wb, ccs=UTF-16LE");
+					//////////op
+					//5:59aa
+					//	//aa
+					//
+				}
+				else if ((*(memory + 8) & 0x003f) == 2) {
+					fclose(disko);
+				}
+				else if ((memory[8] & 0x003f) == 3) {
+					fseek(disko, SEEK_CUR, -1);
+				}
+				else if ((memory[8] & 0x003f) == 4) {
+					fseek(disko, SEEK_CUR, 1);
+				}
+				else if ((memory[8] & 0x003f) == 5) {
+					*(memory + *(memory + 9)) = fgetwc(disko);
+					fseek(disko, SEEK_CUR, -1);
+				}
+				else if ((memory[8] & 0x003f) == 6) {
+					/**(memory + *(memory + 9)) = fgetwc(disko);*/
+					fputwc(*(memory + *(memory + 9)), disko);
+					fseek(disko, SEEK_CUR, -1);
+				}
+			}
 		}
 	}
 	printf("\n\n");
@@ -481,13 +511,13 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		//s
 		switch (memory[*dPoint + 1]) { // 해당 (명령어)의 (옵션1)의 값을 받기
 		case 0x0001: // 1을(를) 받았을 경우,
-			cdmb_Push(2433, &memory[2], memory[*dPoint + 2]); // 1번 스택에 PPUSH
+			cdmb_Push(2433, &memory[2], memory_mgr(memory[*dPoint + 2])); // 1번 스택에 PPUSH
 			break;
 		case 0x0002: // 2을(를) 받았을 경우,
-			cdmb_Push(2689, &memory[3], memory[*dPoint + 2]); // 2번 스택에 PUSH
+			cdmb_Push(2689, &memory[3], memory_mgr(memory[*dPoint + 2])); // 2번 스택에 PUSH
 			break;
 		case 0x0003: // 3을(를) 받았을 경어ㅜ
-			cdmb_Push(2945, &memory[4], memory[*dPoint + 2]);// )
+			cdmb_Push(2945, &memory[4], memory_mgr(memory[*dPoint + 2]));// )
 			break;
 		default:
 			cdmb_Error(0x0100);
@@ -529,13 +559,13 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		*/
 		switch (memory[*dPoint + 1]) {
 		case 0x0001:
-			cdmb_Safe(2433, memory[2], memory[*dPoint + 2]);
+			cdmb_Safe(2433, memory[2], memory_mgr(memory[*dPoint + 2]));
 			break;
 		case 0x0002:
-			cdmb_Safe(2689, memory[3], memory[*dPoint + 2]);
+			cdmb_Safe(2689, memory[3], memory_mgr(memory[*dPoint + 2]));
 			break;
 		case 0x0003:
-			cdmb_Safe(2945, memory[4], memory[*dPoint + 2]);
+			cdmb_Safe(2945, memory[4], memory_mgr(memory[*dPoint + 2]));
 			break;
 		default:
 			cdmb_Error(0x0102);
@@ -547,13 +577,13 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 	else if (memory[*dPoint] == 0x0003) { //load
 		switch (memory[*dPoint + 1]) {
 		case 0x0001:
-			cdmb_Load(2433, &memory[2], memory[*dPoint + 2]);
+			cdmb_Load(2433, &memory[2], memory_mgr(memory[*dPoint + 2]));
 			break;
 		case 0x0002:
-			cdmb_Load(2689, &memory[3], memory[*dPoint + 2]);
+			cdmb_Load(2689, &memory[3], memory_mgr(memory[*dPoint + 2]));
 			break;
 		case 0x0003:
-			cdmb_Load(2945, &memory[4], memory[*dPoint + 2]);
+			cdmb_Load(2945, &memory[4], memory_mgr(memory[*dPoint + 2]));
 			break;
 		default:
 			cdmb_Error(0x0103);
@@ -562,12 +592,12 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		*dPoint += 3;
 	}
 	else if (memory[*dPoint] == 0x0004) { //echo
-		printf("%04x %04x ", *(memory + *(memory + *dPoint + 1)), *(memory + *dPoint + 1));
+		printf("%04x %04x ", *(memory + memory_mgr(*(memory + *dPoint + 1))), memory_mgr(*(memory + *dPoint + 1)));
 		*dPoint += 2;
 	}
 	else if (memory[*dPoint] == 0x0005) { //output
 		//wprintf(L"%c", memory[*dPoint + 1]);
-		_putwch(*(memory + *(memory + *dPoint + 1)));
+		_putwch(*(memory + memory_mgr(*(memory + *dPoint + 1))));
 		*dPoint += 2;
 	}
 	else if (*(memory + (*dPoint)) == 0x1000) { // add
@@ -631,24 +661,24 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		*dPoint += 4;
 	}
 	else if (*(memory + *dPoint) == 0x2000) { // jump
-		*dPoint = *(memory + *dPoint + 1);
+		*dPoint = memory_mgr(*(memory + *dPoint + 1));
 		//
 	}
 	else if (*(memory + *dPoint) == 0x2001) { // njmp
 		switch (*(memory + *dPoint + 1)) {
 		case 1:
 			if (*(memory + 2433 + *(memory + 2)) == 0 || *(memory + 2) == 0) {
-				*dPoint = *(memory + *dPoint + 1);
+				*dPoint = memory_mgr(*(memory + *dPoint + 2));
 			}
 			break;
 		case 2:
 			if (*(memory + 2689 + *(memory + 3)) == 0 || *(memory + 3) == 0) {
-				*dPoint = *(memory + *dPoint + 1);
+				*dPoint = memory_mgr(*(memory + *dPoint + 2));
 			}
 			break;
 		case 3:
-			if (*(memory + 2689 + *(memory + 3)) == 0 || *(memory + 3) == 0) {
-				*dPoint = *(memory + *dPoint + 1);
+			if (*(memory + 2945 + *(memory + 3)) == 0 || *(memory + 3) == 0) {
+				*dPoint = memory_mgr(*(memory + *dPoint + 2));
 			}
 			break;
 		default:
@@ -659,17 +689,17 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		switch (*(memory + *dPoint + 1)) {
 		case 1:
 			if (*(memory + 2433 + *(memory + 2)) != 0 || *(memory + 2) != 0) {
-				*dPoint = *(memory + *dPoint + 1);
+				*dPoint = memory_mgr(*(memory + *dPoint + 2));
 			}
 			break;
 		case 2:
 			if (*(memory + 2689 + *(memory + 3)) != 0 || *(memory + 3) != 0) {
-				*dPoint = *(memory + *dPoint + 1);
+				*dPoint = memory_mgr(*(memory + *dPoint + 2));
 			}
 			break;
 		case 3:
 			if (*(memory + 2689 + *(memory + 3)) != 0 || *(memory + 3) != 0) {
-				*dPoint = *(memory + *dPoint + 1);
+				*dPoint = memory_mgr(*(memory + *dPoint + 2));
 			}
 			break;
 		default:
@@ -677,7 +707,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		}
 	}
 	else if (*(memory + *dPoint) == 0x2003) { // sjump
-		*(memory + *dPoint + 3) = cdmb_Command((memory + *(memory + *dPoint + 2)));
+		*(memory + *dPoint + 3) = cdmb_Command((memory + memory_mgr(*(memory + *dPoint + 2))));
 		*dPoint += 4;
 	}
 	else if (memory[*dPoint] == 0xFEFF) {

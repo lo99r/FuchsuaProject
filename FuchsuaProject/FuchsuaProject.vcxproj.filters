@@ -24,6 +24,12 @@
     <ClInclude Include="binary.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="qmach\qdisk.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="qmach\qstrm.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
@@ -41,5 +47,10 @@
     <ClCompile Include="binary.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Data\202503180651.txt" />
+    <Text Include="Data\Test.txt" />
+    <Text Include="STORE\Data\202503180651.txt" />
   </ItemGroup>
 </Project>
