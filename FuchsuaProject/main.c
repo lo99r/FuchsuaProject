@@ -8,7 +8,7 @@
 
 #include"v.h"
 //#define q_io 0
-#include"binary.h"
+//#include"binary.h"
 
 char cdm_OpsionInput[9][260] = { 0, };
 char* cdm_StringPointer;

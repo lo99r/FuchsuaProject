@@ -136,7 +136,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="binary.h" />
     <ClInclude Include="v.h" />
     <ClInclude Include="version.h" />
   </ItemGroup>
