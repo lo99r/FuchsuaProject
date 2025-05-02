@@ -7,8 +7,9 @@
 */
 
 #include"v.h"
+#include<locale.h>
 //#define q_io 0
-#include"binary.h"
+//#include"binary.h"
 
 char cdm_OpsionInput[9][260] = { 0, };
 char* cdm_StringPointer;
@@ -64,10 +65,8 @@ int main(int argc, char* argv[9]) {
 			++main_Start;
 		}
 		else if (strcmp(cdm_OpsionInput[1], "script") == 0) {
-			UINT16 iop = cdmb_Main();
-			if (iop = 0x41) {
-				printf("Not found file.");
-			}
+			setlocale(LC_ALL, "");
+			wprintf(L"없어진 기능 입니다.");
 		}
 		else if (strcmp(cdm_OpsionInput[1], "exit") == 0) {
 			goto exitA;
