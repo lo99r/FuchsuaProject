@@ -489,6 +489,8 @@ inline UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 					fseek(disko, SEEK_CUR, -1);
 				}
 			}
+
+			//여기에서 부터 여러 장치를 추가할 수 있습니다.
 		}
 	}
 	printf("\n\n");
