@@ -629,7 +629,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 	}
 	else if (memory[*dPoint] == 0x0005) { //output
 		//wprintf(L"%c", memory[*dPoint + 1]);
-		_putwch(*(memory + memory_mgr(*(memory + *dPoint + 1))));
+		_putwch(memory_mgr(*(memory + *dPoint + 1)));
 		*dPoint += 2;
 	}
 	else if (*(memory + (*dPoint)) == 0x1000) { // add
