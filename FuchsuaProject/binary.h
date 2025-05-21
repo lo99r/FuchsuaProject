@@ -66,7 +66,7 @@
 #include<io.h>
 #include<time.h>
 #include<locale.h>
-#include"qmach/qdisk.h"
+//#include"qmach/qdisk.h"
 //#include<Skout.h>
 //#include"v.h"
 
@@ -197,7 +197,7 @@ inline UINT16 memory_mgr(UINT16 _number) {
 	if (number & 0xf000 == 0x0000) {
 		return number;
 	}
-	else if (number & 0xf000 == 0x0000) {
+	else if (number & 0xf000 == 0x1000) {
 		return memory[number - 0x1000];
 	}
 	else {
@@ -222,24 +222,25 @@ inline UINT16* memory_mgrP(UINT16 number) {
 	//if (number < 0x1000) {
 	//	return number;
 	//}
-	if (number >= 0x1000) {
-		return &memory[number - 0x1000];
-	}
-	else {
-		switch (number) {
-		case 0x2000:
-			return &DK;
-		case 0x2001:
-			return &AK;
-		case 0x2002:
-			return &SK;
-		case 0x2003:
-			return &IK;
-		case 0x2004:
-			return &PC;
-		}
-		//
-	}
+	//if (number >= 0x1000) {
+	//	return &memory[number - 0x1000];
+	//}
+	//else {
+	//	switch (number) {
+	//	case 0x2000:
+	//		return &DK;
+	//	case 0x2001:
+	//		return &AK;
+	//	case 0x2002:
+	//		return &SK;
+	//	case 0x2003:
+	//		return &IK;
+	//	case 0x2004:
+	//		return &PC;
+	//	}
+	//	//
+	//}
+	return number;
 }
 
 //본 프로그램의 기본 스택의 카운트입니다.
@@ -529,6 +530,33 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		}
 		*dPoint += 3;
 	}
+	//else if (memory[*dPoint] == 0x0100) { //push
+	//	/*
+	//	PUSH 예약어
+
+	//	 ###########
+	//	 # PUSH란? #
+	//	 ######################################################################################
+	//	 # 스택에 값을 넣는 것을 말합니다. 본 명령어 셋은(는) (명령어) (옵션1) (옵션2)입니다. #
+	//	 ######################################################################################
+	//	*/
+	//	//s
+	//	switch (memory[*dPoint + 1]) { // 해당 (명령어)의 (옵션1)의 값을 받기
+	//	case 0x0001: // 1을(를) 받았을 경우,
+	//		cdmb_Push(2433, &memory[2], memory_mgr(memory + *(memory + (*dPoint + 2)))); // 1번 스택에 PPUSH
+	//		break;
+	//	case 0x0002: // 2을(를) 받았을 경우,
+	//		cdmb_Push(2689, &memory[3], memory_mgr(memory + *(memory + (*dPoint + 2)))); // 2번 스택에 PUSH
+	//		break;
+	//	case 0x0003: // 3을(를) 받았을 경어ㅜ
+	//		cdmb_Push(2945, &memory[4], memory_mgr(memory + *(memory + (*dPoint + 2))));// )
+	//		break;
+	//	default:
+	//		cdmb_Error(0x0100);
+	//		break;
+	//	}
+	//	*dPoint += 3;
+	//}
 	else if (memory[*dPoint] == 0x0001) { //pop
 		/*
 		#######
