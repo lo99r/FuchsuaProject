@@ -194,10 +194,10 @@ static UINT16 PC = 0x0000; //program counter
 
 inline UINT16 memory_mgr(UINT16 _number) {
 	UINT16 number = _number;
-	if (number & 0xf000 == 0x0000) {
+	if (number < 0x1000) {
 		return number;
 	}
-	else if (number & 0xf000 == 0x1000) {
+	else if (number < 0x2000) {
 		return memory[number - 0x1000];
 	}
 	else {
