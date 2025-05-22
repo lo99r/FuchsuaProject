@@ -137,8 +137,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="binary.h" />
-    <ClInclude Include="qmach\qdisk.h" />
-    <ClInclude Include="qmach\qstrm.h" />
+    <ClInclude Include="q.h" />
     <ClInclude Include="v.h" />
     <ClInclude Include="version.h" />
   </ItemGroup>

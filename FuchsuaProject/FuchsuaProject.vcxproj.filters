@@ -24,10 +24,7 @@
     <ClInclude Include="binary.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="qmach\qdisk.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="qmach\qstrm.h">
+    <ClInclude Include="q.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
