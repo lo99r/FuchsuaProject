@@ -12,6 +12,22 @@
 #include <mmsystem.h>                //음악
 #include <Digitalv.h>                //음악
 
+//엔딩음악: wet hands
+//인트로음악: Mice on Venus
+//메인배경음악: Haunt Muskie
+//스진음악: aria math
+//위기속 평화: Dreiton
+//폐허 Dandt Sabahan Dabsahi Hari1be: TASSWELL\
+//디su토피야&아쿠아re움: Axolotl
+//침수차: Dragon Fish
+//탐색: Shuni ji
+//절망: Concrete Halls
+//위기: Dead Voxel
+//회복: Warmth
+//최후의 전투: BALLAD of the CatS
+//작당모의: Rubedo
+//보스 성에 가까워진: So Below
+
 #pragma comment (lib, "gdiplus.lib")
 #include<gdiPlus.h>
 
@@ -19,9 +35,17 @@ extern UINT16 memory[4096];
 
 inline UINT16 QStart(UINT16 QStartSetup) {
 	if (QStartSetup == 0x0000) {
-
+		
 	}
 }
+
+//Planin harab:
+/*
+** Intereptin **
+- zZzZz
+- l-Kiibordin l-Intereptin
+    키보드 실시간 캡처 기능: 메모리 의사 표시 맵핑=
+*/
 
 #endif
 // FuchsuaProject QDisplay 112-118-189-001 1.0

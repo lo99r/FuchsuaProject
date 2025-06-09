@@ -192,7 +192,7 @@ static UINT16 SK = 0x0000; //status keeck
 static UINT16 IK = 0x0000; //instruction keeck
 static UINT16 PC = 0x0000; //program counter
 
-inline UINT16 memory_mgr(UINT16 _number) {
+inline UINT16 memory_mgr(UINT16 _number) { //for standad 1.2
 	UINT16 number = _number;
 	if (number < 0x1000) {
 		return number;
@@ -461,7 +461,7 @@ inline UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 				}
 			}
 			memory[5] = memory[5] & 0x003f;
-			if ((memory[8] & 0x0f00) == 0x0100) {
+			if ((memory[8] & 0x0f00) == 0x0100) { //여기 이제푸터 키보드 옵숀
 				FILE* disko = NULL;
 				if ((memory[8] & 0x003f) == 1) {
 					//opendisk((memory + 9), disko);
