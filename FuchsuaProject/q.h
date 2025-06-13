@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #ifndef q_h
 #define q_h
 #define Q_version "1.0"
@@ -8,34 +8,83 @@
 #include<windows.h>
 #include<locale.h>
 
-#pragma comment (lib, "winmm.lib")    //À½¾Ç
-#include <mmsystem.h>                //À½¾Ç
-#include <Digitalv.h>                //À½¾Ç
+#include<process.h>
 
-//¿£µùÀ½¾Ç: wet hands
-//ÀÎÆ®·ÎÀ½¾Ç: Mice on Venus
-//¸ŞÀÎ¹è°æÀ½¾Ç: Haunt Muskie
-//½ºÁøÀ½¾Ç: aria math
-//À§±â¼Ó ÆòÈ­: Dreiton
-//ÆóÇã Dandt Sabahan Dabsahi Hari1be: TASSWELL\
-//µğsuÅäÇÇ¾ß&¾ÆÄí¾Ære¿ò: Axolotl
-//Ä§¼öÂ÷: Dragon Fish
-//Å½»ö: Shuni ji
-//Àı¸Á: Concrete Halls
-//À§±â: Dead Voxel
-//È¸º¹: Warmth
-//ÃÖÈÄÀÇ ÀüÅõ: BALLAD of the CatS
-//ÀÛ´ç¸ğÀÇ: Rubedo
-//º¸½º ¼º¿¡ °¡±î¿öÁø: So Below
+#pragma comment (lib, "winmm.lib")    //ìŒì•…
+#include <mmsystem.h>                //ìŒì•…
+#include <Digitalv.h>                //ìŒì•…
+
+//ì—”ë”©ìŒì•…: wet hands
+//ì¸íŠ¸ë¡œìŒì•…: Mice on Venus
+//ë©”ì¸ë°°ê²½ìŒì•…: Haunt Muskie
+//ìŠ¤ì§„ìŒì•…: aria math
+//ìœ„ê¸°ì† í‰í™”: Dreiton
+//íí—ˆ Dandt Sabahan Dabsahi Hari1be: TASSWELL\
+//ë””suí† í”¼ì•¼&ì•„ì¿ ì•„reì›€: Axolotl
+//ì¹¨ìˆ˜ì°¨: Dragon Fish
+//íƒìƒ‰: Shuni ji
+//ì ˆë§: Concrete Halls
+//ìœ„ê¸°: Dead Voxel
+//íšŒë³µ: Warmth
+//ìµœí›„ì˜ ì „íˆ¬: BALLAD of the CatS
+//ì‘ë‹¹ëª¨ì˜: Rubedo
+//ë³´ìŠ¤ ì„±ì— ê°€ê¹Œì›Œì§„: So Below
 
 #pragma comment (lib, "gdiplus.lib")
 #include<gdiPlus.h>
 
 extern UINT16 memory[4096];
 
+int count = 0;
+int do_exit = 0;
+
+int in_exit = 0;
+
+unsigned _stdcall Keyboard_loop(void* arg) { //XÃ¯redÃ¯
+	while (1) { //Banbogmun
+		/**?
+		Bon XÃ¯redÃ¯Ã« Ã«mÃ«: {
+		    Bon XÃ¯redÃ¯ silsigan-Ã¯rlo KibodÃ¯ nullimÃ¯l gamci8haya KaundÃ¯lÃ¯l senÃ¯n XÃ¯redÃ¯-ida.
+		}
+		*/
+		count = 0;
+
+		for (int vk = 1; vk < 256; vk++) {
+			SHORT state = GetAsyncKeyState(vk);
+			if (state & 0x8000) {
+				count++;
+			}
+		}
+
+		if (do_exit) {
+			break;
+		}
+		Sleep(200);
+	}
+	return;
+}
+
+extern SHORT KeyList[7];
+
+unsigned _stdcall Keyupdate_loop(void* arg) {
+	int iii = 0;
+	while (in_exit) {
+		*(memory + *(memory + 9) + iii) = *(KeyList + iii)
+			;
+		iii++
+			;
+	}
+}
+
+//extern UINT16 memory[4096];
+
 inline UINT16 QStart(UINT16 QStartSetup) {
 	if (QStartSetup == 0x0000) {
-		
+		_beginthreadex(NULL, 0, Keyboard_loop, 0, 0, NULL); //XÃ¯redÃ¯ silhÃ¤Ã±
+		_beginthreadex(NULL, 0, Keyupdate_loop, 0, 0, NULL);
+	}
+	else if (QStartSetup == 0x0001) {
+		//ready for Display
 	}
 }
 
@@ -44,15 +93,15 @@ inline UINT16 QStart(UINT16 QStartSetup) {
 ** Intereptin **
 - zZzZz
 - l-Kiibordin l-Intereptin
-    Å°º¸µå ½Ç½Ã°£ Ä¸Ã³ ±â´É: ¸Ş¸ğ¸® ÀÇ»ç Ç¥½Ã ¸ÊÇÎ=
+    í‚¤ë³´ë“œ ì‹¤ì‹œê°„ ìº¡ì²˜ ê¸°ëŠ¥: ë©”ëª¨ë¦¬ ì˜ì‚¬ í‘œì‹œ ë§µí•‘=
 */
 
 #endif
 // FuchsuaProject QDisplay 112-118-189-001 1.0
 //(c) FuchsuaProject 182
 /*
-¿ÀÈÄ 5:46¿¡ ºôµå¸¦ ½ÃÀÛÇÔ...
-========== ºôµå: 0°³ ¼º°ø, 0°³ ½ÇÆĞ, 1°³ ÃÖ½Å »óÅÂ, 0°³ °Ç³Ê¶Ü ==========
-========== ºôµåÀÌ(°¡) ¿ÀÈÄ 5:46¿¡ ¿Ï·áµÇ¾úÀ¸¸ç, 00.046 ÃÊÀÌ(°¡) °É¸² ==========
+ì˜¤í›„ 5:46ì— ë¹Œë“œë¥¼ ì‹œì‘í•¨...
+========== ë¹Œë“œ: 0ê°œ ì„±ê³µ, 0ê°œ ì‹¤íŒ¨, 1ê°œ ìµœì‹  ìƒíƒœ, 0ê°œ ê±´ë„ˆëœ€ ==========
+========== ë¹Œë“œì´(ê°€) ì˜¤í›„ 5:46ì— ì™„ë£Œë˜ì—ˆìœ¼ë©°, 00.046 ì´ˆì´(ê°€) ê±¸ë¦¼ ==========
 
 */
