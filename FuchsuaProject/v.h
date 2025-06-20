@@ -53,6 +53,8 @@
 
 // ¦¡¦¢¦£¦¤¦¥¦¦¦§¦¨¦©¦ª¦«
 
+// h
+
 int cdm_ShellMainCode(int eMode);
 int cdm_DirectoryToChar(char directory[2048][260], char charChar[260]);
 int cdm_CharToDirectory(char charChar[260], char directory[2048][260]);
@@ -64,6 +66,10 @@ int cdm_CdZeomDugae(char string[260]);
 int cdm_baseDir_Func();
 int find_enter(char _strings[2048], int _count);
 inline int yoany();
+unsigned _stdcall Keyupdate_loop(void* arg);
+unsigned _stdcall Keyboard_loop(void* arg);
+UINT16 QStart(UINT16 QStartSetup);
+UINT16 cdmb_Parsing();
 
 inline int yoany() {
 	FILE* pSetupBatch = fopen("CDMSETUP.BAT", "r");

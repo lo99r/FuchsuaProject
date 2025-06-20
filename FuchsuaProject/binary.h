@@ -76,6 +76,7 @@
 #include <Digitalv.h>                //음악
 
 #include"q.h"
+#include"v.h"
 
 #endif
 
@@ -242,7 +243,7 @@ inline UINT16* memory_mgrP(UINT16 number) {
 	//	}
 	//	//
 	//}
-	return number;
+	//return number;
 }
 
 //본 프로그램의 기본 스택의 카운트입니다.
@@ -377,13 +378,13 @@ inline UINT16 cdmb_Memory() {
 }
 
 extern int count;
-int decount = 0;
+extern int decount;
 extern int do_exit;
 
-SHORT KeyList[7] = { 0, };
+extern SHORT KeyList[7];
 
 static UINT16 cdmb_CommandFuncReturnen = 0x0; //코드 종료값 변수 선언 및 정의
-inline UINT16 cdmb_Parsing() { // 코드 반복실행 함수
+UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 	UINT16 cdm_t_MEMORYPOINTER = 0; // 메모리 포인터 위치 TODO: 정의 값을 0->0x0010
 	memory[0] = 0x0010;
 	cdm_t_MEMORYPOINTER = memory[cdm_t_MEMORYPOINTER]; // 메모리 이동
@@ -446,8 +447,10 @@ inline UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 			}
 			else if ((memory[5] & 0x003f) == 9) { // 적기
 				//*()
-				fputwc(memory[6], linky);
-				fseek(linky, SEEK_CUR, -2);
+				if (linky != NULL) {
+					fputwc(memory[6], linky);
+					fseek(linky, SEEK_CUR, -2);
+				}
 			}//]//P}
 			else if ((memory[5] & 0x003f) == 10) {
 				RemoveDirectory((memory + *(memory + 6)));
@@ -496,7 +499,7 @@ inline UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 				}
 			}
 			if ((memory[10] & 0x0f00) == 0x0100) {
-				Qstart(0x0000);
+				QStart(0x0000);
 			}
 
 			/* ? */

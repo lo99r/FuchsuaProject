@@ -30,17 +30,25 @@
 //작당모의: Rubedo
 //보스 성에 가까워진: So Below
 
-#pragma comment (lib, "gdiplus.lib")
-#include<gdiPlus.h>
+//#pragma comment (lib, "gdiplus.lib")
+//#include<gdiPlus.h>
 
-extern UINT16 memory[4096];
+#include"v.h"
+#include"binary.h"
 
-int count = 0;
-int do_exit = 0;
+//extern UINT16 memory[4096];
 
-int in_exit = 0;
+extern int decount;
+extern int in_exit;
+extern int do_exit;
+extern int count;
 
-unsigned _stdcall Keyboard_loop(void* arg) { //Xïredï
+//int count = 0;
+//int do_exit = 0;
+
+//int in_exit = 0;
+
+static inline unsigned _stdcall Keyboard_loop(void* arg) { //Xïredï
 	while (1) { //Banbogmun
 		/**?
 		Bon Xïredïë ëmë: {
@@ -61,12 +69,14 @@ unsigned _stdcall Keyboard_loop(void* arg) { //Xïredï
 		}
 		Sleep(200);
 	}
-	return;
+	return 0;
 }
 
 extern SHORT KeyList[7];
 
-unsigned _stdcall Keyupdate_loop(void* arg) {
+extern UINT16 memory[4096];
+
+static inline unsigned _stdcall Keyupdate_loop(void* arg) {
 	int iii = 0;
 	while (in_exit) {
 		*(memory + *(memory + 9) + iii) = *(KeyList + iii)
@@ -76,15 +86,14 @@ unsigned _stdcall Keyupdate_loop(void* arg) {
 	}
 }
 
-//extern UINT16 memory[4096];
-
-inline UINT16 QStart(UINT16 QStartSetup) {
+static inline UINT16 QStart(UINT16 QStartSetup) {
 	if (QStartSetup == 0x0000) {
 		_beginthreadex(NULL, 0, Keyboard_loop, 0, 0, NULL); //Xïredï silhäñ
 		_beginthreadex(NULL, 0, Keyupdate_loop, 0, 0, NULL);
 	}
 	else if (QStartSetup == 0x0001) {
 		//ready for Display
+
 	}
 }
 
