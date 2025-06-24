@@ -10,6 +10,9 @@ int do_exit = 0;
 int in_exit = 0;
 extern UINT16 memory[4096];
 
+HINSTANCE hInstance = NULL;
+HWND hwnd = NULL;
+
 #define def_binary_helper
 //#define seoneon
 //#

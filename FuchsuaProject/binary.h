@@ -499,7 +499,7 @@ UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 				}
 			}
 			if ((memory[10] & 0x0f00) == 0x0100) {
-				QStart(0x0000);
+				QStart(memory[11]);
 			}
 
 			/* ? */

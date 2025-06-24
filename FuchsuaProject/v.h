@@ -68,7 +68,8 @@ int find_enter(char _strings[2048], int _count);
 inline int yoany();
 unsigned _stdcall Keyupdate_loop(void* arg);
 unsigned _stdcall Keyboard_loop(void* arg);
-UINT16 QStart(UINT16 QStartSetup);
+unsigned _stdcall Display_loop(void* arg);
+UINT16 QStart(UINT16 QStartSetup, UINT16 QStartOption1, UINT16 QStartOption2, UINT16 QStartOption3, UINT16 QStartOption4);
 UINT16 cdmb_Parsing();
 
 inline int yoany() {
