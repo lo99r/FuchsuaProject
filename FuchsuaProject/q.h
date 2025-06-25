@@ -132,7 +132,7 @@ inline void InitBitmap(HDC targetHdc) {
 	bmi.bmiHeader.biCompression = BI_RGB;
 	hBitmap = CreateDIBSection(targetHdc, &bmi, DIB_RGB_COLORS, (void**)&pixelBuffer, NULL, 0);
 	memDC = CreateCompatibleDC(targetHdc);
-	SelectObject(memDC, hBitmap);
+	if (hBitmap) SelectObject(memDC, hBitmap);
 
 	pixelMap = (UINT16*)malloc(sizeof(UINT16) * ((width + 1) / 2) * height);
 	//
@@ -172,6 +172,7 @@ inline void TransferToBitmap(UINT16* src, UINT8* dest, int bitwidth, int bitheig
 }
 
 extern int di_exit;
+extern int m8_exit;
 
 static inline unsigned _stdcall Display_loop(void* arg) {
 	pitch = (width + 1) / 2;
@@ -259,3 +260,4 @@ static inline UINT16 QStart(UINT16 QStartSetup, UINT16 QStartOption1, UINT16 QSt
 ========== 빌드이(가) 오후 5:46에 완료되었으며, 00.046 초이(가) 걸림 ==========
 
 */
+//wyd

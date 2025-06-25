@@ -534,7 +534,7 @@ UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 }
 //todo: 바이트 코드를 구현하기
 inline UINT16 cdmb_Command(UINT16* dPoint) {
-	if (memory[*dPoint] & 0xf00f == 0x0000) { //push
+	if ((memory[*dPoint] & 0xf00f) == 0x0000) { //push
 		/*
 		PUSH 예약어
 
@@ -588,7 +588,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 	//	}
 	//	*dPoint += 3;
 	//}
-	else if (memory[*dPoint] & 0xf00f == 0x0001) { //pop
+	else if ((memory[*dPoint] & 0xf00f) == 0x0001) { //pop
 		/*
 		#######
 		# POP #
@@ -612,7 +612,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		}
 		*dPoint += 2;
 	}
-	else if (memory[*dPoint] & 0xf00f == 0x0002) { //safe
+	else if ((memory[*dPoint] & 0xf00f) == 0x0002) { //safe
 		/*
 		########
 		# SAFE #
@@ -637,7 +637,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		//
 		*dPoint += 3;
 	}
-	else if (memory[*dPoint] & 0xf00f == 0x0003) { //load
+	else if ((memory[*dPoint] & 0xf00f) == 0x0003) { //load
 		switch (memory[*dPoint + 1]) {
 		case 0x0001:
 			cdmb_Load(2433, &memory[2], memory_mgr(memory[*dPoint + 2], memory[*dPoint] & 0x0ff0));
@@ -654,19 +654,19 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		}
 		*dPoint += 3;
 	}
-	else if (memory[*dPoint] & 0xf00f == 0x0004) { //echo
+	else if ((memory[*dPoint] & 0xf00f) == 0x0004) { //echo
 		printf("%04x %04x ", *(memory + *(memory + *dPoint + 1)),*(memory + *dPoint + 1));
 		*dPoint += 2;
 	}
-	else if (memory[*dPoint] & 0xf00f == 0x0005) { //output
+	else if ((memory[*dPoint] & 0xf00f) == 0x0005) { //output
 		//wprintf(L"%c", memory[*dPoint + 1]);
 		_putwch(memory_mgr(*(memory + *dPoint + 1), memory[*dPoint] & 0x0ff0));
 		*dPoint += 2;
 	}
-	else if (memory[*dPoint] & 0xf00f == 0x0006) { //mset
+	else if ((memory[*dPoint] & 0xf00f) == 0x0006) { //mset
 		cdmb_Mset(memory_mgr(*(memory + *dPoint + 1), memory[*dPoint] & 0x0ff0), *(memory + *(memory + *dPoint + 2)));
 	}
-	else if (*(memory + (*dPoint)) & 0xf00f == 0x1000) { // add
+	else if ((*(memory + (*dPoint)) & 0xf00f) == 0x1000) { // add
 		//cdmb_Add();
 		switch (*(memory + *dPoint + 1)) {
 		case 1:
@@ -681,7 +681,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		}
 		*dPoint += 4;
 	}
-	else if (*(memory + (*dPoint)) & 0xf00f == 0x1001) { // sub
+	else if ((*(memory + (*dPoint)) & 0xf00f) == 0x1001) { // sub
 		//cdmb_Add();
 		switch (*(memory + *dPoint + 1)) {
 		case 1:
@@ -696,7 +696,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		}
 		*dPoint += 4;
 	}
-	else if (*(memory + (*dPoint)) & 0xf00f == 0x1002) { // mul
+	else if ((*(memory + (*dPoint)) & 0xf00f) == 0x1002) { // mul
 		//cdmb_Add();
 		switch (*(memory + *dPoint + 1)) {
 		case 1:
@@ -711,7 +711,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		}
 		*dPoint += 4;
 	}
-	else if (*(memory + (*dPoint)) & 0xf00f == 0x1003) { // div
+	else if ((*(memory + (*dPoint)) & 0xf00f) == 0x1003) { // div
 		//cdmb_Add();
 		switch (*(memory + *dPoint + 1)) {
 		case 1:
@@ -726,11 +726,11 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		}
 		*dPoint += 4;
 	}
-	else if (*(memory + *dPoint) & 0xf00f == 0x2000) { // jump
+	else if ((*(memory + *dPoint) & 0xf00f) == 0x2000) { // jump
 		*dPoint = memory_mgr(*(memory + *dPoint + 1), memory[*dPoint] & 0x0ff0);
 		//
 	}
-	else if (*(memory + *dPoint) & 0xf00f == 0x2001) { // njmp
+	else if ((*(memory + *dPoint) & 0xf00f) == 0x2001) { // njmp
 		switch (*(memory + *dPoint + 1)) {
 		case 1:
 			if (*(memory + 2433 + *(memory + 2)) == 0 || *(memory + 2) == 0) {
@@ -751,7 +751,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 			cdmb_Error(0x0002);
 		}
 	}
-	else if (*(memory + *dPoint) & 0xf00f == 0x2002) { // ujmp
+	else if ((*(memory + *dPoint) & 0xf00f) == 0x2002) { // ujmp
 		switch (*(memory + *dPoint + 1)) {
 		case 1:
 			if (*(memory + 2433 + *(memory + 2)) != 0 || *(memory + 2) != 0) {
@@ -772,11 +772,11 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 			cdmb_Error(0x0002);
 		}
 	}
-	else if (*(memory + *dPoint) & 0xf00f == 0x2003) { // sjump
+	else if ((*(memory + *dPoint) & 0xf00f) == 0x2003) { // sjump
 		*(memory + *dPoint + 3) = cdmb_Command((memory + memory_mgr(*(memory + *dPoint + 2), memory[*dPoint] & 0x0ff0)));
 		*dPoint += 4;
 	}
-	else if (memory[*dPoint] & 0xf00f == 0xFEFF) {
+	else if ((memory[*dPoint] & 0xf00f) == 0xFEFF) {
 		return 1;
 	}
 	else {
