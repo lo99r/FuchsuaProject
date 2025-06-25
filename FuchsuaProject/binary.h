@@ -664,7 +664,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		*dPoint += 2;
 	}
 	else if ((memory[*dPoint] & 0xf00f) == 0x0006) { //mset
-		cdmb_Mset(memory_mgr(*(memory + *dPoint + 1), memory[*dPoint] & 0x0ff0), *(memory + *(memory + *dPoint + 2)));
+		cdmb_Mset(memory_mgr(*(memory + *dPoint + 1), memory[*dPoint] & 0x0ff0), (memory + *(memory + *dPoint + 2)));
 	}
 	else if ((*(memory + (*dPoint)) & 0xf00f) == 0x1000) { // add
 		//cdmb_Add();
