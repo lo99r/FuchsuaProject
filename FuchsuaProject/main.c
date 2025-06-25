@@ -65,7 +65,7 @@ int main(int argc, char* argv[9]) {
 		}
 		else if (strcmp(cdm_OpsionInput[1], "script") == 0) {
 			UINT16 iop = cdmb_Main();
-			if (iop = 0x41) {
+			if (iop == 0x41) {
 				printf("Not found file.");
 			}
 		}
