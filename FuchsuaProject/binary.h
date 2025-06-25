@@ -195,25 +195,25 @@ static UINT16 SK = 0x0000; //status keeck
 static UINT16 IK = 0x0000; //instruction keeck
 static UINT16 PC = 0x0000; //program counter
 
-inline UINT16 memory_mgr(UINT16 _number) { //for standad 1.2
+inline UINT16 memory_mgr(UINT16 _number, UINT16 _memory) { //for standad 1.2
 	UINT16 number = _number;
-	if (number < 0x1000) {
+	if (_memory < 0x0100) {
 		return number;
 	}
-	else if (number < 0x2000) {
-		return memory[number - 0x1000];
+	else if (_memory < 0x0200) {
+		return memory[number - 0x0100];
 	}
 	else {
-		switch (number) {
-		case 0x2000:
+		switch (_memory) {
+		case 0x0200:
 			return DK;
-		case 0x2001:
+		case 0x0210:
 			return AK;
-		case 0x2002:
+		case 0x0220:
 			return SK;
-		case 0x2003:
+		case 0x0230:
 			return IK;
-		case 0x2004:
+		case 0x0240:
 			return PC;
 		}
 		//
@@ -345,6 +345,7 @@ inline UINT16 cdmb_Add(UINT16 dStack1, v19 dCount1, UINT16 dStack2, v19 dCount2,
 inline UINT16 cdmb_Sub(UINT16 dStack1, v19 dCount1, UINT16 dStack2, v19 dCount2, UINT16 dPushStack, UINT16* dPushCount);
 inline UINT16 cdmb_Mul(UINT16 dStack1, v19 dCount1, UINT16 dStack2, v19 dCount2, UINT16 dPushStack, UINT16* dPushCount);
 inline UINT16 cdmb_Div(UINT16 dStack1, v19 dCount1, UINT16 dStack2, v19 dCount2, UINT16 dPushStack, UINT16* dPushCount);
+inline UINT16 cdmb_Mset(UINT16 _16bit, UINT16* _where);
 
 inline UINT16 cdmb_Main() {
 	if(q_io == 0) //q_io란
@@ -380,6 +381,8 @@ inline UINT16 cdmb_Memory() {
 extern int count;
 extern int decount;
 extern int do_exit;
+extern int di_exit;
+extern int m8_exit;
 
 extern SHORT KeyList[7];
 
@@ -475,6 +478,7 @@ UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 			memory[5] = memory[5] & 0x003f;
 			if ((memory[8] & 0x0f00) == 0x0100) { //여기 이제푸터 키보드 옵숀
 				decount = 0;
+				m8_exit = 1;
 				for (int vk = 1; vk < 256; vk++) {
 					SHORT state = GetAsyncKeyState(vk);
 					if (state & 0x8000) {
@@ -483,7 +487,7 @@ UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 					}
 					else {
 						int whileCount = 0;
-						while (1) {
+						while (m8_exit) {
 							if (KeyList[whileCount] == state) {
 								KeyList[whileCount] = 0;
 								int forCount = 0;
@@ -498,8 +502,13 @@ UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 					}
 				}
 			}
+			else {
+				in_exit = 0;
+				do_exit = 0;
+			}
 			if ((memory[10] & 0x0f00) == 0x0100) {
 				QStart(memory[11], memory[12], memory[13], memory[14], memory[15]);
+				memory[10] = 0x0000;
 			}
 
 			/* ? */
@@ -525,7 +534,7 @@ UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 }
 //todo: 바이트 코드를 구현하기
 inline UINT16 cdmb_Command(UINT16* dPoint) {
-	if (memory[*dPoint] == 0x0000) { //push
+	if (memory[*dPoint] & 0xf00f == 0x0000) { //push
 		/*
 		PUSH 예약어
 
@@ -538,13 +547,13 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		//s
 		switch (memory[*dPoint + 1]) { // 해당 (명령어)의 (옵션1)의 값을 받기
 		case 0x0001: // 1을(를) 받았을 경우,
-			cdmb_Push(2433, &memory[2], memory_mgr(memory[*dPoint + 2])); // 1번 스택에 PPUSH
+			cdmb_Push(2433, &memory[2], memory_mgr(memory[*dPoint + 2], memory[*dPoint] & 0x0ff0)); // 1번 스택에 PPUSH
 			break;
 		case 0x0002: // 2을(를) 받았을 경우,
-			cdmb_Push(2689, &memory[3], memory_mgr(memory[*dPoint + 2])); // 2번 스택에 PUSH
+			cdmb_Push(2689, &memory[3], memory_mgr(memory[*dPoint + 2], memory[*dPoint] & 0x0ff0)); // 2번 스택에 PUSH
 			break;
 		case 0x0003: // 3을(를) 받았을 경어ㅜ
-			cdmb_Push(2945, &memory[4], memory_mgr(memory[*dPoint + 2]));// )
+			cdmb_Push(2945, &memory[4], memory_mgr(memory[*dPoint + 2], memory[*dPoint] & 0x0ff0));// )
 			break;
 		default:
 			cdmb_Error(0x0100);
@@ -579,7 +588,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 	//	}
 	//	*dPoint += 3;
 	//}
-	else if (memory[*dPoint] == 0x0001) { //pop
+	else if (memory[*dPoint] & 0xf00f == 0x0001) { //pop
 		/*
 		#######
 		# POP #
@@ -603,7 +612,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		}
 		*dPoint += 2;
 	}
-	else if (memory[*dPoint] == 0x0002) { //safe
+	else if (memory[*dPoint] & 0xf00f == 0x0002) { //safe
 		/*
 		########
 		# SAFE #
@@ -613,13 +622,13 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		*/
 		switch (memory[*dPoint + 1]) {
 		case 0x0001:
-			cdmb_Safe(2433, memory[2], memory_mgr(memory[*dPoint + 2]));
+			cdmb_Safe(2433, memory[2], memory_mgr(memory[*dPoint + 2], memory[*dPoint] & 0x0ff0));
 			break;
 		case 0x0002:
-			cdmb_Safe(2689, memory[3], memory_mgr(memory[*dPoint + 2]));
+			cdmb_Safe(2689, memory[3], memory_mgr(memory[*dPoint + 2], memory[*dPoint] & 0x0ff0));
 			break;
 		case 0x0003:
-			cdmb_Safe(2945, memory[4], memory_mgr(memory[*dPoint + 2]));
+			cdmb_Safe(2945, memory[4], memory_mgr(memory[*dPoint + 2], memory[*dPoint] & 0x0ff0));
 			break;
 		default:
 			cdmb_Error(0x0102);
@@ -628,16 +637,16 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		//
 		*dPoint += 3;
 	}
-	else if (memory[*dPoint] == 0x0003) { //load
+	else if (memory[*dPoint] & 0xf00f == 0x0003) { //load
 		switch (memory[*dPoint + 1]) {
 		case 0x0001:
-			cdmb_Load(2433, &memory[2], memory_mgr(memory[*dPoint + 2]));
+			cdmb_Load(2433, &memory[2], memory_mgr(memory[*dPoint + 2], memory[*dPoint] & 0x0ff0));
 			break;
 		case 0x0002:
-			cdmb_Load(2689, &memory[3], memory_mgr(memory[*dPoint + 2]));
+			cdmb_Load(2689, &memory[3], memory_mgr(memory[*dPoint + 2], memory[*dPoint] & 0x0ff0));
 			break;
 		case 0x0003:
-			cdmb_Load(2945, &memory[4], memory_mgr(memory[*dPoint + 2]));
+			cdmb_Load(2945, &memory[4], memory_mgr(memory[*dPoint + 2], memory[*dPoint] & 0x0ff0));
 			break;
 		default:
 			cdmb_Error(0x0103);
@@ -645,16 +654,19 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		}
 		*dPoint += 3;
 	}
-	else if (memory[*dPoint] == 0x0004) { //echo
+	else if (memory[*dPoint] & 0xf00f == 0x0004) { //echo
 		printf("%04x %04x ", *(memory + *(memory + *dPoint + 1)),*(memory + *dPoint + 1));
 		*dPoint += 2;
 	}
-	else if (memory[*dPoint] == 0x0005) { //output
+	else if (memory[*dPoint] & 0xf00f == 0x0005) { //output
 		//wprintf(L"%c", memory[*dPoint + 1]);
-		_putwch(memory_mgr(*(memory + *dPoint + 1)));
+		_putwch(memory_mgr(*(memory + *dPoint + 1), memory[*dPoint] & 0x0ff0));
 		*dPoint += 2;
 	}
-	else if (*(memory + (*dPoint)) == 0x1000) { // add
+	else if (memory[*dPoint] & 0xf00f == 0x0006) { //mset
+		cdmb_Mset(memory_mgr(*(memory + *dPoint + 1), memory[*dPoint] & 0x0ff0), *(memory + *(memory + *dPoint + 2)));
+	}
+	else if (*(memory + (*dPoint)) & 0xf00f == 0x1000) { // add
 		//cdmb_Add();
 		switch (*(memory + *dPoint + 1)) {
 		case 1:
@@ -669,7 +681,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		}
 		*dPoint += 4;
 	}
-	else if (*(memory + (*dPoint)) == 0x1001) { // sub
+	else if (*(memory + (*dPoint)) & 0xf00f == 0x1001) { // sub
 		//cdmb_Add();
 		switch (*(memory + *dPoint + 1)) {
 		case 1:
@@ -684,7 +696,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		}
 		*dPoint += 4;
 	}
-	else if (*(memory + (*dPoint)) == 0x1002) { // mul
+	else if (*(memory + (*dPoint)) & 0xf00f == 0x1002) { // mul
 		//cdmb_Add();
 		switch (*(memory + *dPoint + 1)) {
 		case 1:
@@ -699,7 +711,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		}
 		*dPoint += 4;
 	}
-	else if (*(memory + (*dPoint)) == 0x1003) { // div
+	else if (*(memory + (*dPoint)) & 0xf00f == 0x1003) { // div
 		//cdmb_Add();
 		switch (*(memory + *dPoint + 1)) {
 		case 1:
@@ -714,57 +726,57 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 		}
 		*dPoint += 4;
 	}
-	else if (*(memory + *dPoint) == 0x2000) { // jump
-		*dPoint = memory_mgr(*(memory + *dPoint + 1));
+	else if (*(memory + *dPoint) & 0xf00f == 0x2000) { // jump
+		*dPoint = memory_mgr(*(memory + *dPoint + 1), memory[*dPoint] & 0x0ff0);
 		//
 	}
-	else if (*(memory + *dPoint) == 0x2001) { // njmp
+	else if (*(memory + *dPoint) & 0xf00f == 0x2001) { // njmp
 		switch (*(memory + *dPoint + 1)) {
 		case 1:
 			if (*(memory + 2433 + *(memory + 2)) == 0 || *(memory + 2) == 0) {
-				*dPoint = memory_mgr(*(memory + *dPoint + 2));
+				*dPoint = memory_mgr(*(memory + *dPoint + 2), memory[*dPoint] & 0x0ff0);
 			}
 			break;
 		case 2:
 			if (*(memory + 2689 + *(memory + 3)) == 0 || *(memory + 3) == 0) {
-				*dPoint = memory_mgr(*(memory + *dPoint + 2));
+				*dPoint = memory_mgr(*(memory + *dPoint + 2), memory[*dPoint] & 0x0ff0);
 			}
 			break;
 		case 3:
 			if (*(memory + 2945 + *(memory + 3)) == 0 || *(memory + 3) == 0) {
-				*dPoint = memory_mgr(*(memory + *dPoint + 2));
+				*dPoint = memory_mgr(*(memory + *dPoint + 2), memory[*dPoint] & 0x0ff0);
 			}
 			break;
 		default:
 			cdmb_Error(0x0002);
 		}
 	}
-	else if (*(memory + *dPoint) == 0x2002) { // ujmp
+	else if (*(memory + *dPoint) & 0xf00f == 0x2002) { // ujmp
 		switch (*(memory + *dPoint + 1)) {
 		case 1:
 			if (*(memory + 2433 + *(memory + 2)) != 0 || *(memory + 2) != 0) {
-				*dPoint = memory_mgr(*(memory + *dPoint + 2));
+				*dPoint = memory_mgr(*(memory + *dPoint + 2), memory[*dPoint] & 0x0ff0);
 			}
 			break;
 		case 2:
 			if (*(memory + 2689 + *(memory + 3)) != 0 || *(memory + 3) != 0) {
-				*dPoint = memory_mgr(*(memory + *dPoint + 2));
+				*dPoint = memory_mgr(*(memory + *dPoint + 2), memory[*dPoint] & 0x0ff0);
 			}
 			break;
 		case 3:
 			if (*(memory + 2689 + *(memory + 3)) != 0 || *(memory + 3) != 0) {
-				*dPoint = memory_mgr(*(memory + *dPoint + 2));
+				*dPoint = memory_mgr(*(memory + *dPoint + 2), memory[*dPoint] & 0x0ff0);
 			}
 			break;
 		default:
 			cdmb_Error(0x0002);
 		}
 	}
-	else if (*(memory + *dPoint) == 0x2003) { // sjump
-		*(memory + *dPoint + 3) = cdmb_Command((memory + memory_mgr(*(memory + *dPoint + 2))));
+	else if (*(memory + *dPoint) & 0xf00f == 0x2003) { // sjump
+		*(memory + *dPoint + 3) = cdmb_Command((memory + memory_mgr(*(memory + *dPoint + 2), memory[*dPoint] & 0x0ff0)));
 		*dPoint += 4;
 	}
-	else if (memory[*dPoint] == 0xFEFF) {
+	else if (memory[*dPoint] & 0xf00f == 0xFEFF) {
 		return 1;
 	}
 	else {
@@ -819,6 +831,10 @@ inline UINT16 cdmb_Mul(UINT16 dStack1, v19 dCount1, UINT16 dStack2, v19 dCount2,
 inline UINT16 cdmb_Div(UINT16 dStack1, v19 dCount1, UINT16 dStack2, v19 dCount2, UINT16 dPushStack, UINT16* dPushCount) {
 	cdmb_Push(dPushStack, dPushCount, *(memory + dStack1 + *dCount1) / *(memory + dStack2 + *dCount2) != 0 ? *(memory + dStack2 + *dCount2) : 1);
 	return 0;
+}
+
+inline UINT16 cdmb_Mset(UINT16 _16bit, UINT16* _where) {
+	*_where = _16bit;
 }
 
 //

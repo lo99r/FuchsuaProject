@@ -64,7 +64,7 @@ static inline unsigned _stdcall Keyboard_loop(void* arg) { //Xïredï
 			}
 		}
 
-		if (do_exit) {
+		if (!do_exit) {
 			break;
 		}
 		Sleep(200);
@@ -96,6 +96,22 @@ static UINT8* pixelBuffer;
 static HBITMAP hBitmap;
 static HDC memDC;
 static HDC hdc;
+static UINT16 the_Option[5] = { 0, };
+
+static inline unsigned _stdcall KeylistToMemory(void* arg) {
+	if (the_Option[1] == 1) {
+		while(*(memory + *(the_Option + 3))) {
+			*(memory + *(the_Option + 2)) = *(KeyList + *(the_Option + 1));
+		}
+	}
+	else {
+		while (*(memory + *(the_Option + 3))) {
+			for (int counting = 0; counting < 7; counting++) {
+				*(memory + *(the_Option + 2)) = *(KeyList + *(the_Option + 1) + counting);
+			}
+		}
+	}
+}
 
 //static inline unsigned _stdcall PixelMap_loop(void* arg) {
 //	while (1) {
@@ -155,6 +171,8 @@ inline void TransferToBitmap(UINT16* src, UINT8* dest, int bitwidth, int bitheig
 	}
 }
 
+extern int di_exit;
+
 static inline unsigned _stdcall Display_loop(void* arg) {
 	pitch = (width + 1) / 2;
 	pixelMap = malloc(sizeof(UINT16) * pitch * height);
@@ -164,7 +182,7 @@ static inline unsigned _stdcall Display_loop(void* arg) {
 	ShowWindow(hwnd, SW_SHOW);
 	UpdateWindow(hwnd);//j
 	hdc = GetDC(hwnd);
-	while (1) {
+	while (di_exit) {
 		//
 		TransferToBitmap(pixelMap, pixelBuffer, width, height);
 		DrawToScreen(hdc); //TODO: 함수정의!~!~!~~ ~
@@ -176,6 +194,8 @@ static inline unsigned _stdcall Display_loop(void* arg) {
 
 static inline UINT16 QStart(UINT16 QStartSetup, UINT16 QStartOption1, UINT16 QStartOption2, UINT16 QStartOption3, UINT16 QStartOption4) {
 	if (QStartSetup == 0x0000) {
+		in_exit = 1;
+		do_exit = 1;
 		_beginthreadex(NULL, 0, Keyboard_loop, 0, 0, NULL); //Xïredï silhäñ
 		_beginthreadex(NULL, 0, Keyupdate_loop, 0, 0, NULL);
 	}
@@ -192,6 +212,34 @@ static inline UINT16 QStart(UINT16 QStartSetup, UINT16 QStartOption1, UINT16 QSt
 		//ReleaseKC...
 		ReleaseDC(hwnd, hdc);
 	}
+	else if (QStartSetup == 0x0004) { //Keylist -> Memory
+		//o1 = mode, o2 = wantkey, o3 = memory, o4 = endkeeck
+		the_Option[0] = QStartSetup;
+		the_Option[1] = QStartOption1;
+		the_Option[2] = QStartOption2;
+		the_Option[3] = QStartOption3;
+		the_Option[4] = QStartOption4;
+		di_exit = 1;
+		_beginthreadex(NULL, 0, KeylistToMemory, 0, 0, NULL);
+		//
+	}
+	else if (QStartSetup == 0x0005) {
+		switch (QStartOption1) {
+		case 1:
+			di_exit = 0;
+			break;
+		case 2:
+			m8_exit = 0;
+			break;
+		case 0:
+			di_exit = 0;
+			m8_exit = 0;
+			break;
+		}
+		/*di_exit = 0;
+		m8_exit = 0;*/
+	}
+	return 0;
 }
 
 //Planin harab:

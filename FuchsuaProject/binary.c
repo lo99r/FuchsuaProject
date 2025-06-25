@@ -10,6 +10,9 @@ int do_exit = 0;
 int in_exit = 0;
 extern UINT16 memory[4096];
 
+int di_exit = 0;
+int m8_exit = 0;
+
 HINSTANCE hInstance = NULL;
 HWND hwnd = NULL;
 
