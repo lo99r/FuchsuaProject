@@ -201,7 +201,7 @@ inline UINT16 memory_mgr(UINT16 _number, UINT16 _memory) { //for standad 1.2
 		return number;
 	}
 	else if (_memory < 0x0200) {
-		return memory[number - 0x0100];
+		return memory[number];
 	}
 	else {
 		switch (_memory) {
