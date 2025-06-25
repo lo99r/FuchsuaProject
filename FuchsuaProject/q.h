@@ -83,6 +83,9 @@ static inline unsigned _stdcall Keyupdate_loop(void* arg) {
 			;
 		iii++
 			;
+		if (iii == 6) {
+			iii = 0;
+		}
 	}
 }
 
@@ -100,14 +103,14 @@ static UINT16 the_Option[5] = { 0, };
 
 static inline unsigned _stdcall KeylistToMemory(void* arg) {
 	if (the_Option[1] == 1) {
-		while(*(memory + *(the_Option + 3))) {
-			*(memory + *(the_Option + 2)) = *(KeyList + *(the_Option + 1));
+		while(*(memory + *(the_Option + 4))) {
+			*(memory + *(the_Option + 3)) = *(KeyList + *(the_Option + 2));
 		}
 	}
 	else {
-		while (*(memory + *(the_Option + 3))) {
+		while (*(memory + *(the_Option + 4))) {
 			for (int counting = 0; counting < 7; counting++) {
-				*(memory + *(the_Option + 2)) = *(KeyList + *(the_Option + 1) + counting);
+				*(memory + *(the_Option + 3)) = *(KeyList + *(the_Option + 2) + counting);
 			}
 		}
 	}
