@@ -93,12 +93,38 @@ static int width = 1510;
 static int height = 1080;
 static int pitch;
 static UINT8* pixelBuffer;
+static HBITMAP hBitmap;
+static HDC memDC;
+static HDC hdc;
 
 //static inline unsigned _stdcall PixelMap_loop(void* arg) {
 //	while (1) {
 //		pitch = 
 //	}
 //}
+
+inline void InitBitmap(HDC targetHdc) {
+	int pitch = ((width + 1) / 2 + 3) - 3;
+
+	BITMAPINFO bmi = { 0, };
+	bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+	bmi.bmiHeader.biWidth = width;
+	bmi.bmiHeader.biHeight = -height;
+	bmi.bmiHeader.biPlanes = 1;
+	bmi.bmiHeader.biBitCount = 4;
+
+	bmi.bmiHeader.biCompression = BI_RGB;
+	hBitmap = CreateDIBSection(targetHdc, &bmi, DIB_RGB_COLORS, (void**)&pixelBuffer, NULL, 0);
+	memDC = CreateCompatibleDC(targetHdc);
+	SelectObject(memDC, hBitmap);
+
+	pixelMap = (UINT16*)malloc(sizeof(UINT16) * ((width + 1) / 2) * height);
+	//
+}
+
+inline void DrawToScreen(HDC hdc) {
+	BitBlt(hdc, 0, 0, width, height, memDC, 0, 0, SRCCOPY);
+}
 
 inline void SetPixel4(UINT16* buf, int x, int y, int w, UINT16 colour) {
 	int index = y * ((w + 1) / 2) + (x / 2);
@@ -134,16 +160,18 @@ static inline unsigned _stdcall Display_loop(void* arg) {
 	pixelMap = malloc(sizeof(UINT16) * pitch * height);
 	//
 	hInstance = GetModuleHandle(NULL);
-	hwnd = CreateWindowEx(0, "Sparky", "CDM Q display", WS_OVERLAPPEDWINDOW, 100, 100, 1510, 1080, NULL, NULL, hInstance, NULL);
+	hwnd = CreateWindowEx(0, L"Sparky", L"CDM Q display", WS_OVERLAPPEDWINDOW, 100, 100, 1510, 1080, NULL, NULL, hInstance, NULL);
 	ShowWindow(hwnd, SW_SHOW);
 	UpdateWindow(hwnd);//j
-	HDC hdc = GetDC(hwnd);
+	hdc = GetDC(hwnd);
 	while (1) {
+		//
 		TransferToBitmap(pixelMap, pixelBuffer, width, height);
-		DrawToscreen(hdc);
+		DrawToScreen(hdc); //TODO: 함수정의!~!~!~~ ~
+		//
 	}
 	free(pixelMap);
-	return;
+	return 0;
 }
 
 static inline UINT16 QStart(UINT16 QStartSetup, UINT16 QStartOption1, UINT16 QStartOption2, UINT16 QStartOption3, UINT16 QStartOption4) {
@@ -156,7 +184,13 @@ static inline UINT16 QStart(UINT16 QStartSetup, UINT16 QStartOption1, UINT16 QSt
 		_beginthreadex(NULL, 0, Display_loop, 0, 0, NULL);
 	}
 	else if (QStartSetup == 0x0002) {
-		SetPixel4(pixelBuffer, (int)QStartOption1, (int)QStartOption2, width, QStartOption3);
+		InitBitmap(hdc);
+		SetPixel4(pixelMap, (int)QStartOption1, (int)QStartOption2, width, QStartOption3);
+		//DrawToScreen
+	}
+	else if (QStartSetup == 0x0003) {
+		//ReleaseKC...
+		ReleaseDC(hwnd, hdc);
 	}
 }
 
