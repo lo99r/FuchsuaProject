@@ -478,42 +478,42 @@ UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 				}
 			}
 			memory[5] = memory[5] & 0x003f;
-			/*SHORT state;*/
-			if ((memory[8] & 0x0f00) == 0x0100) { //여기 이제푸터 키보드 옵숀
-				decount = 0;
-				m8_exit = 1;
-				for (int vk = 1; vk < 256; vk++) {
-					state = GetAsyncKeyState(vk);
-					if (state & 0x8000) {
-						KeyList[decount] = state;
-						decount++;
-					}
-					else {
-						int whileCount = decount;
-						while (whileCount != 7) {
-							if (KeyList[whileCount] == state) {
-								KeyList[whileCount] = 0;
-								int forCount = 0;
-								for (forCount = whileCount; forCount < 6; forCount++) {
-									//d
-									KeyList[whileCount] = KeyList[whileCount + 1];
-								}
-								//for (forCount; forCount < 7; forCount)KC
-								KeyList[6] = 0;
-							}
-							//if(whileCount)
-							/*else {
-								break;
-							}*/
-						}
-						decount++; // m
-					}
-				}
-			}
-			else {
-				in_exit = 0;
-				do_exit = 0;
-			}
+			///*SHORT state;*/
+			//if ((memory[8] & 0x0f00) == 0x0100) { //여기 이제푸터 키보드 옵숀
+			//	decount = 0;
+			//	m8_exit = 1;
+			//	for (int vk = 1; vk < 256; vk++) {
+			//		state = GetAsyncKeyState(vk);
+			//		if (state & 0x8000) {
+			//			KeyList[decount] = state;
+			//			decount++;
+			//		}
+			//		else {
+			//			int whileCount = decount;
+			//			while (whileCount != 7) {
+			//				if (KeyList[whileCount] == state) {
+			//					KeyList[whileCount] = 0;
+			//					int forCount = 0;
+			//					for (forCount = whileCount; forCount < 6; forCount++) {
+			//						//d
+			//						KeyList[whileCount] = KeyList[whileCount + 1];
+			//					}
+			//					//for (forCount; forCount < 7; forCount)KC
+			//					KeyList[6] = 0;
+			//				}
+			//				//if(whileCount)
+			//				/*else {
+			//					break;
+			//				}*/
+			//			}
+			//			decount++; // m
+			//		}
+			//	}
+			//}
+			//else {
+			//	in_exit = 0;
+			//	do_exit = 0;
+			//}
 			if ((memory[10] & 0x0f00) == 0x0100) {
 				QStart(memory[11], memory[12], memory[13], memory[14], memory[15]);
 				memory[10] = 0x0000;
