@@ -110,7 +110,7 @@ static inline unsigned _stdcall KeylistToMemory(void* arg) {
 	else {
 		while (*(memory + *(the_Option + 4))) {
 			for (int counting = 0; counting < 7; counting++) {
-				*(memory + *(the_Option + 3)) = *(KeyList + *(the_Option + 2) + counting);
+				*(memory + *(the_Option + 3)) = *(KeyList + counting);
 			}
 		}
 	}
