@@ -325,6 +325,9 @@ E[2-4]은(는) 본 프로그램의 memory에서 가장 중요한 공간입니다
 요아니 뽀뽀,
 요아니 뽀뽀, 요아니 뽀뽀, 요아니 뽀뽀, 요아니 뽀뽀, 요아니 뽀뽀*/
 
+// 현재 의문점 발견
+// #E[2689] = 112 why?
+
 //typedef (inline UINT16) ebikawa;
 typedef volatile UINT16 v16;
 typedef volatile UINT16* v19;
