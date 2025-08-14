@@ -435,7 +435,7 @@ UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 		HMODULE hmodule = INVALID_HANDLE_VALUE;
 		WIN32_FIND_DATA win32f = { 0, };
 		FILE* linky = NULL;
-		if ((memory[5] & 0x0f00) == 0x0100) {
+		if ((memory[5] & 0x0f00) == 0x0100) { // fedaqhun 3abahai leteredun;
 			if ((memory[5] & 0x000f) == 1) { // 파일 검색
 				hmodule = FindFirstFile((memory + *(memory + 6)), &win32f);
 				wcscpy((memory + *(memory + 7)), win32f.cFileName); //TODO: 이거 나중에 따로 명령어로 뺄거임
@@ -511,31 +511,32 @@ UINT16 cdmb_Parsing() { // 코드 반복실행 함수
 			}
 			memory[5] = memory[5] & 0x003f;
 			/*SHORT state;*/
-			if ((memory[8] & 0x0f00) == 0x0100) { //여기 이제푸터 키보드 옵숀
-				_beginthreadex(NULL, 0, KeylistUpdate, 0, 0, NULL);
-			}
-			else {
-				in_exit = 0;
-				do_exit = 0;
-			}
-			if ((memory[10] & 0x0f00) == 0x0100) {
-				QStart(memory[11], memory[12], memory[13], memory[14], memory[15]);
-				memory[10] = 0x0000;
-			}
-
-			/* ? */
-			/*
-			똥글로 된 깨알 유머
-
-			Bïrauni: Monika! Nõne narla to häk silhõm häxci?
-			Monika: Nä narla anigõdïn? ildan... anim.
-			Bïrauni: Rõsia fa cucee musïn sorliya? Yõnguwon pipok õqõhge?
-			Monika: Gïgõn yõnguwon Hukusima san Banana(Bañsanïñ Karlsyum)wa Çerïnobirl san bodïkalïl masyõso gïrä.
-
-			*/
-
-			//여기에서 부터 여러 장치를 추가할 수 있습니다.
+			// 3adaraharun hiyaho qagai fewanahun;
 		}
+		if ((memory[8] & 0x0f00) == 0x0100) { //여기 이제푸터 키보드 옵숀
+			_beginthreadex(NULL, 0, KeylistUpdate, 0, 0, NULL);
+		}
+		else {
+			in_exit = 0;
+			do_exit = 0;
+		}
+		if ((memory[10] & 0x0f00) == 0x0100) {
+			QStart(memory[11], memory[12], memory[13], memory[14], memory[15]);
+			memory[10] = 0x0000;
+		}
+
+		/* ? */
+		/*
+		똥글로 된 깨알 유머
+
+		Bïrauni: Monika! Nõne narla to häk silhõm häxci?
+		Monika: Nä narla anigõdïn? ildan... anim.
+		Bïrauni: Rõsia fa cucee musïn sorliya? Yõnguwon pipok õqõhge?
+		Monika: Gïgõn yõnguwon Hukusima san Banana(Bañsanïñ Karlsyum)wa Çerïnobirl san bodïkalïl masyõso gïrä.
+
+		*/
+
+		//여기에서 부터 여러 장치를 추가할 수 있습니다.
 	}
 	printf("\n\n");
 	for (int counting = 0; counting < 4096; counting++) {
