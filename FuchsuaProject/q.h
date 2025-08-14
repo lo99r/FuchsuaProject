@@ -1,4 +1,6 @@
-﻿#pragma once
+﻿ // hahaha
+ // 
+#pragma once
 #ifndef q_h
 #define q_h
 #define Q_version "1.0"

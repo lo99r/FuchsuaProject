@@ -325,6 +325,9 @@ E[2-4]은(는) 본 프로그램의 memory에서 가장 중요한 공간입니다
 요아니 뽀뽀,
 요아니 뽀뽀, 요아니 뽀뽀, 요아니 뽀뽀, 요아니 뽀뽀, 요아니 뽀뽀*/
 
+// 현재 의문점 발견
+// #E[2689] = 112 why?
+
 //typedef (inline UINT16) ebikawa;
 typedef volatile UINT16 v16;
 typedef volatile UINT16* v19;
@@ -678,6 +681,7 @@ inline UINT16 cdmb_Command(UINT16* dPoint) {
 	}
 	else if ((memory[*dPoint] & 0xf00f) == 0x0006) { //mset
 		cdmb_Mset(memory_mgr(*(memory + *dPoint + 1), memory[*dPoint] & 0x0ff0), (memory + *(memory + *dPoint + 2)));
+		*dPoint += 3;
 	}
 	else if ((*(memory + (*dPoint)) & 0xf00f) == 0x1000) { // add
 		//cdmb_Add();
